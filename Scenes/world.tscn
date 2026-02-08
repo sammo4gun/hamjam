@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bi043lyrcqx35"]
+
+[ext_resource type="PackedScene" uid="uid://yq7k650rdo1l" path="res://Scenes/circle.tscn" id="1_f3sb7"]
+
+[node name="World" type="Node2D" unique_id=781493837]
+
+[node name="Circle" parent="." unique_id=814518204 instance=ExtResource("1_f3sb7")]
