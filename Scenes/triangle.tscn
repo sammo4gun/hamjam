@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://cu8bxqh8t3jt0"]
+
+[ext_resource type="Script" uid="uid://bh3q47edog7ty" path="res://Scripts/triangle.gd" id="1_d4psy"]
+[ext_resource type="Texture2D" uid="uid://4nft4js2ma0y" path="res://Sprites/triangle.png" id="2_d4psy"]
+[ext_resource type="Texture2D" uid="uid://c26xulcg06wfu" path="res://Sprites/SquareAttack/attack1.png" id="3_18ods"]
+[ext_resource type="Texture2D" uid="uid://bs1ioal73lrn1" path="res://Sprites/SquareAttack/attack2.png" id="4_3mfel"]
+[ext_resource type="Texture2D" uid="uid://bqtey2pk6yvps" path="res://Sprites/SquareAttack/attack3.png" id="5_83av3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d4psy"]
+height = 42.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q30vm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_18ods")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3mfel")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_83av3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_83av3")
+}],
+"loop": false,
+"name": &"default",
+"speed": 20.0
+}]
+
+[node name="Triangle" type="CharacterBody2D" unique_id=814518204]
+motion_mode = 1
+script = ExtResource("1_d4psy")
+
+[node name="FirePoint" type="Node2D" parent="." unique_id=1906386619]
+position = Vector2(24, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=884459657]
+position = Vector2(3, 1.9999999)
+rotation = 1.5707964
+scale = Vector2(0.47352228, 0.5656355)
+texture = ExtResource("2_d4psy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1199280012]
+position = Vector2(-1, 0)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_d4psy")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=215279989]
+
+[node name="TargetFinder" type="RayCast2D" parent="." unique_id=1221931344]
+target_position = Vector2(300, 0)
+
+[node name="AttackSprite" type="AnimatedSprite2D" parent="." unique_id=481773665]
+visible = false
+position = Vector2(37.500004, 12.5)
+rotation = 1.5955135
+scale = Vector2(0.5003114, 0.5034464)
+sprite_frames = SubResource("SpriteFrames_q30vm")

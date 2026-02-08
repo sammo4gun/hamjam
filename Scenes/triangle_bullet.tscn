@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://chybb5ebcgl4n"]
+
+[ext_resource type="Script" uid="uid://dtjig2dqg7kxa" path="res://Scripts/triangle_bullet.gd" id="1_unfqi"]
+[ext_resource type="Texture2D" uid="uid://devcphhh4vsmi" path="res://Sprites/circle.png" id="2_di87k"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ml3eb"]
+radius = 5.0
+
+[node name="TriangleBullet" type="Area2D" unique_id=1651610934]
+script = ExtResource("1_unfqi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=400194122]
+shape = SubResource("CircleShape2D_ml3eb")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=129162188]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(0, -5.9604645e-08)
+scale = Vector2(0.10483871, 0.104838714)
+texture = ExtResource("2_di87k")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

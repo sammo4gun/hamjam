@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var TYPE = 'circle'
+var TYPE = 'triangle'
 
 #export vars
 @export var SPEED = 500.0
@@ -10,14 +10,14 @@ var TYPE = 'circle'
 @export var MAX_HEALTH = 5
 var health = MAX_HEALTH
 
-@export var ATTACK_TIME = 0.2
-@export var ATTACK_COOLDOWN = 0.3
+@export var ATTACK_TIME = 0.1
+@export var ATTACK_COOLDOWN = 0.1
 
-@export var BACKUP_SLOWDOWN = 0.3
-@export var BACKUP_RANGE = 200
+@export var BACKUP_SLOWDOWN = 0.2
+@export var BACKUP_RANGE = 300
 
-@export var FIRE_SHOT_SPEED = 600.0
-@export var FIRE_RANGE = 300
+@export var FIRE_SHOT_SPEED = 1000
+@export var FIRE_RANGE = 600.0
 
 @export var is_player = false
 
@@ -38,7 +38,7 @@ var target_handler
 
 var dead = false
 
-@export var bullet_scene: PackedScene = preload("res://Scenes/circle_bullet.tscn")
+@export var bullet_scene: PackedScene = preload("res://Scenes/triangle_bullet.tscn")
 @onready var fire_point: Node2D = $"FirePoint"
 
 func _ready():

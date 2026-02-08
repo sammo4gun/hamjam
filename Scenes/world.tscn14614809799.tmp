@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://yq7k650rdo1l" path="res://Scenes/circle.tscn" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://hb2htwjtp7jv" path="res://Scripts/target_handler.gd" id="2_8j60k"]
 [ext_resource type="PackedScene" uid="uid://dn5ion778qime" path="res://Scenes/square.tscn" id="2_go701"]
-[ext_resource type="PackedScene" uid="uid://cu8bxqh8t3jt0" path="res://Scenes/triangle.tscn" id="5_fo5ed"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_go701"]
 vertices = PackedVector2Array(595.14844, 461.64844, 1105.3516, 602.4219, 46.648438, 604.27344, 370.85156, 461.64844, 46.648438, 46.570313, 370.85156, 54.351563, 1105.3516, 44.71875, 595.14844, 54.351563)
@@ -51,9 +50,6 @@ position = Vector2(339, 90)
 
 [node name="Circle3" parent="CircleNavigation" unique_id=1507191041 instance=ExtResource("1_f3sb7")]
 position = Vector2(285, 410)
-
-[node name="Triangle" parent="CircleNavigation" unique_id=1027312270 instance=ExtResource("5_fo5ed")]
-position = Vector2(118, 165)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=259973137]
 

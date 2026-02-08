@@ -37,7 +37,7 @@ animations = [{
 }]
 
 [node name="Square" type="CharacterBody2D" unique_id=1548567980]
-scale = Vector2(2, 2)
+scale = Vector2(1.5407054, 1.5407054)
 motion_mode = 1
 script = ExtResource("1_mu0s7")
 
@@ -53,7 +53,6 @@ texture = ExtResource("1_7naj2")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=995240591]
 radius = 34.75
 max_speed = 300.0
-debug_enabled = true
 
 [node name="AttackDetectorArea" type="Area2D" parent="." unique_id=539582286]
 position = Vector2(21, 0.5)
@@ -76,6 +75,3 @@ position = Vector2(37.500004, 12.5)
 rotation = 1.5955135
 scale = Vector2(0.5003114, 0.5034464)
 sprite_frames = SubResource("SpriteFrames_ff18a")
-
-[connection signal="body_entered" from="AttackDetectorArea" to="." method="_on_attack_detector_area_body_entered"]
-[connection signal="body_exited" from="AttackDetectorArea" to="." method="_on_attack_detector_area_body_exited"]

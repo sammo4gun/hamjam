@@ -2,14 +2,16 @@ extends Node
 
 var entity_dict = {}
 
+@onready var world = get_parent()
+
 func register(entity):
 	entity_dict[entity.TYPE] = entity_dict.get(entity.TYPE, []) + [entity]
 	entity.target_handler = self
-	if entity.TYPE == get_parent().wanted:
+	if entity.TYPE == world.wanted:
 		entity.is_wanted = true
 
 func get_nearest_wanted(entity) -> CharacterBody2D:
-	var wanted = get_parent().wanted
+	var wanted = world.wanted
 	# gets the nearest entity of the 'wanted' type from the specified entity
 	var nearest = null
 	var dist = 100000000
@@ -21,7 +23,21 @@ func get_nearest_wanted(entity) -> CharacterBody2D:
 				dist = entity_dist
 	
 	return nearest
+
+func should_attack(type, target_type) -> bool: # returns true if you should attack
+	if type == world.wanted:
+		return target_type != type
+	return target_type == world.wanted
+
+func get_enemies(type) -> Array:
+	if type != world.wanted:
+		return [world.wanted]
 	
+	var output = []
+	for target in entity_dict.keys():
+		if target != type: output.append(type)
+	return output
+
 func get_nearest_enemy(entity) -> CharacterBody2D:
 	var wanted = get_parent().wanted
 	# gets the nearest entity of the 'wanted' type from the specified entity

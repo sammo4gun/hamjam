@@ -20,6 +20,7 @@ var target_entity = null
 var ready_for_attack = false
 var attacking = false
 @onready var attack_sprite = $"AttackSprite"
+@onready var attack_detection_area = $"AttackDetectorArea"
 @onready var attack_area = $"AttackArea"
 
 var is_wanted = false
@@ -43,6 +44,7 @@ func _physics_process(delta: float) -> void:
 			nav_find_target() # what we could do at one point is ping for this every second,
 			# and just follow the target for the time that we have. this could be better for processing
 			# speed
+			check_attack_area()
 			nav_handle_movement(delta)
 			nav_handle_rotation(delta)
 			if ready_for_attack and !attacking:
@@ -70,11 +72,6 @@ func nav_find_target():
 		nav_agent.target_position = global_position
 
 func nav_handle_movement(delta) -> void:
-	if nav_agent.is_navigation_finished() or ready_for_attack or attacking:
-		velocity = Vector2.ZERO
-		move_and_slide()
-		return
-
 	next_position = nav_agent.get_next_path_position()
 	var direction = (next_position - global_position).normalized()
 	var new_velocity = Vector2.ZERO
@@ -82,12 +79,15 @@ func nav_handle_movement(delta) -> void:
 	# Normalize the direction to ensure consistent movement speed in all directions
 	if direction != Vector2.ZERO:
 		direction = direction.normalized()
-
+	
+	if nav_agent.is_navigation_finished() or ready_for_attack or attacking:
+		direction = Vector2.ZERO
+	
 	# Apply acceleration
 	if direction != Vector2.ZERO:
 		new_velocity = velocity.move_toward(direction * SPEED
 		*
-		(0.8 + (0.2 * (get_global_mouse_position() - global_position).normalized().dot(direction.normalized()))), ACCELERATION * delta)
+		(0.8 + (0.2 * (Vector2.from_angle(rotation)).normalized().dot(direction.normalized()))), ACCELERATION * delta)
 	# Apply deceleration when there's no input
 	else:
 		new_velocity = velocity.move_toward(Vector2.ZERO, DECELERATION * delta)
@@ -103,6 +103,14 @@ func nav_handle_rotation(delta) -> void:
 	var angle_to_mouse = (target_position - global_position).angle()
 	
 	rotation = rotate_toward(rotation, angle_to_mouse, 10 * delta)
+
+func check_attack_area():
+	var found = false
+	for body in attack_detection_area.get_overlapping_bodies():
+		if body is CharacterBody2D:
+			if target_handler.should_attack(TYPE, body.TYPE) and !body.dead:
+				found = true
+	ready_for_attack = found
 
 # ============================================================
 # PLAYER SCRIPTS
@@ -125,7 +133,10 @@ func player_handle_movement(delta: float) -> void:
 	# Normalize the direction to ensure consistent movement speed in all directions
 	if direction != Vector2.ZERO:
 		direction = direction.normalized()
-
+	
+	if attacking: 
+		direction = Vector2.ZERO
+	
 	# Apply acceleration
 	if direction != Vector2.ZERO:
 		new_velocity = velocity.move_toward(direction * SPEED
@@ -141,6 +152,7 @@ func player_handle_movement(delta: float) -> void:
 
 func player_handle_rotation(delta) -> void:
 	# Get the mouse position and calculate the angle to face it
+	if attacking: return
 	var mouse_position = get_global_mouse_position()
 	var angle_to_mouse = (mouse_position - global_position).angle()
 	
@@ -148,6 +160,12 @@ func player_handle_rotation(delta) -> void:
 
 func player_handle_attacks() -> void:
 	pass
+
+func _input(event: InputEvent) -> void:
+	if (is_player and !attacking and 
+		event is InputEventMouseButton and event.is_pressed() and 
+		event.button_index == MOUSE_BUTTON_LEFT):
+		attack()
 
 func attack():
 	attacking = true
@@ -164,8 +182,8 @@ func damage():
 	for entity in attack_area.get_overlapping_bodies():
 		# check which entities it can deal damage to
 		if entity is CharacterBody2D:
-			if entity.TYPE != TYPE:
-				entity.apply_damage(1)
+			if target_handler.should_attack(TYPE, entity.TYPE):
+				entity.apply_damage(2)
 
 func apply_damage(amount):
 	health -= amount
@@ -185,12 +203,3 @@ func die():
 	# death animation
 	await get_tree().create_timer(0.4).timeout
 	target_handler.die(self)
-
-func _on_attack_detector_area_body_entered(body: Node2D) -> void:
-	if body == target_entity:
-		if !body.dead:
-			ready_for_attack = true
-
-func _on_attack_detector_area_body_exited(body: Node2D) -> void:
-	if body == target_entity:
-		ready_for_attack = false
