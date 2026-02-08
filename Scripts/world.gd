@@ -11,10 +11,10 @@ extends Node2D
 
 var wanted = 'circle'
 
-func _physics_process(delta: float) -> void:
-	target_handler.register(square1, 'square')
-	target_handler.register(square2, 'square')
-	target_handler.register(square3, 'square')
-	target_handler.register(circle1, 'circle')
-	target_handler.register(circle2, 'circle')
-	target_handler.register(circle3, 'circle')
+func _ready() -> void:
+	target_handler.register(square1)
+	target_handler.register(square2)
+	target_handler.register(square3)
+	target_handler.register(circle1)
+	target_handler.register(circle2)
+	target_handler.register(circle3)

@@ -1,9 +1,15 @@
 extends CharacterBody2D
 
+var TYPE = 'circle'
+
 #export vars
 @export var SPEED = 500.0
 @export var ACCELERATION : float = 1200
 @export var DECELERATION : float = 2000
+
+@export var MAX_HEALTH = 5
+var health = MAX_HEALTH
+@export var ATTACK_RANGE = 10
 
 @export var is_player = false
 
@@ -12,6 +18,8 @@ var next_position = global_position
 var is_wanted = false
 
 var target_handler
+
+var dead = false
 
 func _ready():
 	# Optional tuning
@@ -23,9 +31,9 @@ func _physics_process(delta: float) -> void:
 		if is_player:
 			player_handle_movement(delta)
 			player_handle_rotation(delta)
-			player_handle_attacks(delta)
+			player_handle_attacks()
 		else:
-			nav_find_target(delta)
+			#nav_find_target()
 			nav_handle_movement(delta)
 			nav_handle_rotation(delta)
 
@@ -33,7 +41,7 @@ func _physics_process(delta: float) -> void:
 # AI SCRIPTS
 # ============================================================
 
-func nav_find_target(pos):
+func nav_find_target():
 	if !is_wanted:
 		var target_entity = target_handler.get_nearest_wanted(self)
 		nav_agent.target_position = target_entity.global_position
@@ -116,5 +124,25 @@ func player_handle_rotation(delta) -> void:
 	
 	rotation = rotate_toward(rotation, angle_to_mouse, 10 * delta)
 
-func player_handle_attacks(delta) -> void:
+func player_handle_attacks() -> void:
 	pass
+
+func apply_damage(amount):
+	health -= amount
+	if is_player:
+		if health <= 0:
+			# die as a player, do some cool stuff here
+			dead = true
+			die()
+			pass
+	else:
+		if health <= 0:
+			# entity dies, do some cool stuff here
+			dead = true
+			die()
+			pass
+
+func die():
+	# death animation
+	await get_tree().create_timer(0.4).timeout
+	target_handler.die(self)
