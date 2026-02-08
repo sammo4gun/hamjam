@@ -35,7 +35,7 @@ func get_enemies(type) -> Array:
 	
 	var output = []
 	for target in entity_dict.keys():
-		if target != type: output.append(type)
+		if target != type: output.append(target)
 	return output
 
 func get_nearest_enemy(entity) -> CharacterBody2D:
