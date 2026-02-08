@@ -9,6 +9,7 @@ extends Node2D
 @onready var triangle: CharacterBody2D = $CircleNavigation/Triangle
 
 @onready var target_handler = $"TargetHandler"
+@onready var camera = $"Camera"
 
 var wanted = 'circle'
 
@@ -18,6 +19,7 @@ func _ready() -> void:
 	target_handler.register(square3)
 	
 	target_handler.register(circle1)
+	camera.target = circle1
 	target_handler.register(circle2)
 	target_handler.register(circle3)
 	
