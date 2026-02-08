@@ -16,7 +16,7 @@ var health = MAX_HEALTH
 @export var BACKUP_SLOWDOWN = 0.2
 @export var BACKUP_RANGE = 300
 
-@export var FIRE_SHOT_SPEED = 1000
+@export var FIRE_SHOT_SPEED = 1400
 @export var FIRE_RANGE = 600.0
 
 @export var is_player = false
@@ -31,10 +31,10 @@ var backing_up = true
 var cooldown = 0
 @onready var attack_sprite = $"AttackSprite"
 @onready var target_finder = $"TargetFinder"
-
-var is_wanted = false
+@onready var switch_finder = $"SwitchFinder"
 
 var target_handler
+var switch_handler
 
 var dead = false
 
@@ -52,6 +52,7 @@ func _physics_process(delta: float) -> void:
 		if is_player:
 			player_handle_movement(delta)
 			player_handle_rotation(delta)
+			switch_handler.switch_available(self)
 		else:
 			nav_find_target() # what we could do at one point is ping for this every second,
 			# and just follow the target for the time that we have. this could be better for processing
@@ -68,11 +69,11 @@ func _physics_process(delta: float) -> void:
 # ============================================================
 
 func nav_find_target():
-	if !is_wanted:
+	if !target_handler.is_wanted(TYPE):
 		target_entity = target_handler.get_nearest_wanted(self)
 		if target_entity:
 			nav_agent.target_position = target_entity.global_position
-	if is_wanted:
+	if target_handler.is_wanted(TYPE):
 		target_entity = target_handler.get_nearest_enemy(self)
 		if target_entity:
 			nav_agent.target_position = target_entity.global_position
@@ -198,7 +199,7 @@ func fire():
 	bullet.global_position = fire_point.global_position
 	bullet.direction = Vector2.from_angle(rotation)
 	bullet.speed = FIRE_SHOT_SPEED
-	bullet.lifetime = FIRE_RANGE / FIRE_SHOT_SPEED
+	bullet.lifetime = FIRE_RANGE / FIRE_SHOT_SPEED * 2
 	bullet.enemies = target_handler.get_enemies(TYPE)
 	get_tree().current_scene.add_child(bullet)
 

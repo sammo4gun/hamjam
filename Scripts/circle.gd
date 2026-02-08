@@ -31,10 +31,10 @@ var backing_up = true
 var cooldown = 0
 @onready var attack_sprite = $"AttackSprite"
 @onready var target_finder = $"TargetFinder"
-
-var is_wanted = false
+@onready var switch_finder = $"SwitchFinder"
 
 var target_handler
+var switch_handler
 
 var dead = false
 
@@ -52,6 +52,7 @@ func _physics_process(delta: float) -> void:
 		if is_player:
 			player_handle_movement(delta)
 			player_handle_rotation(delta)
+			switch_handler.switch_available(self)
 		else:
 			nav_find_target() # what we could do at one point is ping for this every second,
 			# and just follow the target for the time that we have. this could be better for processing
@@ -68,11 +69,11 @@ func _physics_process(delta: float) -> void:
 # ============================================================
 
 func nav_find_target():
-	if !is_wanted:
+	if !target_handler.is_wanted(TYPE):
 		target_entity = target_handler.get_nearest_wanted(self)
 		if target_entity:
 			nav_agent.target_position = target_entity.global_position
-	if is_wanted:
+	if target_handler.is_wanted(TYPE):
 		target_entity = target_handler.get_nearest_enemy(self)
 		if target_entity:
 			nav_agent.target_position = target_entity.global_position

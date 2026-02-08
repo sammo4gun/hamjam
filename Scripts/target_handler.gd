@@ -7,8 +7,7 @@ var entity_dict = {}
 func register(entity):
 	entity_dict[entity.TYPE] = entity_dict.get(entity.TYPE, []) + [entity]
 	entity.target_handler = self
-	if entity.TYPE == world.wanted:
-		entity.is_wanted = true
+	entity.switch_handler = world.switch_handler
 
 func get_nearest_wanted(entity) -> CharacterBody2D:
 	var wanted = world.wanted
@@ -23,6 +22,9 @@ func get_nearest_wanted(entity) -> CharacterBody2D:
 				dist = entity_dist
 	
 	return nearest
+
+func is_wanted(type) -> bool:
+	return type == world.wanted
 
 func should_attack(type, target_type) -> bool: # returns true if you should attack
 	if type == world.wanted:

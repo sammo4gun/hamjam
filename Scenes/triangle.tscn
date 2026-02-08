@@ -58,3 +58,6 @@ position = Vector2(37.500004, 12.5)
 rotation = 1.5955135
 scale = Vector2(0.5003114, 0.5034464)
 sprite_frames = SubResource("SpriteFrames_q30vm")
+
+[node name="SwitchFinder" type="RayCast2D" parent="." unique_id=980646788]
+target_position = Vector2(500, 0)
