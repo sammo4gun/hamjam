@@ -60,14 +60,10 @@ func nav_find_target():
 		target_entity = target_handler.get_nearest_wanted(self)
 		if target_entity:
 			nav_agent.target_position = target_entity.global_position
-			if not target_entity in attack_area.get_overlapping_bodies():
-				ready_for_attack = false
 	if target_handler.is_wanted(TYPE):
 		target_entity = target_handler.get_nearest_enemy(self)
 		if target_entity:
 			nav_agent.target_position = target_entity.global_position
-			if not target_entity in attack_area.get_overlapping_bodies():
-				ready_for_attack = false
 	if !target_entity:
 		ready_for_attack = false
 		nav_agent.target_position = global_position

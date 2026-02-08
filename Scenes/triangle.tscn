@@ -48,6 +48,7 @@ rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_d4psy")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=215279989]
+debug_enabled = true
 
 [node name="TargetFinder" type="RayCast2D" parent="." unique_id=1221931344]
 target_position = Vector2(300, 0)

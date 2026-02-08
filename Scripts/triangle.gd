@@ -3,7 +3,7 @@ extends CharacterBody2D
 var TYPE = 'triangle'
 
 #export vars
-@export var SPEED = 500.0
+@export var SPEED = 200.0
 @export var ACCELERATION : float = 1200
 @export var DECELERATION : float = 2000
 
