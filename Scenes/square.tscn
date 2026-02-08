@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dn5ion778qime"]
+
+[ext_resource type="Texture2D" uid="uid://be8dpd8hioe0w" path="res://Sprites/square.png" id="1_7naj2"]
+[ext_resource type="Script" uid="uid://cv52yk4doy3dq" path="res://Scripts/square.gd" id="1_mu0s7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mu0s7"]
+radius = 20.0
+
+[node name="Square" type="CharacterBody2D" unique_id=1548567980]
+scale = Vector2(2, 2)
+motion_mode = 1
+script = ExtResource("1_mu0s7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1915569533]
+shape = SubResource("CircleShape2D_mu0s7")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=738823433]
+position = Vector2(0, 1)
+rotation = -1.5642526
+scale = Vector2(0.40451542, 0.40451542)
+texture = ExtResource("1_7naj2")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=995240591]
+avoidance_enabled = true
+debug_enabled = true

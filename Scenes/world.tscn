@@ -1,7 +1,38 @@
 [gd_scene format=3 uid="uid://bi043lyrcqx35"]
 
+[ext_resource type="Script" uid="uid://dtfppl1ywm4h0" path="res://Scripts/world.gd" id="1_5a7ea"]
 [ext_resource type="PackedScene" uid="uid://yq7k650rdo1l" path="res://Scenes/circle.tscn" id="1_f3sb7"]
+[ext_resource type="PackedScene" uid="uid://dn5ion778qime" path="res://Scenes/square.tscn" id="2_go701"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_go701"]
+vertices = PackedVector2Array(595.14844, 461.64844, 1105.3516, 602.4219, 46.648438, 604.27344, 370.85156, 461.64844, 46.648438, 46.570313, 370.85156, 54.351563, 1105.3516, 44.71875, 595.14844, 54.351563)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 2, 4, 5), PackedInt32Array(5, 4, 6, 7), PackedInt32Array(6, 1, 0, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(3, 3, 3, 648, 1149, 646, 1149, 1)])
+agent_radius = 43.65
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a02cp"]
+size = Vector2(137, 320)
 
 [node name="World" type="Node2D" unique_id=781493837]
+script = ExtResource("1_5a7ea")
 
-[node name="Circle" parent="." unique_id=814518204 instance=ExtResource("1_f3sb7")]
+[node name="SquareNavigation" type="NavigationRegion2D" parent="." unique_id=945869248]
+navigation_polygon = SubResource("NavigationPolygon_go701")
+
+[node name="Square" parent="SquareNavigation" unique_id=1548567980 instance=ExtResource("2_go701")]
+position = Vector2(668, 267)
+
+[node name="Square2" parent="SquareNavigation" unique_id=644466614 instance=ExtResource("2_go701")]
+position = Vector2(774, 181)
+
+[node name="Square3" parent="SquareNavigation" unique_id=1285289754 instance=ExtResource("2_go701")]
+position = Vector2(799, 358)
+
+[node name="Circle" parent="SquareNavigation" unique_id=814518204 instance=ExtResource("1_f3sb7")]
+position = Vector2(306, 255)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SquareNavigation" unique_id=259973137]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SquareNavigation/StaticBody2D" unique_id=2085838233]
+position = Vector2(483, 258)
+shape = SubResource("RectangleShape2D_a02cp")

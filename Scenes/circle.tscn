@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://yq7k650rdo1l"]
 
-[ext_resource type="Texture2D" uid="uid://dfowv321icwjv" path="res://icon.svg" id="1_6e8rh"]
 [ext_resource type="Script" uid="uid://dqn5hrnqr7qao" path="res://Scripts/circle.gd" id="1_ny5yc"]
+[ext_resource type="Texture2D" uid="uid://devcphhh4vsmi" path="res://Sprites/circle.png" id="2_ny5yc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l2lw7"]
+radius = 20.0
 
 [node name="Circle" type="CharacterBody2D" unique_id=814518204]
 motion_mode = 1
@@ -13,5 +14,7 @@ script = ExtResource("1_ny5yc")
 shape = SubResource("CircleShape2D_l2lw7")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=884459657]
-scale = Vector2(0.16760087, 0.16760087)
-texture = ExtResource("1_6e8rh")
+position = Vector2(0.46116912, -0.461169)
+rotation = -1.5791483
+scale = Vector2(0.39812627, 0.39812627)
+texture = ExtResource("2_ny5yc")
