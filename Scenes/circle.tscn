@@ -18,3 +18,7 @@ position = Vector2(0.46116912, -0.461169)
 rotation = -1.5791483
 scale = Vector2(0.39812627, 0.39812627)
 texture = ExtResource("2_ny5yc")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=215279989]
+avoidance_enabled = true
+debug_enabled = true

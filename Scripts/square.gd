@@ -5,10 +5,13 @@ extends CharacterBody2D
 @export var ACCELERATION : float = 1200
 @export var DECELERATION : float = 1200
 
-var is_player = false;
+@export var is_player = false
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
-var next_position = global_position;
+var next_position = global_position
+var is_wanted = false
+
+var target_handler
 
 func _ready():
 	# Optional tuning
@@ -16,20 +19,29 @@ func _ready():
 	nav_agent.target_desired_distance = 4.0
 
 func _physics_process(delta: float) -> void:
-	if is_player:
-		player_handle_movement(delta)
-		player_handle_rotation(delta)
-		player_handle_attacks(delta)
-	else:
-		nav_handle_movement(delta)
-		nav_handle_rotation(delta)
+	if target_handler: # make sure this doesn't happen before we assign a target handler
+		if is_player:
+			player_handle_movement(delta)
+			player_handle_rotation(delta)
+			player_handle_attacks(delta)
+		else:
+			nav_find_target(delta) # what we could do at one point is ping for this every second,
+			# and just follow the target for the time that we have. this could be better for processing
+			# speed
+			nav_handle_movement(delta)
+			nav_handle_rotation(delta)
 
 # ============================================================
-# AI SCRIPTS
+# ENEMY SCRIPTS
 # ============================================================
 
-func set_target(pos):
-	nav_agent.target_position = pos
+func nav_find_target(pos):
+	if !is_wanted:
+		var target_entity = target_handler.get_nearest_wanted(self)
+		nav_agent.target_position = target_entity.global_position
+	if is_wanted:
+		var target_entity = target_handler.get_nearest_enemy(self)
+		nav_agent.target_position = target_entity.global_position
 
 func nav_handle_movement(delta) -> void:
 	if nav_agent.is_navigation_finished():

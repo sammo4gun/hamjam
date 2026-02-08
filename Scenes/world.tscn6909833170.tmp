@@ -11,12 +11,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 outlines = Array[PackedVector2Array]([PackedVector2Array(3, 3, 3, 648, 1149, 646, 1149, 1)])
 agent_radius = 43.65
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_8j60k"]
-vertices = PackedVector2Array(571.5, 438, 1131.0313, 629, 20.03125, 629, 394.5, 438, 20.960938, 21.9375, 394.5, 78, 1131.9609, 19.046875, 571.5, 78)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 2, 4, 5), PackedInt32Array(5, 4, 6, 7), PackedInt32Array(6, 1, 0, 7)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(1, 2, 0, 649, 1151, 649, 1152, -1)])
-agent_radius = 20.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a02cp"]
 size = Vector2(137, 320)
 
@@ -31,28 +25,27 @@ navigation_polygon = SubResource("NavigationPolygon_go701")
 
 [node name="Square" parent="SquareNavigation" unique_id=1548567980 instance=ExtResource("2_go701")]
 position = Vector2(668, 267)
+SPEED = 300.0
+ACCELERATION = 1200.0
+DECELERATION = 1200.0
 
 [node name="Square2" parent="SquareNavigation" unique_id=644466614 instance=ExtResource("2_go701")]
 position = Vector2(774, 181)
+SPEED = 300.0
+ACCELERATION = 1200.0
+DECELERATION = 1200.0
 
 [node name="Square3" parent="SquareNavigation" unique_id=1285289754 instance=ExtResource("2_go701")]
 position = Vector2(799, 358)
+SPEED = 300.0
+ACCELERATION = 1200.0
+DECELERATION = 1200.0
 
-[node name="CircleNavigation" type="NavigationRegion2D" parent="." unique_id=1682700205]
-navigation_polygon = SubResource("NavigationPolygon_8j60k")
-
-[node name="Circle" parent="CircleNavigation" unique_id=814518204 instance=ExtResource("1_f3sb7")]
+[node name="Circle" parent="SquareNavigation" unique_id=814518204 instance=ExtResource("1_f3sb7")]
 position = Vector2(306, 255)
-is_player = true
 
-[node name="Circle2" parent="CircleNavigation" unique_id=1230203239 instance=ExtResource("1_f3sb7")]
-position = Vector2(339, 90)
+[node name="StaticBody2D" type="StaticBody2D" parent="SquareNavigation" unique_id=259973137]
 
-[node name="Circle3" parent="CircleNavigation" unique_id=1507191041 instance=ExtResource("1_f3sb7")]
-position = Vector2(285, 410)
-
-[node name="StaticBody2D" type="StaticBody2D" parent="CircleNavigation" unique_id=259973137]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CircleNavigation/StaticBody2D" unique_id=2085838233]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SquareNavigation/StaticBody2D" unique_id=2085838233]
 position = Vector2(483, 258)
 shape = SubResource("RectangleShape2D_a02cp")
