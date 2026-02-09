@@ -4,6 +4,9 @@ extends Node2D
 
 @onready var target_handler = $"TargetHandler"
 @onready var switch_handler = $"SwitchHandler"
+
+@onready var idle_behaviour_handler = $"IdleBehaviourHandler"
+
 @onready var camera = $"Camera"
 
 @onready var types_navigation = {
@@ -17,6 +20,8 @@ var wanted = 'circle'
 func _ready() -> void:
 	target_handler.register(circle1)
 	set_camera_target(circle1)
+	for c in $CircleNavigation.get_children():
+		target_handler.register(c)
 
 func set_camera_target(target):
 	camera.target = target

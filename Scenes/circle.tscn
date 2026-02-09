@@ -29,6 +29,9 @@ animations = [{
 "speed": 20.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4pbwo"]
+radius = 600.0
+
 [node name="Circle" type="CharacterBody2D" unique_id=814518204]
 motion_mode = 1
 script = ExtResource("1_ny5yc")
@@ -46,6 +49,10 @@ scale = Vector2(0.39812627, 0.39812627)
 texture = ExtResource("2_ny5yc")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=215279989]
+avoidance_enabled = true
+radius = 20.0
+neighbor_distance = 100.0
+debug_enabled = true
 
 [node name="TargetFinder" type="RayCast2D" parent="." unique_id=1221931344]
 target_position = Vector2(300, 0)
@@ -59,3 +66,10 @@ sprite_frames = SubResource("SpriteFrames_q30vm")
 
 [node name="SwitchFinder" type="RayCast2D" parent="." unique_id=1807708675]
 target_position = Vector2(500, 0)
+
+[node name="EntityView" type="Area2D" parent="." unique_id=458178092]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntityView" unique_id=513281629]
+shape = SubResource("CircleShape2D_4pbwo")
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

@@ -36,6 +36,9 @@ animations = [{
 "speed": 20.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_2jr70"]
+radius = 300.0
+
 [node name="Square" type="CharacterBody2D" unique_id=1548567980]
 scale = Vector2(1.5407054, 1.5407054)
 motion_mode = 1
@@ -51,7 +54,9 @@ scale = Vector2(0.40451542, 0.40451542)
 texture = ExtResource("1_7naj2")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=995240591]
-debug_enabled = true
+avoidance_enabled = true
+radius = 20.0
+neighbor_distance = 100.0
 
 [node name="AttackDetectorArea" type="Area2D" parent="." unique_id=539582286]
 position = Vector2(21, 0.5)
@@ -77,3 +82,11 @@ sprite_frames = SubResource("SpriteFrames_ff18a")
 
 [node name="SwitchFinder" type="RayCast2D" parent="." unique_id=1087052971]
 target_position = Vector2(500, 0)
+
+[node name="EntityView" type="Area2D" parent="." unique_id=39565044]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntityView" unique_id=850463964]
+position = Vector2(153, 0)
+shape = SubResource("CircleShape2D_2jr70")
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

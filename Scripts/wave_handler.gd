@@ -5,6 +5,13 @@ extends Node2D
 @onready var spawn_area_w: Area2D = $"SpawnW"
 @onready var spawn_area_s: Area2D = $"SpawnS"
 
+@onready var spawn_areas =[
+	spawn_area_n,
+	spawn_area_e,
+	spawn_area_s,
+	spawn_area_w
+]
+
 var square_entity = preload("res://Scenes/square.tscn")
 var circle_entity = preload("res://Scenes/circle.tscn")
 var triangle_entity = preload("res://Scenes/triangle.tscn")
@@ -15,7 +22,7 @@ var type_dict = {
 	'circle': circle_entity
 }
 
-@export var WAVE_WAIT = 4
+@export var WAVE_WAIT = 10
 @export var WAVE_DURATION: float = 5.0
 @export var max_attempts_per_spawn: int = 10
 
@@ -32,7 +39,7 @@ var spawned := {
 	'square': 0
 }
 var spawn_interval = 0
-var current_wave_wait = 0
+var current_wave_wait = WAVE_WAIT
 var current_spawn_interval = spawn_interval
 var total_to_spawn = 0
 
@@ -75,16 +82,17 @@ func _physics_process(delta: float) -> void:
 		current_wave_wait -= delta
 
 func try_spawn_entity():
-	var shape: RectangleShape2D = spawn_area_n.get_node("CollisionShape2D").shape
+	var spawn_area = spawn_areas.pick_random()
+	var shape: RectangleShape2D = spawn_area.get_node("CollisionShape2D").shape
 	var space_state := get_world_2d().direct_space_state
 
 	for i in max_attempts_per_spawn:
 		var point = get_random_point_in_shape(shape)
 
 		var params := PhysicsPointQueryParameters2D.new()
-		params.position = spawn_area_n.global_position + point
+		params.position = spawn_area.global_position + point
 		params.collide_with_bodies = true
-		params.collide_with_areas = true
+		params.collide_with_areas = false
 
 		var result = space_state.intersect_point(params)
 

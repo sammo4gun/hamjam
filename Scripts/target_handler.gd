@@ -8,6 +8,7 @@ func register(entity):
 	entity_dict[entity.TYPE] = entity_dict.get(entity.TYPE, []) + [entity]
 	entity.target_handler = self
 	entity.switch_handler = world.switch_handler
+	entity.idle_behaviour_handler = world.idle_behaviour_handler
 
 func get_nearest_wanted(entity) -> CharacterBody2D:
 	var wanted = world.wanted
@@ -15,11 +16,12 @@ func get_nearest_wanted(entity) -> CharacterBody2D:
 	var nearest = null
 	var dist = 100000000
 	for wanted_entity in entity_dict.get(wanted, []):
-		if !wanted_entity.dead:
-			var entity_dist = entity.global_position.distance_to(wanted_entity.global_position)
-			if entity_dist < dist:
-				nearest = wanted_entity
-				dist = entity_dist
+		if wanted_entity:
+			if !wanted_entity.dead:
+				var entity_dist = entity.global_position.distance_to(wanted_entity.global_position)
+				if entity_dist < dist:
+					nearest = wanted_entity
+					dist = entity_dist
 	
 	return nearest
 
@@ -48,11 +50,12 @@ func get_nearest_enemy(entity) -> CharacterBody2D:
 	for entity_type in entity_dict.keys():
 		if entity_type != wanted:
 			for enemy_entity in entity_dict.get(entity_type, []):
-				if !enemy_entity.dead:
-					var entity_dist = entity.global_position.distance_to(enemy_entity.global_position)
-					if entity_dist < dist:
-						nearest = enemy_entity
-						dist = entity_dist
+				if enemy_entity:
+					if !enemy_entity.dead:
+						var entity_dist = entity.global_position.distance_to(enemy_entity.global_position)
+						if entity_dist < dist:
+							nearest = enemy_entity
+							dist = entity_dist
 	
 	return nearest
 

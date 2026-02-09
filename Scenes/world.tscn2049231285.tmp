@@ -144,28 +144,17 @@ navigation_polygon = SubResource("NavigationPolygon_go701")
 navigation_polygon = SubResource("NavigationPolygon_8j60k")
 
 [node name="Circle" parent="CircleNavigation" unique_id=814518204 instance=ExtResource("1_f3sb7")]
+position = Vector2(139, 149)
 is_player = true
 
-[node name="Circle2" parent="CircleNavigation" unique_id=1940889666 instance=ExtResource("1_f3sb7")]
-position = Vector2(99, 7)
+[node name="Circle2" parent="CircleNavigation" unique_id=460197894 instance=ExtResource("1_f3sb7")]
+position = Vector2(108, 279)
 
-[node name="Circle3" parent="CircleNavigation" unique_id=942913543 instance=ExtResource("1_f3sb7")]
-position = Vector2(50, 73)
+[node name="Circle3" parent="CircleNavigation" unique_id=1406635924 instance=ExtResource("1_f3sb7")]
+position = Vector2(238, 186)
 
-[node name="Circle4" parent="CircleNavigation" unique_id=18010491 instance=ExtResource("1_f3sb7")]
-position = Vector2(131, 87)
+[node name="Circle4" parent="CircleNavigation" unique_id=450647647 instance=ExtResource("1_f3sb7")]
+position = Vector2(207, 276)
 
-[node name="Circle5" parent="CircleNavigation" unique_id=1973619544 instance=ExtResource("1_f3sb7")]
-position = Vector2(206, 45)
-
-[node name="Circle6" parent="CircleNavigation" unique_id=1227001601 instance=ExtResource("1_f3sb7")]
-position = Vector2(243, -33)
-
-[node name="Circle7" parent="CircleNavigation" unique_id=738507613 instance=ExtResource("1_f3sb7")]
-position = Vector2(141, -84)
-
-[node name="Circle8" parent="CircleNavigation" unique_id=1373569951 instance=ExtResource("1_f3sb7")]
-position = Vector2(33, -109)
-
-[node name="Circle9" parent="CircleNavigation" unique_id=1856338222 instance=ExtResource("1_f3sb7")]
-position = Vector2(-56, -70)
+[node name="Circle5" parent="CircleNavigation" unique_id=1657403705 instance=ExtResource("1_f3sb7")]
+position = Vector2(304, 291)

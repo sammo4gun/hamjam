@@ -29,6 +29,9 @@ animations = [{
 "speed": 20.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_d4psy"]
+radius = 300.0
+
 [node name="Triangle" type="CharacterBody2D" unique_id=814518204]
 motion_mode = 1
 script = ExtResource("1_d4psy")
@@ -48,7 +51,8 @@ rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_d4psy")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=215279989]
-debug_enabled = true
+avoidance_enabled = true
+neighbor_distance = 100.0
 
 [node name="TargetFinder" type="RayCast2D" parent="." unique_id=1221931344]
 target_position = Vector2(300, 0)
@@ -62,3 +66,11 @@ sprite_frames = SubResource("SpriteFrames_q30vm")
 
 [node name="SwitchFinder" type="RayCast2D" parent="." unique_id=980646788]
 target_position = Vector2(500, 0)
+
+[node name="EntityView" type="Area2D" parent="." unique_id=1515433456]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntityView" unique_id=2129735163]
+position = Vector2(153, 0)
+shape = SubResource("CircleShape2D_d4psy")
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
