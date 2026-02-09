@@ -1,16 +1,6 @@
 extends Node2D
 
-@onready var spawn_area_n: Area2D = $"SpawnN"
-@onready var spawn_area_e: Area2D = $"SpawnE"
-@onready var spawn_area_w: Area2D = $"SpawnW"
-@onready var spawn_area_s: Area2D = $"SpawnS"
-
-@onready var spawn_areas =[
-	spawn_area_n,
-	spawn_area_e,
-	spawn_area_s,
-	spawn_area_w
-]
+@onready var spawn_areas = get_children()
 
 var square_entity = preload("res://Scenes/square.tscn")
 var circle_entity = preload("res://Scenes/circle.tscn")
