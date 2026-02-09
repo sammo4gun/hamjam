@@ -42,6 +42,7 @@ var cooldown = 0
 var target_handler
 var switch_handler
 var idle_behaviour_handler
+var player_handler
 
 var dead = false
 
@@ -87,10 +88,12 @@ func _physics_process(delta: float) -> void:
 
 func handle_behaviours(delta):
 	if behaviour == 'idle':
+		backing_up = false
 		var info = idle_behaviour_handler.idle_target(self, entities_seen, SHYNESS)
 		nav_agent.target_position = info[0]
 		target_lookat = info[1]
 	elif behaviour == 'flee':
+		backing_up = false
 		nav_agent.target_position = idle_behaviour_handler.flee_target(self, entities_seen, nav_map)
 	elif behaviour == 'attack':
 		nav_find_target()
@@ -224,6 +227,9 @@ func _input(event: InputEvent) -> void:
 		event is InputEventMouseButton and event.is_pressed() and 
 		event.button_index == MOUSE_BUTTON_LEFT):
 		attack()
+
+func pickup(type):
+	player_handler.pickup(type)
 
 func attack():
 	attacking = true

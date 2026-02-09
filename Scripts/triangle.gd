@@ -42,6 +42,7 @@ var cooldown = 0
 var target_handler
 var switch_handler
 var idle_behaviour_handler
+var player_handler
 
 var entities_seen = []
 var behaviour = 'idle'
@@ -224,6 +225,9 @@ func _input(event: InputEvent) -> void:
 		event is InputEventMouseButton and event.is_pressed() and 
 		event.button_index == MOUSE_BUTTON_LEFT):
 		attack()
+
+func pickup(type):
+	player_handler.pickup(type)
 
 func attack():
 	attacking = true

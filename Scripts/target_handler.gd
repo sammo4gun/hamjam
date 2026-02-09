@@ -9,6 +9,7 @@ func register(entity):
 	entity.target_handler = self
 	entity.switch_handler = world.switch_handler
 	entity.idle_behaviour_handler = world.idle_behaviour_handler
+	entity.player_handler = world.player_handler
 
 func get_nearest_wanted(entity) -> CharacterBody2D:
 	var wanted = world.wanted
@@ -60,6 +61,8 @@ func get_nearest_enemy(entity) -> CharacterBody2D:
 	return nearest
 
 func die(entity):
+	world.death_spawn_mana(entity.global_position, entity.TYPE)
+	
 	if entity in entity_dict[entity.TYPE]:
 		entity_dict[entity.TYPE].erase(entity)
 	entity.queue_free()

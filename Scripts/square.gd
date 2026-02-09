@@ -33,6 +33,7 @@ var attacking = false
 var target_handler
 var switch_handler
 var idle_behaviour_handler
+var player_handler
 
 var entities_seen = []
 var behaviour = 'idle'
@@ -201,6 +202,9 @@ func _input(event: InputEvent) -> void:
 		event.button_index == MOUSE_BUTTON_LEFT):
 		attack()
 
+func pickup(type):
+	player_handler.pickup(type)
+
 func attack():
 	attacking = true
 	await get_tree().create_timer(0.3).timeout
@@ -234,6 +238,6 @@ func apply_damage(amount):
 
 func die():
 	dead = true
-	# death animation
+	
 	await get_tree().create_timer(0.4).timeout
 	target_handler.die(self)

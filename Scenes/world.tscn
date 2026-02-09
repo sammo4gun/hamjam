@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c43ukederb43r" path="res://Sprites/phantompuffin demo tiles.png" id="4_o06y3"]
 [ext_resource type="Script" uid="uid://ct2n8ww0cyao0" path="res://Scripts/wave_handler.gd" id="5_5v1tr"]
 [ext_resource type="Script" uid="uid://dfwpp3ejtvrfy" path="res://Scripts/idle_behaviour_handler.gd" id="5_k7acu"]
+[ext_resource type="Script" uid="uid://cl1ucshpi7qjh" path="res://Scripts/player_handler.gd" id="6_0fj1v"]
 [ext_resource type="Script" uid="uid://bqar1u1ieo2d5" path="res://Scripts/camera.gd" id="6_5ukr8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k7acu"]
@@ -63,7 +64,7 @@ use_texture_padding = false
 0:1/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_k7acu"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 3
 sources/0 = SubResource("TileSetAtlasSource_o06y3")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_go701"]
@@ -100,6 +101,9 @@ script = ExtResource("4_k7acu")
 
 [node name="IdleBehaviourHandler" type="Node" parent="." unique_id=1480498269]
 script = ExtResource("5_k7acu")
+
+[node name="PlayerHandler" type="Node" parent="." unique_id=30873824]
+script = ExtResource("6_0fj1v")
 
 [node name="WaveHandler" type="Node2D" parent="." unique_id=1337412498]
 script = ExtResource("5_5v1tr")

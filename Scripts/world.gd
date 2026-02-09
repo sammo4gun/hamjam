@@ -4,8 +4,8 @@ extends Node2D
 
 @onready var target_handler = $"TargetHandler"
 @onready var switch_handler = $"SwitchHandler"
-
 @onready var idle_behaviour_handler = $"IdleBehaviourHandler"
+@onready var player_handler = $"PlayerHandler"
 
 @onready var camera = $"Camera"
 
@@ -14,6 +14,8 @@ extends Node2D
 	'triangle': $CircleNavigation,
 	'square': $SquareNavigation
 }
+
+var mana_pickup = preload("res://Scenes/mana_pickup.tscn")
 
 var wanted = 'circle'
 
@@ -25,6 +27,11 @@ func _ready() -> void:
 
 func set_camera_target(target):
 	camera.target = target
+
+func death_spawn_mana(location, _type):
+	var mana = mana_pickup.instantiate()
+	mana.global_position = location
+	add_child(mana)
 
 func add_entity(entity):
 	types_navigation[entity.TYPE].add_child(entity)
