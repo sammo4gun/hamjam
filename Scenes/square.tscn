@@ -57,6 +57,7 @@ texture = ExtResource("1_7naj2")
 avoidance_enabled = true
 radius = 30.0
 neighbor_distance = 100.0
+debug_enabled = true
 
 [node name="AttackDetectorArea" type="Area2D" parent="." unique_id=539582286]
 position = Vector2(21, 0.5)
@@ -86,7 +87,6 @@ target_position = Vector2(500, 0)
 [node name="EntityView" type="Area2D" parent="." unique_id=39565044]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EntityView" unique_id=850463964]
-position = Vector2(153, 0)
 shape = SubResource("CircleShape2D_2jr70")
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

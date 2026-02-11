@@ -30,22 +30,37 @@ func get_behaviour(entity: CharacterBody2D, visible_entities: Array):
 
 # these return an array with 2 vector2ds, first one is target, second is look_target
 func idle_target(entity: CharacterBody2D, visible_entities: Array,
-					shyness = 200):
-	for player in visible_entities:
-		if player is CharacterBody2D:
-			if player.is_player:
-				if player.global_position.distance_to(entity.global_position) < shyness:
-					var dist = (entity.global_position - player.global_position).normalized() * 10
-					return [entity.global_position + dist, player.global_position]
-				var dist = (player.global_position - entity.global_position).length() - shyness
-				return [entity.global_position + (player.global_position - entity.global_position).limit_length(dist), player.global_position]
+					nav_map, shyness = 200):
+		
+	if world.wanted == entity.TYPE:
+		for player in visible_entities:
+			if player is CharacterBody2D:
+				if player.is_player:
+					var dist
+					if player.global_position.distance_to(entity.global_position) < shyness:
+						dist = (entity.global_position - player.global_position).normalized() * 10
+						return [entity.global_position + dist, player.global_position]
+					dist = (player.global_position - entity.global_position).length() - shyness
+					return [entity.global_position + (player.global_position - entity.global_position).limit_length(dist), player.global_position]
+	
+	var wander_targets = [entity.wander_target]
 	
 	for friend in visible_entities:
 		if friend is CharacterBody2D:
-			var dist = (friend.global_position - entity.global_position).length() - shyness
-			return [entity.global_position + (friend.global_position - entity.global_position).limit_length(dist), friend.global_position]
+			if friend.TYPE == entity.TYPE:
+				if friend.wander_target:
+					wander_targets.append(friend.wander_target)
 	
-	return [entity.global_position, null]
+	var sum_target = Vector2(0,0)
+	for i in wander_targets:
+		sum_target += i
+	
+	return [NavigationServer2D.map_get_closest_point(nav_map, sum_target/len(wander_targets)), null]
+
+func pick_wander_target():
+	var desired = Vector2(	randf_range(world_min_x, world_max_x), 
+							randf_range(world_min_y, world_max_y))
+	return desired
 
 func flee_target(entity: CharacterBody2D, visible_entities: Array, nav_map, flee_distance := 300.0):
 	var closest_enemy : CharacterBody2D = null
@@ -61,11 +76,11 @@ func flee_target(entity: CharacterBody2D, visible_entities: Array, nav_map, flee
 	var away_dir = (entity.global_position - closest_enemy.global_position).normalized()
 	var desired_pos = entity.global_position + away_dir * flee_distance
 	
-	if desired_pos.y > world_max_y or desired_pos.y < world_min_y:
-		if desired_pos.x > world_max_x: # corner spot
-			desired_pos.x -= world_max_x
-		if desired_pos.x < world_min_x:
-			desired_pos.x -= world_min_x
+	#if desired_pos.y > world_max_y or desired_pos.y < world_min_y:
+		#if desired_pos.x > world_max_x: # corner spot
+			#desired_pos.x -= world_max_x
+		#if desired_pos.x < world_min_x:
+			#desired_pos.x -= world_min_x
 	
 	desired_pos = Vector2(
 		desired_pos.x,

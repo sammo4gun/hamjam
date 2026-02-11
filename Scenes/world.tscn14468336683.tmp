@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://dfwpp3ejtvrfy" path="res://Scripts/idle_behaviour_handler.gd" id="5_k7acu"]
 [ext_resource type="Script" uid="uid://cl1ucshpi7qjh" path="res://Scripts/player_handler.gd" id="6_0fj1v"]
 [ext_resource type="Script" uid="uid://bqar1u1ieo2d5" path="res://Scripts/camera.gd" id="6_5ukr8"]
-[ext_resource type="PackedScene" uid="uid://cu8bxqh8t3jt0" path="res://Scenes/triangle.tscn" id="9_5v1tr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k7acu"]
 size = Vector2(213, 156)
@@ -150,39 +149,20 @@ navigation_polygon = SubResource("NavigationPolygon_8j60k")
 
 [node name="Circle" parent="CircleNavigation" unique_id=814518204 instance=ExtResource("1_f3sb7")]
 
-[node name="Circle2" parent="CircleNavigation" unique_id=737279250 instance=ExtResource("1_f3sb7")]
-position = Vector2(100, -27)
+[node name="Circle2" parent="CircleNavigation" unique_id=365559627 instance=ExtResource("1_f3sb7")]
+position = Vector2(67, -67)
 
-[node name="Circle3" parent="CircleNavigation" unique_id=1105900826 instance=ExtResource("1_f3sb7")]
-position = Vector2(20, -79)
+[node name="Circle3" parent="CircleNavigation" unique_id=505914511 instance=ExtResource("1_f3sb7")]
+position = Vector2(-46, -93)
 
-[node name="Circle4" parent="CircleNavigation" unique_id=956774887 instance=ExtResource("1_f3sb7")]
-position = Vector2(-131, -122)
+[node name="Circle4" parent="CircleNavigation" unique_id=2063163652 instance=ExtResource("1_f3sb7")]
+position = Vector2(-139, -50)
 
-[node name="Circle5" parent="CircleNavigation" unique_id=479177292 instance=ExtResource("1_f3sb7")]
-position = Vector2(-81, -172)
+[node name="Circle5" parent="CircleNavigation" unique_id=583314568 instance=ExtResource("1_f3sb7")]
+position = Vector2(-74, 17)
 
-[node name="Circle6" parent="CircleNavigation" unique_id=2024467969 instance=ExtResource("1_f3sb7")]
-position = Vector2(-147, -224)
+[node name="Circle6" parent="CircleNavigation" unique_id=1798720483 instance=ExtResource("1_f3sb7")]
+position = Vector2(73, 31)
 
-[node name="Circle7" parent="CircleNavigation" unique_id=1505241911 instance=ExtResource("1_f3sb7")]
-position = Vector2(-197, -80)
-
-[node name="Circle8" parent="CircleNavigation" unique_id=447588651 instance=ExtResource("1_f3sb7")]
-position = Vector2(-113, -23)
-
-[node name="Circle9" parent="CircleNavigation" unique_id=1379806197 instance=ExtResource("1_f3sb7")]
-position = Vector2(-202, 34)
-
-[node name="Triangle" parent="CircleNavigation" unique_id=796219129 instance=ExtResource("9_5v1tr")]
-position = Vector2(-782, -503)
-
-[node name="Triangle2" parent="CircleNavigation" unique_id=1244378470 instance=ExtResource("9_5v1tr")]
-position = Vector2(-817, -417)
-
-[node name="Triangle3" parent="CircleNavigation" unique_id=1015251995 instance=ExtResource("9_5v1tr")]
-position = Vector2(-928, -495)
-
-[node name="Triangle4" parent="CircleNavigation" unique_id=730056458 instance=ExtResource("9_5v1tr")]
-position = Vector2(-205, -167)
-is_player = true
+[node name="Circle7" parent="CircleNavigation" unique_id=1398316434 instance=ExtResource("1_f3sb7")]
+position = Vector2(166, 10)

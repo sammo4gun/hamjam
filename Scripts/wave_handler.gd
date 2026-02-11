@@ -12,7 +12,7 @@ var type_dict = {
 	'circle': circle_entity
 }
 
-@export var WAVE_WAIT = 10
+@export var WAVE_WAIT = 2
 @export var WAVE_DURATION: float = 5.0
 @export var max_attempts_per_spawn: int = 10
 
@@ -40,11 +40,11 @@ func start_spawn():
 	print("NEW WAVEEE!!!")
 	# define what to spawn
 	if world.wanted != 'circle':
-		spawn_counts.circle += 6
+		spawn_counts.circle += 0
 	if world.wanted != 'square':
-		spawn_counts.square += 5
+		spawn_counts.square += 0
 	if world.wanted != 'triangle':
-		spawn_counts.triangle += 4
+		spawn_counts.triangle += 0
 	
 	spawn_interval = WAVE_DURATION / float(get_dict_sum(spawn_counts))
 

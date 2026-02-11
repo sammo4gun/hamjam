@@ -3,16 +3,18 @@ extends CharacterBody2D
 var TYPE = 'square'
 
 #export vars
-@export var SPEED = 300.0
-@export var IDLE_SLOWDOWN = 0.6
+@export var SPEED = 150.0
 @export var ACCELERATION : float = 1200
 @export var DECELERATION : float = 1200
 
-@export var MAX_HEALTH = 8
+@export var MAX_HEALTH = 6
 var health = MAX_HEALTH
 @export var ATTACK_RANGE = 10
 
-@export var SHYNESS = 100
+@export var SHYNESS = 150
+@export var WANDER_TIMER = 4.0
+var wander_time = 0.0
+var wander_target = Vector2(0,0)
 
 @export var is_player = false
 
@@ -52,7 +54,7 @@ func _physics_process(delta: float) -> void:
 			player_handle_movement(delta)
 			player_handle_rotation(delta)
 			switch_handler.switch_available(self)
-		elif target_handler.is_wanted(TYPE):
+		else:
 			entities_seen = idle_behaviour_handler.get_visible_entities(entity_view)
 			var new_behaviour = idle_behaviour_handler.get_behaviour(self, entities_seen)
 			if behaviour != new_behaviour:
@@ -61,29 +63,28 @@ func _physics_process(delta: float) -> void:
 			handle_behaviours(delta)
 			nav_handle_movement(delta)
 			nav_handle_rotation(delta)
-		else:
-			behaviour = 'attack'
-			nav_find_target() # what we could do at one point is ping for this every second,
-			# and just follow the target for the time that we have. this could be better for processing
-			# speed
-			check_attack_area()
-			nav_handle_movement(delta)
-			nav_handle_rotation(delta)
-			if ready_for_attack and !attacking:
-				attack()
 
-func handle_behaviours(_delta):
+func handle_behaviours(delta):
 	if behaviour == 'idle':
-		var info = idle_behaviour_handler.idle_target(self, entities_seen, SHYNESS)
+		wander_check(delta)
+		var info = idle_behaviour_handler.idle_target(self, entities_seen, nav_map, SHYNESS)
 		nav_agent.target_position = info[0]
 		target_lookat = info[1]
 	elif behaviour == 'flee':
+		attacking = false
+		ready_for_attack = false
 		nav_agent.target_position = idle_behaviour_handler.flee_target(self, entities_seen, nav_map)
 	elif behaviour == 'attack':
 		nav_find_target()
 		check_attack_area()
 		if ready_for_attack and !attacking:
 			attack()
+
+func wander_check(delta):
+	if idle_behaviour_handler and wander_time < 0.0:
+		wander_target = idle_behaviour_handler.pick_wander_target()
+		wander_time = WANDER_TIMER + (randf()-0.5) * 0.5 * WANDER_TIMER
+	else: wander_time -= delta
 
 # ============================================================
 # ENEMY SCRIPTS
@@ -105,28 +106,43 @@ func nav_find_target():
 func nav_handle_movement(delta) -> void:
 	next_position = nav_agent.get_next_path_position()
 	var direction = (next_position - global_position).normalized()
-	var new_velocity = Vector2.ZERO
 	
 	# Normalize the direction to ensure consistent movement speed in all directions
 	if direction != Vector2.ZERO:
 		direction = direction.normalized()
 	
-	if behaviour == 'idle':
-		direction = direction.normalized() * IDLE_SLOWDOWN
-	
 	if nav_agent.is_navigation_finished() or ready_for_attack or attacking:
 		direction = Vector2.ZERO
 	
+	handle_movement(direction, delta)
+
+func handle_movement(direction: Vector2, delta):
+	var new_velocity: Vector2
+	var factored_speed = SPEED
+	var factored_acceleration = ACCELERATION
+	
+	if is_player:
+		factored_speed *= player_handler.PLAYER_SPEED_FACTOR
+		factored_acceleration *= player_handler.PLAYER_SPEED_FACTOR
+	elif target_handler.is_wanted(TYPE):
+		factored_speed *= 1.5
+		factored_acceleration *= 1.5
+	
 	# Apply acceleration
 	if direction != Vector2.ZERO:
-		new_velocity = velocity.move_toward(direction * SPEED
+		new_velocity = velocity.move_toward(direction * factored_speed
 		*
 		(0.8 + (0.2 * (Vector2.from_angle(rotation)).normalized().dot(direction.normalized()))), ACCELERATION * delta)
 	# Apply deceleration when there's no input
 	else:
-		new_velocity = velocity.move_toward(Vector2.ZERO, DECELERATION * delta)
+		new_velocity = velocity.move_toward(Vector2.ZERO, factored_acceleration * delta)
 	
-	nav_agent.set_velocity(new_velocity)
+	if is_player:
+		velocity = new_velocity
+		#move_and_collide(velocity * delta)
+		move_and_slide()
+	else:
+		nav_agent.set_velocity(new_velocity)
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	if !is_player:
@@ -134,7 +150,7 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 		move_and_slide()
 
 func nav_handle_rotation(delta) -> void:
-	if attacking: return
+	#if attacking: return
 	# Get the mouse position and calculate the angle to face it
 	var target_position = next_position
 	if target_lookat: target_position = target_lookat
@@ -156,7 +172,6 @@ func check_attack_area():
 
 func player_handle_movement(delta: float) -> void:
 	var direction = Vector2.ZERO
-	var new_velocity = Vector2.ZERO
 	
 	# Input for movement: Arrow keys or WASD
 	if Input.is_action_pressed("move_right"):
@@ -175,18 +190,7 @@ func player_handle_movement(delta: float) -> void:
 	if attacking: 
 		direction = Vector2.ZERO
 	
-	# Apply acceleration
-	if direction != Vector2.ZERO:
-		new_velocity = velocity.move_toward(direction * SPEED
-		*
-		(0.8 + (0.2 * (get_global_mouse_position() - global_position).normalized().dot(direction.normalized()))), ACCELERATION * delta)
-	# Apply deceleration when there's no input
-	else:
-		new_velocity = velocity.move_toward(Vector2.ZERO, DECELERATION * delta)
-	velocity = new_velocity
-	
-	#move_and_collide(velocity * delta)
-	move_and_slide()
+	handle_movement(direction, delta)
 
 func player_handle_rotation(delta) -> void:
 	# Get the mouse position and calculate the angle to face it

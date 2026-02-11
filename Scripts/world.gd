@@ -1,7 +1,5 @@
 extends Node2D
 
-@onready var circle1: CharacterBody2D = $SquareNavigation/Square
-
 @onready var target_handler = $"TargetHandler"
 @onready var switch_handler = $"SwitchHandler"
 @onready var idle_behaviour_handler = $"IdleBehaviourHandler"
@@ -20,10 +18,12 @@ var mana_pickup = preload("res://Scenes/mana_pickup.tscn")
 var wanted = 'square'
 
 func _ready() -> void:
-	target_handler.register(circle1)
-	set_camera_target(circle1)
 	for c in $SquareNavigation.get_children():
 		target_handler.register(c)
+		set_camera_target(c)
+	for c in $CircleNavigation.get_children():
+		target_handler.register(c)
+		set_camera_target(c)
 
 func set_camera_target(target):
 	camera.target = target
