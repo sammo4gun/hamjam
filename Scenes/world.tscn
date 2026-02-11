@@ -1,7 +1,6 @@
 [gd_scene format=4 uid="uid://bi043lyrcqx35"]
 
 [ext_resource type="Script" uid="uid://dtfppl1ywm4h0" path="res://Scripts/world.gd" id="1_5a7ea"]
-[ext_resource type="PackedScene" uid="uid://yq7k650rdo1l" path="res://Scenes/circle.tscn" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://hb2htwjtp7jv" path="res://Scripts/target_handler.gd" id="2_8j60k"]
 [ext_resource type="Script" uid="uid://giwmys7m06vb" path="res://Scripts/switch_handler.gd" id="4_k7acu"]
 [ext_resource type="Texture2D" uid="uid://c43ukederb43r" path="res://Sprites/phantompuffin demo tiles.png" id="4_o06y3"]
@@ -9,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dfwpp3ejtvrfy" path="res://Scripts/idle_behaviour_handler.gd" id="5_k7acu"]
 [ext_resource type="Script" uid="uid://cl1ucshpi7qjh" path="res://Scripts/player_handler.gd" id="6_0fj1v"]
 [ext_resource type="Script" uid="uid://bqar1u1ieo2d5" path="res://Scripts/camera.gd" id="6_5ukr8"]
+[ext_resource type="PackedScene" uid="uid://dn5ion778qime" path="res://Scenes/square.tscn" id="9_5v1tr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k7acu"]
 size = Vector2(213, 156)
@@ -144,8 +144,20 @@ tile_set = SubResource("TileSet_k7acu")
 [node name="SquareNavigation" type="NavigationRegion2D" parent="." unique_id=945869248]
 navigation_polygon = SubResource("NavigationPolygon_go701")
 
+[node name="Square" parent="SquareNavigation" unique_id=1548567980 instance=ExtResource("9_5v1tr")]
+is_player = true
+
+[node name="Square2" parent="SquareNavigation" unique_id=1055374693 instance=ExtResource("9_5v1tr")]
+position = Vector2(183, 36)
+
+[node name="Square3" parent="SquareNavigation" unique_id=1291309635 instance=ExtResource("9_5v1tr")]
+position = Vector2(92, -107)
+
+[node name="Square4" parent="SquareNavigation" unique_id=1899689912 instance=ExtResource("9_5v1tr")]
+position = Vector2(-246, -128)
+
+[node name="Square5" parent="SquareNavigation" unique_id=1535882375 instance=ExtResource("9_5v1tr")]
+position = Vector2(-145.99998, -17)
+
 [node name="CircleNavigation" type="NavigationRegion2D" parent="." unique_id=1682700205]
 navigation_polygon = SubResource("NavigationPolygon_8j60k")
-
-[node name="Circle" parent="CircleNavigation" unique_id=814518204 instance=ExtResource("1_f3sb7")]
-is_player = true

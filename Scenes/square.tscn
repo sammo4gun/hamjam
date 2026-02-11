@@ -55,7 +55,7 @@ texture = ExtResource("1_7naj2")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=995240591]
 avoidance_enabled = true
-radius = 20.0
+radius = 30.0
 neighbor_distance = 100.0
 
 [node name="AttackDetectorArea" type="Area2D" parent="." unique_id=539582286]

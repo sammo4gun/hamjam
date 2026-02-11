@@ -44,7 +44,7 @@ func _ready():
 	# Optional tuning
 	nav_agent.path_desired_distance = 4.0
 	nav_agent.target_desired_distance = 4.0
-	nav_agent.max_speed = SPEED
+	nav_agent.max_speed = SPEED * 0.9
 
 func _physics_process(delta: float) -> void:
 	if target_handler: # make sure this doesn't happen before we assign a target handler
