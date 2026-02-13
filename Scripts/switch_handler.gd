@@ -2,7 +2,7 @@ extends Node
 
 @onready var world = get_parent()
 
-@export var TIME_TILL_WANTED = 0.
+@export var TIME_TILL_WANTED = 3.
 
 var switcher
 var switchee
@@ -39,6 +39,7 @@ func _input(event: InputEvent) -> void:
 func switch():
 	var new_type = switchee.TYPE
 	switcher.is_player = false
+	switcher.die()
 	switchee.is_player = true
 	world.set_camera_target(switchee)
 	

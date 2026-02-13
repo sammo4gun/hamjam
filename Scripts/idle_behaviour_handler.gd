@@ -16,6 +16,10 @@ func get_visible_entities(visible_area: Area2D) -> Array:
 
 func get_behaviour(entity: CharacterBody2D, visible_entities: Array):
 	var my_type = entity.TYPE
+	if world.wanted != my_type:
+		if entity.target_handler.get_nearest_wanted(entity):
+			return 'attack'
+	
 	var good_guys = 0
 	var bad_guys = 0
 	for i in visible_entities:
@@ -24,7 +28,7 @@ func get_behaviour(entity: CharacterBody2D, visible_entities: Array):
 		else: good_guys += 1
 	if bad_guys == 0:
 		return 'idle'
-	if good_guys >= bad_guys or world.wanted != my_type:
+	if good_guys >= bad_guys:
 		return 'attack'
 	return 'flee'
 

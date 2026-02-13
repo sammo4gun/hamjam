@@ -105,6 +105,8 @@ func get_lights_on(entity: CharacterBody2D):
 		world.tilemap.to_local(entity.global_position)
 	)
 	var radius_pixels = LIGHT_RADIUS
+	if entity.dead:
+		radius_pixels /= 2
 	var tile_size = world.tilemap.tile_set.tile_size
 	var radius_in_tiles = int(ceil(radius_pixels / tile_size.x))
 	

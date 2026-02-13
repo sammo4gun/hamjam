@@ -5,7 +5,7 @@ extends Node2D
 @onready var behaviour_handler = $"BehaviourHandler"
 @onready var player_handler = $"PlayerHandler"
 
-@onready var tilemap = $"TileMapLayer"
+@onready var tilemap = $"LightsLayer"
 
 @onready var camera = $"Camera"
 
