@@ -23,7 +23,6 @@ func end_of_life(collision_normal = null):
 		if collision_normal:
 			impact.process_material.spread = 90
 			impact.rotation = ray.get_collision_normal().angle()
-		else: print('no contact')
 		impact.global_position = global_position
 		impact.emitting = true
 	
