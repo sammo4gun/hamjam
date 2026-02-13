@@ -3,7 +3,7 @@ extends CharacterBody2D
 var TYPE = 'square'
 
 #export vars
-@export var SPEED = 150.0
+@export var SPEED = 200.0
 @export var ACCELERATION : float = 1200
 @export var DECELERATION : float = 1200
 
@@ -46,6 +46,8 @@ var behaviour = 'idle'
 var glitch_timer = 0.0
 var glitch_max_timer = 0.0
 
+var invincible = 0.0
+
 var dead = false
 
 func _ready():
@@ -74,6 +76,8 @@ func _physics_process(delta: float) -> void:
 		glitch_timer -= delta
 		glitch.set_shader_parameter("shake_power", 0.3 * glitch_timer/glitch_max_timer)
 	else: stop_glitch()
+	if invincible > 0.0:
+		invincible -= delta
 
 func activate_glitch(period):
 	glitch_max_timer = period
@@ -235,7 +239,6 @@ func pickup(type):
 func attack():
 	if is_player:
 		attacking = true
-		await get_tree().create_timer(0.1).timeout
 		attack_sprite.visible = true
 		attack_sprite.play()
 		await attack_sprite.animation_finished
@@ -245,13 +248,12 @@ func attack():
 		attacking = false
 	else:
 		attacking = true
-		await get_tree().create_timer(0.3).timeout
 		attack_sprite.visible = true
 		attack_sprite.play()
 		await attack_sprite.animation_finished
-		damage(2)
+		damage(3)
 		attack_sprite.visible = false
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0.3).timeout
 		attacking = false
 
 func damage(amount):
@@ -262,17 +264,20 @@ func damage(amount):
 				entity.apply_damage(amount)
 
 func apply_damage(amount):
-	health -= amount
-	if is_player:
-		if health <= 0:
-			# die as a player, do some cool stuff here
-			die()
-			pass
-	else:
-		if health <= 0:
-			# entity dies, do some cool stuff here
-			die()
-			pass
+	if invincible <= 0.0:
+		health -= amount
+		if is_player:
+			# damage effects?
+			if health <= 0:
+				# die as a player, do some cool stuff here
+				die()
+			else: invincible = 0.5
+		else:
+			health -= amount
+			# damage effects?
+			if health <= 0:
+				# entity dies, do some cool stuff here
+				die()
 
 func set_light_strength(strength):
 	$Light.energy = strength

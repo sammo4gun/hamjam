@@ -17,12 +17,13 @@ extends Node2D
 
 var mana_pickup = preload("res://Scenes/mana_pickup.tscn")
 
-var wanted = 'circle'
+var wanted = 'triangle'
 
 func _ready() -> void:
 	for c in $Navigation.get_children():
 		target_handler.register(c)
 		set_camera_target(c)
+		wanted = c.TYPE
 
 func set_camera_target(target):
 	camera.target = target

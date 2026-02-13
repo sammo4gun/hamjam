@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://boke3lxkf5lno"
-path="res://.godot/imported/directional_light.png-85cd75b111ee550e3a0a23d28c3c3466.ctex"
+uid="uid://ujh2jn45ngoa"
+path="res://.godot/imported/circle_particle.png-1e8c9fba0626876c1f155d8f3b5f662e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scripts/directional_light.png"
-dest_files=["res://.godot/imported/directional_light.png-85cd75b111ee550e3a0a23d28c3c3466.ctex"]
+source_file="res://Sprites/circle_particle.png"
+dest_files=["res://.godot/imported/circle_particle.png-1e8c9fba0626876c1f155d8f3b5f662e.ctex"]
 
 [params]
 

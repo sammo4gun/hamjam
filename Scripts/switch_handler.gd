@@ -49,10 +49,12 @@ func switch():
 	current_switcher.is_player = false
 	current_switcher.die()
 	
-	current_switchee.is_player = true
 	current_switchee.activate_glitch(4.0)
+	current_switchee.invincible = 3.0
 	Engine.time_scale = 0.2
 	world.set_camera_target(current_switchee)
+	await get_tree().create_timer(0.5).timeout
+	current_switchee.is_player = true
 	
 	await get_tree().create_timer(TIME_TILL_WANTED).timeout
 	

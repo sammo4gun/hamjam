@@ -55,6 +55,8 @@ var behaviour = 'idle'
 var glitch_timer = 0.0
 var glitch_max_timer = 0.0
 
+var invincible = 0.0
+
 var dead = false
 
 @export var bullet_scene: PackedScene = preload("res://Scenes/triangle_bullet.tscn")
@@ -87,6 +89,8 @@ func _physics_process(delta: float) -> void:
 		glitch_timer -= delta
 		glitch.set_shader_parameter("shake_power", 0.3 * glitch_timer/glitch_max_timer)
 	else: stop_glitch()
+	if invincible > 0.0:
+		invincible -= delta
 
 func activate_glitch(period):
 	glitch_max_timer = period
@@ -277,25 +281,28 @@ func fire():
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = fire_point.global_position
 	bullet.direction = Vector2.from_angle(rotation)
+	bullet.rotation = rotation
 	bullet.speed = FIRE_SHOT_SPEED
 	bullet.lifetime = FIRE_RANGE / FIRE_SHOT_SPEED * 2
+	bullet.finished_particles = preload("res://Scenes/triangle_bullet_explosion.tscn")
 	bullet.enemies = target_handler.get_enemies(TYPE)
 	get_tree().current_scene.add_child(bullet)
 
 func apply_damage(amount):
-	health -= amount
-	if is_player:
-		# damage effects?
-		if health <= 0:
-			# die as a player, do some cool stuff here
-			die()
-			pass
-	else:
-		# damage effects?
-		if health <= 0:
-			# entity dies, do some cool stuff here
-			die()
-			pass
+	if invincible <= 0.0:
+		health -= amount
+		if is_player:
+			# damage effects?
+			if health <= 0:
+				# die as a player, do some cool stuff here
+				die()
+			else: invincible = 0.5
+		else:
+			health -= amount
+			# damage effects?
+			if health <= 0:
+				# entity dies, do some cool stuff here
+				die()
 
 func die():
 	dead = true

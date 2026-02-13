@@ -1,10 +1,30 @@
 [gd_scene format=3 uid="uid://cugdqxv7xc14h"]
 
 [ext_resource type="Script" uid="uid://dtjig2dqg7kxa" path="res://Scripts/bullet.gd" id="1_h1moi"]
-[ext_resource type="Texture2D" uid="uid://devcphhh4vsmi" path="res://Sprites/circle.png" id="1_nmfmc"]
+[ext_resource type="Shader" uid="uid://djsqxws8gq1go" path="res://Shader/circle_laser.gdshader" id="3_h4nc8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ml3eb"]
 radius = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w3nvr"]
+resource_local_to_scene = true
+shader = ExtResource("3_h4nc8")
+shader_parameter/beams = 2
+shader_parameter/energy = 20.0
+shader_parameter/roughness = 3
+shader_parameter/frequency = 10
+shader_parameter/speed = 1.0
+shader_parameter/thickness = 0.0870000041325
+shader_parameter/outline_thickness = 0.0770000036575
+shader_parameter/beam_difference = 0.0
+shader_parameter/glow = 0.0
+shader_parameter/outline_glow = 0.0
+shader_parameter/color = Color(0.30331126, 0.21105736, 0.02842542, 1)
+shader_parameter/outline_color = Color(0.6554729, 0.2783615, 0.19376853, 1)
+shader_parameter/progress = 1.0
+shader_parameter/y_offset = 0.0
+shader_parameter/fixed_edge_size = 0.05
+shader_parameter/noise_scale = Vector2(1, 1)
 
 [node name="CircleBullet" type="Area2D" unique_id=1651610934]
 script = ExtResource("1_h1moi")
@@ -12,10 +32,16 @@ script = ExtResource("1_h1moi")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=400194122]
 shape = SubResource("CircleShape2D_ml3eb")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=129162188]
-modulate = Color(1, 1, 0, 1)
-position = Vector2(0, -5.9604645e-08)
-scale = Vector2(0.10483871, 0.104838714)
-texture = ExtResource("1_nmfmc")
+[node name="ColorRect" type="ColorRect" parent="." unique_id=984496825]
+material = SubResource("ShaderMaterial_w3nvr")
+offset_left = -30.0
+offset_top = -20.0
+offset_right = 10.0
+offset_bottom = 20.0
+scale = Vector2(0.70920867, 1.3492078)
+pivot_offset = Vector2(20, 20)
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=268194366]
+target_position = Vector2(20, 0)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

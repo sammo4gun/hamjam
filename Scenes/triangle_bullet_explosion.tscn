@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://bjvtmwm2eijax"]
+
+[ext_resource type="Texture2D" uid="uid://ujh2jn45ngoa" path="res://Sprites/circle_particle.png" id="1_ynsun"]
+[ext_resource type="Script" uid="uid://5l4f7k7ms5qf" path="res://Scripts/circle_bullet_explosion.gd" id="2_yftk7"]
+
+[sub_resource type="Curve" id="Curve_eiyb3"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_w3nvr"]
+curve = SubResource("Curve_eiyb3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ue6nd"]
+resource_local_to_scene = true
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 180.0
+initial_velocity_min = 94.17
+initial_velocity_max = 165.92
+gravity = Vector3(0, 0, 0)
+scale_min = 0.01
+scale_max = 0.19999999
+scale_curve = SubResource("CurveTexture_w3nvr")
+turbulence_enabled = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" unique_id=548318484]
+modulate = Color(0.79130894, 0.6099617, 0.014220326, 1)
+scale = Vector2(0.9981223, 1)
+emitting = false
+amount = 32
+texture = ExtResource("1_ynsun")
+one_shot = true
+explosiveness = 1.0
+visibility_rect = Rect2(-200, -200, 400, 400)
+process_material = SubResource("ParticleProcessMaterial_ue6nd")
+script = ExtResource("2_yftk7")

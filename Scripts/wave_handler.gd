@@ -14,7 +14,7 @@ var type_dict = {
 
 @export var SPAWN = true
 
-@export var WAVE_WAIT = 2
+@export var WAVE_WAIT = 6
 @export var WAVE_DURATION: float = 5.0
 @export var max_attempts_per_spawn: int = 10
 
@@ -35,18 +35,27 @@ var current_wave_wait = WAVE_WAIT
 var current_spawn_interval = spawn_interval
 var total_to_spawn = 0
 
+var current_wave = 0
+
 var spawning = false
 
 func start_spawn():
 	spawning = true
+	current_wave += 1
 	print("NEW WAVEEE!!!")
+	print("wave:", current_wave)
+	var total_to_spawn = 3 + int(current_wave * 1.5)
 	# define what to spawn
-	if world.wanted != 'circle':
-		spawn_counts.circle += 2
-	if world.wanted != 'square':
-		spawn_counts.square += 2
-	if world.wanted != 'triangle':
-		spawn_counts.triangle += 2
+	var all_types = ['circle', 'triangle', 'square']
+	all_types.erase(world.wanted)
+	spawn_counts = {
+		'circle': 0,
+		'triangle': 0,
+		'square': 0
+	}
+	for i in range(total_to_spawn):
+		var type = all_types.pick_random()
+		spawn_counts[type] += 1
 	
 	spawn_interval = WAVE_DURATION / float(get_dict_sum(spawn_counts))
 
@@ -55,7 +64,7 @@ func end_spawn():
 	for k in spawn_counts.keys():
 		spawn_counts[k] = 0
 		spawned[k] = 0
-	current_wave_wait = WAVE_WAIT
+	current_wave_wait = WAVE_WAIT * (0.5 * current_wave)
 
 func _physics_process(delta: float) -> void:
 	if current_wave_wait <= 0 and !spawning and SPAWN:
