@@ -24,7 +24,7 @@ var health = MAX_HEALTH
 var wander_time = 0.0
 var wander_target = Vector2(0,0)
 
-@export var LIGHT_STRENGTH_DEFAULT = 0.5
+@export var LIGHT_STRENGTH_DEFAULT = 0.2
 
 @export var is_player = false
 

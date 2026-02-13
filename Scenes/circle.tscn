@@ -71,7 +71,6 @@ scale = Vector2(0.39812627, 0.39812627)
 texture = ExtResource("2_ny5yc")
 
 [node name="PlayerIndicator" type="Sprite2D" parent="Sprite2D" unique_id=2074330455]
-visible = false
 position = Vector2(1.5938017, -28.775465)
 rotation = 1.5791483
 scale = Vector2(0.7857175, 0.7857175)
