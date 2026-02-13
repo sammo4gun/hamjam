@@ -8,7 +8,7 @@ func register(entity):
 	entity_dict[entity.TYPE] = entity_dict.get(entity.TYPE, []) + [entity]
 	entity.target_handler = self
 	entity.switch_handler = world.switch_handler
-	entity.idle_behaviour_handler = world.idle_behaviour_handler
+	entity.behaviour_handler = world.behaviour_handler
 	entity.player_handler = world.player_handler
 
 func get_nearest_wanted(entity) -> CharacterBody2D:

@@ -43,7 +43,7 @@ var cooldown = 0
 
 var target_handler
 var switch_handler
-var idle_behaviour_handler
+var behaviour_handler
 var player_handler
 
 var entities_seen = []
@@ -68,8 +68,8 @@ func _physics_process(delta: float) -> void:
 			player_handle_rotation(delta)
 			switch_handler.switch_available(self)
 		else:
-			entities_seen = idle_behaviour_handler.get_visible_entities(entity_view)
-			var new_behaviour = idle_behaviour_handler.get_behaviour(self, entities_seen)
+			entities_seen = behaviour_handler.get_visible_entities(entity_view)
+			var new_behaviour = behaviour_handler.get_behaviour(self, entities_seen)
 			if behaviour != new_behaviour:
 				target_lookat = null
 				behaviour = new_behaviour
@@ -81,14 +81,14 @@ func handle_behaviours(delta):
 	if !NavigationServer2D.map_get_iteration_id(nav_map) == 0:
 		if behaviour == 'idle':
 			wander_check(delta)
-			var info = idle_behaviour_handler.idle_target(self, entities_seen, nav_map, SHYNESS)
+			var info = behaviour_handler.idle_target(self, entities_seen, nav_map, SHYNESS)
 			nav_agent.target_position = info[0]
 			target_lookat = info[1]
 		elif behaviour == 'flee':
 			backing_up = false
 			attacking = false
 			ready_for_attack = false
-			nav_agent.target_position = idle_behaviour_handler.flee_target(self, entities_seen, nav_map)
+			nav_agent.target_position = behaviour_handler.flee_target(self, entities_seen, nav_map)
 		elif behaviour == 'attack':
 			nav_find_target()
 			check_target_finder()
@@ -97,8 +97,8 @@ func handle_behaviours(delta):
 				attack()
 
 func wander_check(delta):
-	if idle_behaviour_handler and wander_time < 0.0:
-		wander_target = idle_behaviour_handler.pick_wander_target()
+	if behaviour_handler and wander_time < 0.0:
+		wander_target = behaviour_handler.pick_wander_target()
 		wander_time = WANDER_TIMER + (randf()-0.5) * 0.5 * WANDER_TIMER
 	else: wander_time -= delta
 

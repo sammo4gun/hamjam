@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var target_handler = $"TargetHandler"
 @onready var switch_handler = $"SwitchHandler"
-@onready var idle_behaviour_handler = $"IdleBehaviourHandler"
+@onready var behaviour_handler = $"BehaviourHandler"
 @onready var player_handler = $"PlayerHandler"
 
 @onready var camera = $"Camera"

@@ -76,12 +76,6 @@ func flee_target(entity: CharacterBody2D, visible_entities: Array, nav_map, flee
 	var away_dir = (entity.global_position - closest_enemy.global_position).normalized()
 	var desired_pos = entity.global_position + away_dir * flee_distance
 	
-	#if desired_pos.y > world_max_y or desired_pos.y < world_min_y:
-		#if desired_pos.x > world_max_x: # corner spot
-			#desired_pos.x -= world_max_x
-		#if desired_pos.x < world_min_x:
-			#desired_pos.x -= world_min_x
-	
 	desired_pos = Vector2(
 		desired_pos.x,
 		desired_pos.y
@@ -91,6 +85,3 @@ func flee_target(entity: CharacterBody2D, visible_entities: Array, nav_map, flee
 	var safe_pos = NavigationServer2D.map_get_closest_point(nav_map, desired_pos)
 	
 	return safe_pos
-
-func attack_target():
-	pass
