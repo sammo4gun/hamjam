@@ -7,6 +7,11 @@ extends Node
 var switcher
 var switchee
 
+func _process(delta: float) -> void:
+	if Engine.time_scale < 0.99:
+		Engine.time_scale = lerpf(Engine.time_scale, 1.0, delta * 2.)
+	else: Engine.time_scale = 1.0
+
 func switch_available(entity):
 	var new_switcher = null
 	var new_switchee = null
@@ -38,10 +43,16 @@ func _input(event: InputEvent) -> void:
 
 func switch():
 	var new_type = switchee.TYPE
-	switcher.is_player = false
-	switcher.die()
-	switchee.is_player = true
-	world.set_camera_target(switchee)
+	var current_switcher = switcher
+	var current_switchee = switchee
+	
+	current_switcher.is_player = false
+	current_switcher.die()
+	
+	current_switchee.is_player = true
+	current_switchee.activate_glitch(4.0)
+	Engine.time_scale = 0.2
+	world.set_camera_target(current_switchee)
 	
 	await get_tree().create_timer(TIME_TILL_WANTED).timeout
 	

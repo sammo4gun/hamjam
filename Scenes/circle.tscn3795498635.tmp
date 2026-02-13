@@ -6,19 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://bs1ioal73lrn1" path="res://Sprites/SquareAttack/attack2.png" id="4_1axvn"]
 [ext_resource type="Texture2D" uid="uid://bqtey2pk6yvps" path="res://Sprites/SquareAttack/attack3.png" id="5_evqyu"]
 [ext_resource type="Shader" uid="uid://25opi4m6leqw" path="res://Shader/glitch.gdshader" id="6_1axvn"]
-[ext_resource type="Texture2D" uid="uid://blif2c0mtjker" path="res://Sprites/player_indicator.png" id="8_q30vm"]
+[ext_resource type="Script" uid="uid://t0pjd8ty5vq6" path="res://Scripts/glitch.gd" id="7_evqyu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l2lw7"]
 radius = 20.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_q30vm"]
-resource_local_to_scene = true
-shader = ExtResource("6_1axvn")
-shader_parameter/shake_power = 0.4
-shader_parameter/shake_rate = 0.0
-shader_parameter/shake_speed = 3.0
-shader_parameter/shake_block_size = 5.0
-shader_parameter/shake_color_rate = 0.01
 
 [sub_resource type="Gradient" id="Gradient_4pbwo"]
 offsets = PackedFloat32Array(0.0025252525, 0.27525252, 1)
@@ -53,6 +44,14 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_4pbwo"]
 radius = 600.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_evqyu"]
+shader = ExtResource("6_1axvn")
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 0.2
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
+
 [node name="Circle" type="CharacterBody2D" unique_id=814518204]
 motion_mode = 1
 script = ExtResource("1_ny5yc")
@@ -64,18 +63,10 @@ position = Vector2(20, 0)
 shape = SubResource("CircleShape2D_l2lw7")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=884459657]
-material = SubResource("ShaderMaterial_q30vm")
 position = Vector2(0.46116912, -0.461169)
 rotation = -1.5791483
 scale = Vector2(0.39812627, 0.39812627)
 texture = ExtResource("2_ny5yc")
-
-[node name="PlayerIndicator" type="Sprite2D" parent="Sprite2D" unique_id=2074330455]
-visible = false
-position = Vector2(1.5938017, -28.775465)
-rotation = 1.5791483
-scale = Vector2(0.7857175, 0.7857175)
-texture = ExtResource("8_q30vm")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=215279989]
 avoidance_enabled = true
@@ -105,5 +96,13 @@ target_position = Vector2(500, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EntityView" unique_id=513281629]
 shape = SubResource("CircleShape2D_4pbwo")
+
+[node name="Glitcher" type="ColorRect" parent="." unique_id=2038733841]
+material = SubResource("ShaderMaterial_evqyu")
+offset_left = -45.0
+offset_top = -50.0
+offset_right = 44.0
+offset_bottom = 45.0
+script = ExtResource("7_evqyu")
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

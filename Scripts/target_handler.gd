@@ -1,6 +1,6 @@
 extends Node
 
-var LIGHT_RADIUS = 200
+var LIGHT_RADIUS = 150
 var PLAYER_LIGHT_RADIUS = 100
 
 var entity_dict = {}
@@ -15,9 +15,8 @@ func register(entity):
 	entity.behaviour_handler = world.behaviour_handler
 	entity.player_handler = world.player_handler
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	update_tile_lights()
-	pass
 
 func get_nearest_wanted(entity) -> CharacterBody2D:
 	var wanted = world.wanted
@@ -105,10 +104,12 @@ func get_lights_on(entity: CharacterBody2D):
 		world.tilemap.to_local(entity.global_position)
 	)
 	var radius_pixels = LIGHT_RADIUS
-	if entity.dead:
-		radius_pixels /= 2
 	if entity.is_player:
 		radius_pixels = PLAYER_LIGHT_RADIUS
+	if entity.dead:
+		radius_pixels /= 2
+	if world.wanted != entity.TYPE:
+		radius_pixels *= 1.5
 	var tile_size = world.tilemap.tile_set.tile_size
 	var radius_in_tiles = int(ceil(radius_pixels / tile_size.x))
 	

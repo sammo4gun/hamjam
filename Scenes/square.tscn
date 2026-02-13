@@ -5,9 +5,31 @@
 [ext_resource type="Texture2D" uid="uid://c26xulcg06wfu" path="res://Sprites/SquareAttack/attack1.png" id="3_2jr70"]
 [ext_resource type="Texture2D" uid="uid://bs1ioal73lrn1" path="res://Sprites/SquareAttack/attack2.png" id="4_6rp5l"]
 [ext_resource type="Texture2D" uid="uid://bqtey2pk6yvps" path="res://Sprites/SquareAttack/attack3.png" id="5_g0n2n"]
+[ext_resource type="Shader" uid="uid://25opi4m6leqw" path="res://Shader/glitch.gdshader" id="6_g0n2n"]
+[ext_resource type="Script" uid="uid://t0pjd8ty5vq6" path="res://Scripts/glitch.gd" id="7_ff18a"]
+[ext_resource type="Texture2D" uid="uid://blif2c0mtjker" path="res://Sprites/player_indicator.png" id="8_ff18a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mu0s7"]
 radius = 20.0
+
+[sub_resource type="Gradient" id="Gradient_4pbwo"]
+offsets = PackedFloat32Array(0.0025252525, 0.27525252, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2jr70"]
+gradient = SubResource("Gradient_4pbwo")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ff18a"]
+resource_local_to_scene = true
+shader = ExtResource("6_g0n2n")
+shader_parameter/shake_power = 0.1
+shader_parameter/shake_rate = 0.0
+shader_parameter/shake_speed = 0.1
+shader_parameter/shake_block_size = 15.0
+shader_parameter/shake_color_rate = 0.01
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mu0s7"]
 radius = 15.5
@@ -39,6 +61,14 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_2jr70"]
 radius = 300.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y576l"]
+shader = ExtResource("6_g0n2n")
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 0.2
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
+
 [node name="Square" type="CharacterBody2D" unique_id=1548567980]
 scale = Vector2(1.5407054, 1.5407054)
 motion_mode = 1
@@ -47,11 +77,23 @@ script = ExtResource("1_mu0s7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1915569533]
 shape = SubResource("CircleShape2D_mu0s7")
 
+[node name="Light" type="PointLight2D" parent="." unique_id=1491677763]
+energy = 0.5
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_2jr70")
+texture_scale = 2.3
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=738823433]
+material = SubResource("ShaderMaterial_ff18a")
 position = Vector2(0, 1)
 rotation = -1.5642526
 scale = Vector2(0.40451542, 0.40451542)
 texture = ExtResource("1_7naj2")
+
+[node name="PlayerIndicator" type="Sprite2D" parent="Sprite2D" unique_id=608273771]
+position = Vector2(-11, -1)
+scale = Vector2(0.3128148, 0.3128148)
+texture = ExtResource("8_ff18a")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=995240591]
 avoidance_enabled = true
@@ -87,5 +129,21 @@ target_position = Vector2(500, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EntityView" unique_id=850463964]
 shape = SubResource("CircleShape2D_2jr70")
+
+[node name="PlayerIndicator" type="Sprite2D" parent="." unique_id=555485528]
+visible = false
+position = Vector2(-9.086747, 0)
+scale = Vector2(0.3128148, 0.3128148)
+texture = ExtResource("8_ff18a")
+
+[node name="Glitcher" type="ColorRect" parent="." unique_id=1075452086]
+visible = false
+material = SubResource("ShaderMaterial_y576l")
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+pivot_offset = Vector2(50, 50)
+script = ExtResource("7_ff18a")
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

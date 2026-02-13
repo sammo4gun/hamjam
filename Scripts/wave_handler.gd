@@ -12,6 +12,8 @@ var type_dict = {
 	'circle': circle_entity
 }
 
+@export var SPAWN = true
+
 @export var WAVE_WAIT = 2
 @export var WAVE_DURATION: float = 5.0
 @export var max_attempts_per_spawn: int = 10
@@ -56,7 +58,7 @@ func end_spawn():
 	current_wave_wait = WAVE_WAIT
 
 func _physics_process(delta: float) -> void:
-	if current_wave_wait <= 0 and !spawning:
+	if current_wave_wait <= 0 and !spawning and SPAWN:
 		start_spawn()
 	elif current_wave_wait <= 0 and spawning:
 		if current_spawn_interval <= 0:

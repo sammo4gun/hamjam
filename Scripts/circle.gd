@@ -24,6 +24,8 @@ var health = MAX_HEALTH
 var wander_time = 0.0
 var wander_target = Vector2(0,0)
 
+@export var LIGHT_STRENGTH_DEFAULT = 0.5
+
 @export var is_player = false
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
@@ -40,6 +42,7 @@ var cooldown = 0
 @onready var attack_sprite = $"AttackSprite"
 @onready var target_finder = $"TargetFinder"
 @onready var switch_finder = $"SwitchFinder"
+@onready var glitch = $"Sprite2D".material as ShaderMaterial
 
 var target_handler
 var switch_handler
@@ -50,6 +53,9 @@ var dead = false
 
 var entities_seen = []
 var behaviour = 'idle'
+
+var glitch_timer = 0.0
+var glitch_max_timer = 0.0
 
 @export var bullet_scene: PackedScene = preload("res://Scenes/circle_bullet.tscn")
 @onready var fire_point: Node2D = $"FirePoint"
@@ -62,6 +68,7 @@ func _ready():
 	nav_agent.max_speed = SPEED
 
 func _physics_process(delta: float) -> void:
+	$Sprite2D/PlayerIndicator.visible = is_player
 	if target_handler: # make sure this doesn't happen before we assign a target handler
 		if is_player:
 			player_handle_movement(delta)
@@ -76,6 +83,18 @@ func _physics_process(delta: float) -> void:
 			handle_behaviours(delta)
 			nav_handle_movement(delta)
 			nav_handle_rotation(delta)
+	if glitch_timer > 0.0:
+		glitch_timer -= delta
+		glitch.set_shader_parameter("shake_power", 0.3 * glitch_timer/glitch_max_timer)
+	else: stop_glitch()
+
+func activate_glitch(period):
+	glitch_max_timer = period
+	glitch_timer = period
+	glitch.set_shader_parameter("shake_rate", 1)
+
+func stop_glitch():
+	glitch_max_timer = 0.0
 
 func handle_behaviours(delta):
 	if !NavigationServer2D.map_get_iteration_id(nav_map) == 0:
@@ -94,7 +113,7 @@ func handle_behaviours(delta):
 			nav_find_target()
 			check_target_finder()
 			if cooldown > 0: cooldown -= delta
-			if ready_for_attack and !attacking and cooldown <= 0:
+			if ready_for_attack and !attacking and cooldown <= 0 and not dead:
 				attack()
 
 func wander_check(delta):
@@ -163,11 +182,17 @@ func handle_movement(direction: Vector2, delta):
 		move_and_slide()
 	else:
 		nav_agent.set_velocity(new_velocity)
+	
+	set_light_strength(LIGHT_STRENGTH_DEFAULT * 
+						((0.5*(get_real_velocity().length()/factored_speed)) + 0.5))
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	if !is_player:
 		velocity = safe_velocity
 		move_and_slide()
+
+func set_light_strength(strength):
+	$Light.energy = strength
 
 func nav_handle_rotation(delta) -> void:
 	if attacking: return
@@ -227,7 +252,7 @@ func player_handle_rotation(delta) -> void:
 	rotation = rotate_toward(rotation, angle_to_mouse, 10 * delta)
 
 func _input(event: InputEvent) -> void:
-	if (is_player and !attacking and 
+	if (is_player and !attacking and not dead and
 		event is InputEventMouseButton and event.is_pressed() and 
 		event.button_index == MOUSE_BUTTON_LEFT):
 		attack()

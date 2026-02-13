@@ -2,9 +2,22 @@
 
 [ext_resource type="Script" uid="uid://bh3q47edog7ty" path="res://Scripts/triangle.gd" id="1_d4psy"]
 [ext_resource type="Texture2D" uid="uid://4nft4js2ma0y" path="res://Sprites/triangle.png" id="2_d4psy"]
+[ext_resource type="Texture2D" uid="uid://boke3lxkf5lno" path="res://Scripts/directional_light.png" id="2_m0yjs"]
 [ext_resource type="Texture2D" uid="uid://c26xulcg06wfu" path="res://Sprites/SquareAttack/attack1.png" id="3_18ods"]
 [ext_resource type="Texture2D" uid="uid://bs1ioal73lrn1" path="res://Sprites/SquareAttack/attack2.png" id="4_3mfel"]
 [ext_resource type="Texture2D" uid="uid://bqtey2pk6yvps" path="res://Sprites/SquareAttack/attack3.png" id="5_83av3"]
+[ext_resource type="Shader" uid="uid://25opi4m6leqw" path="res://Shader/glitch.gdshader" id="7_3mfel"]
+[ext_resource type="Script" uid="uid://t0pjd8ty5vq6" path="res://Scripts/glitch.gd" id="8_83av3"]
+[ext_resource type="Texture2D" uid="uid://blif2c0mtjker" path="res://Sprites/player_indicator.png" id="9_83av3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_83av3"]
+resource_local_to_scene = true
+shader = ExtResource("7_3mfel")
+shader_parameter/shake_power = 0.3
+shader_parameter/shake_rate = 0.0
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 15.0
+shader_parameter/shake_color_rate = 0.01
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d4psy"]
 height = 42.0
@@ -32,6 +45,14 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_d4psy"]
 radius = 450.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jxlpj"]
+shader = ExtResource("7_3mfel")
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 0.2
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
+
 [node name="Triangle" type="CharacterBody2D" unique_id=814518204]
 motion_mode = 1
 script = ExtResource("1_d4psy")
@@ -39,11 +60,27 @@ script = ExtResource("1_d4psy")
 [node name="FirePoint" type="Node2D" parent="." unique_id=1906386619]
 position = Vector2(24, 0)
 
+[node name="Light" type="PointLight2D" parent="." unique_id=763952222]
+position = Vector2(-6, 1.1920929e-07)
+rotation = -2.3386483
+energy = 0.5
+shadow_enabled = true
+texture = ExtResource("2_m0yjs")
+texture_scale = 3.0
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=884459657]
+material = SubResource("ShaderMaterial_83av3")
 position = Vector2(3, 1.9999999)
 rotation = 1.5707964
 scale = Vector2(0.47352228, 0.5656355)
 texture = ExtResource("2_d4psy")
+
+[node name="PlayerIndicator" type="Sprite2D" parent="Sprite2D" unique_id=179032166]
+visible = false
+position = Vector2(-4.2236657, -3.5358458)
+rotation = -1.5707964
+scale = Vector2(0.55303246, 0.66061264)
+texture = ExtResource("9_83av3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1199280012]
 position = Vector2(-1, 0)
@@ -71,5 +108,15 @@ target_position = Vector2(500, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EntityView" unique_id=2129735163]
 shape = SubResource("CircleShape2D_d4psy")
+
+[node name="Glitcher" type="ColorRect" parent="." unique_id=1806012433]
+visible = false
+material = SubResource("ShaderMaterial_jxlpj")
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+pivot_offset = Vector2(50, 50)
+script = ExtResource("8_83av3")
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
