@@ -5,6 +5,8 @@ extends Node2D
 @onready var behaviour_handler = $"BehaviourHandler"
 @onready var player_handler = $"PlayerHandler"
 
+@onready var tilemap = $"TileMapLayer"
+
 @onready var camera = $"Camera"
 
 @onready var types_navigation = {
@@ -15,7 +17,7 @@ extends Node2D
 
 var mana_pickup = preload("res://Scenes/mana_pickup.tscn")
 
-var wanted = 'square'
+var wanted = 'circle'
 
 func _ready() -> void:
 	for c in $SquareNavigation.get_children():

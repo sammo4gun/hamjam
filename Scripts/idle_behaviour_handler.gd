@@ -24,7 +24,7 @@ func get_behaviour(entity: CharacterBody2D, visible_entities: Array):
 		else: good_guys += 1
 	if bad_guys == 0:
 		return 'idle'
-	if good_guys >= bad_guys:
+	if good_guys >= bad_guys or world.wanted != my_type:
 		return 'attack'
 	return 'flee'
 

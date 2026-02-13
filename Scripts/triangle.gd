@@ -216,8 +216,8 @@ func player_handle_movement(delta: float) -> void:
 	if direction != Vector2.ZERO:
 		direction = direction.normalized()
 	
-	if attacking: 
-		direction = Vector2.ZERO
+	#if attacking: 
+		#direction = Vector2.ZERO
 	
 	handle_movement(direction, delta)
 

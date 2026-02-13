@@ -40,11 +40,11 @@ func start_spawn():
 	print("NEW WAVEEE!!!")
 	# define what to spawn
 	if world.wanted != 'circle':
-		spawn_counts.circle += 0
+		spawn_counts.circle += 2
 	if world.wanted != 'square':
-		spawn_counts.square += 0
+		spawn_counts.square += 2
 	if world.wanted != 'triangle':
-		spawn_counts.triangle += 0
+		spawn_counts.triangle += 2
 	
 	spawn_interval = WAVE_DURATION / float(get_dict_sum(spawn_counts))
 

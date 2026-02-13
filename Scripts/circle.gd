@@ -213,8 +213,8 @@ func player_handle_movement(delta: float) -> void:
 	if direction != Vector2.ZERO:
 		direction = direction.normalized()
 	
-	if attacking: 
-		direction = Vector2.ZERO
+	#if attacking: 
+		#direction = Vector2.ZERO
 	
 	handle_movement(direction, delta)
 
@@ -238,7 +238,7 @@ func pickup(type):
 func attack():
 	attacking = true
 	if is_player:
-		await get_tree().create_timer(ATTACK_TIME).timeout
+		#await get_tree().create_timer(ATTACK_TIME).timeout
 		fire()
 		attack_sprite.visible = true
 		attack_sprite.play()
