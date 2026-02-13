@@ -187,14 +187,14 @@ func player_handle_movement(delta: float) -> void:
 	if direction != Vector2.ZERO:
 		direction = direction.normalized()
 	
-	if attacking: 
-		direction = Vector2.ZERO
+	#if attacking: 
+		#direction = Vector2.ZERO
 	
 	handle_movement(direction, delta)
 
 func player_handle_rotation(delta) -> void:
 	# Get the mouse position and calculate the angle to face it
-	if attacking: return
+	#if attacking: return
 	var mouse_position = get_global_mouse_position()
 	var angle_to_mouse = (mouse_position - global_position).angle()
 	

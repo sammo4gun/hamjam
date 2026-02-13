@@ -10,9 +10,9 @@ extends Node2D
 @onready var camera = $"Camera"
 
 @onready var types_navigation = {
-	'circle': $CircleNavigation,
-	'triangle': $CircleNavigation,
-	'square': $SquareNavigation
+	'circle': $Navigation,
+	'triangle': $Navigation,
+	'square': $Navigation
 }
 
 var mana_pickup = preload("res://Scenes/mana_pickup.tscn")
@@ -20,10 +20,7 @@ var mana_pickup = preload("res://Scenes/mana_pickup.tscn")
 var wanted = 'circle'
 
 func _ready() -> void:
-	for c in $SquareNavigation.get_children():
-		target_handler.register(c)
-		set_camera_target(c)
-	for c in $CircleNavigation.get_children():
+	for c in $Navigation.get_children():
 		target_handler.register(c)
 		set_camera_target(c)
 

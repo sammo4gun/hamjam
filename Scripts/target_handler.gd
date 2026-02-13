@@ -1,7 +1,7 @@
 extends Node
 
 var LIGHT_RADIUS = 200
-var PLAYER_LIGHT_RADIUS = 300
+var PLAYER_LIGHT_RADIUS = 100
 
 var entity_dict = {}
 var lights_on = {}
@@ -107,6 +107,8 @@ func get_lights_on(entity: CharacterBody2D):
 	var radius_pixels = LIGHT_RADIUS
 	if entity.dead:
 		radius_pixels /= 2
+	if entity.is_player:
+		radius_pixels = PLAYER_LIGHT_RADIUS
 	var tile_size = world.tilemap.tile_set.tile_size
 	var radius_in_tiles = int(ceil(radius_pixels / tile_size.x))
 	
