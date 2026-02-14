@@ -68,7 +68,7 @@ func get_nearest_enemy(entity) -> CharacterBody2D:
 	return nearest
 
 func die(entity):
-	world.death_spawn_mana(entity.global_position, entity.TYPE)
+	world.death_spawn(entity.global_position, entity.TYPE)
 	
 	if entity in entity_dict[entity.TYPE]:
 		entity_dict[entity.TYPE].erase(entity)

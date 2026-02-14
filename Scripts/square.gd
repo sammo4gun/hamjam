@@ -234,7 +234,7 @@ func _input(event: InputEvent) -> void:
 		attack()
 
 func pickup(type):
-	player_handler.pickup(type)
+	player_handler.pickup(self, type)
 
 func attack():
 	if is_player:

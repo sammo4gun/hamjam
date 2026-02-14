@@ -16,7 +16,7 @@ var health = MAX_HEALTH
 @export var BACKUP_SLOWDOWN = 0.2
 @export var BACKUP_RANGE = 300
 
-@export var FIRE_SHOT_SPEED = 1400
+@export var FIRE_SHOT_SPEED = 1000
 @export var FIRE_RANGE = 600.0
 
 @export var SHYNESS = 100
@@ -264,7 +264,7 @@ func _input(event: InputEvent) -> void:
 		attack()
 
 func pickup(type):
-	player_handler.pickup(type)
+	player_handler.pickup(self, type)
 
 func attack():
 	attacking = true

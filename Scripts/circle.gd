@@ -262,7 +262,7 @@ func _input(event: InputEvent) -> void:
 		attack()
 
 func pickup(type):
-	player_handler.pickup(type)
+	player_handler.pickup(self, type)
 
 func attack():
 	attacking = true
@@ -310,6 +310,10 @@ func apply_damage(amount):
 			if health <= 0:
 				# entity dies, do some cool stuff here
 				die()
+
+func apply_heal(amount: int):
+	if health < MAX_HEALTH:
+		health = min(health+amount, MAX_HEALTH)
 
 func die():
 	dead = true
