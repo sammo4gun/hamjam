@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://iqr7jqnkcnt2"]
+
+[ext_resource type="Script" uid="uid://xvwoxc5ufqa7" path="res://body.gd" id="1_ou3cv"]
+[ext_resource type="Texture2D" uid="uid://wg3ouexd5tr7" path="res://Sprites/Circle/circle_main.png" id="2_q2pd1"]
+[ext_resource type="Texture2D" uid="uid://hc82j2wrf0n7" path="res://Sprites/Circle/circle_left_q.png" id="3_8wq5q"]
+[ext_resource type="Texture2D" uid="uid://mdeyquen0l3u" path="res://Sprites/Circle/circle_right_q.png" id="4_lwtj6"]
+[ext_resource type="Texture2D" uid="uid://dbq0i0ugi8ft7" path="res://Sprites/Circle/circle_bottom_q.png" id="5_80q7h"]
+
+[node name="Body" type="Node2D" unique_id=1351006833]
+script = ExtResource("1_ou3cv")
+
+[node name="Main" type="Sprite2D" parent="." unique_id=1935420016]
+texture = ExtResource("2_q2pd1")
+
+[node name="Q1" type="Sprite2D" parent="." unique_id=712174551]
+texture = ExtResource("3_8wq5q")
+
+[node name="Q2" type="Sprite2D" parent="." unique_id=498922028]
+texture = ExtResource("4_lwtj6")
+
+[node name="Q3" type="Sprite2D" parent="." unique_id=1851037625]
+texture = ExtResource("5_80q7h")
+
+[node name="Q4" type="Sprite2D" parent="." unique_id=234754461]

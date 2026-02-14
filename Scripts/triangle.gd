@@ -278,6 +278,7 @@ func attack():
 	cooldown = ATTACK_COOLDOWN
 
 func fire():
+	$Body.apply_shoot_push()
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = fire_point.global_position
 	bullet.direction = Vector2.from_angle(rotation)
@@ -290,6 +291,7 @@ func fire():
 
 func apply_damage(amount):
 	if invincible <= 0.0:
+		$Body.apply_damage_push()
 		health -= amount
 		if is_player:
 			player_handler.player_hit(amount, self)

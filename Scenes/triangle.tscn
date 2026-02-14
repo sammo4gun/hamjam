@@ -8,6 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://bqtey2pk6yvps" path="res://Sprites/SquareAttack/attack3.png" id="5_83av3"]
 [ext_resource type="Shader" uid="uid://25opi4m6leqw" path="res://Shader/glitch.gdshader" id="7_3mfel"]
 [ext_resource type="Texture2D" uid="uid://blif2c0mtjker" path="res://Sprites/player_indicator.png" id="9_83av3"]
+[ext_resource type="PackedScene" uid="uid://iqr7jqnkcnt2" path="res://Scenes/body.tscn" id="9_jxlpj"]
+[ext_resource type="Texture2D" uid="uid://ctyqreeyqlcc6" path="res://Sprites/Triangle/triangle_main.png" id="10_h2vmu"]
+[ext_resource type="Texture2D" uid="uid://cpnwfs86b1q4c" path="res://Sprites/Triangle/triangle_left_q.png" id="11_gxdil"]
+[ext_resource type="Texture2D" uid="uid://bxsvtni2heqdq" path="res://Sprites/Triangle/triangle_right_q.png" id="12_hhe8p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_83av3"]
 resource_local_to_scene = true
@@ -60,6 +64,7 @@ texture = ExtResource("2_m0yjs")
 texture_scale = 3.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=884459657]
+visible = false
 material = SubResource("ShaderMaterial_83av3")
 position = Vector2(3, 1.9999999)
 rotation = 1.5707964
@@ -100,4 +105,23 @@ target_position = Vector2(500, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EntityView" unique_id=2129735163]
 shape = SubResource("CircleShape2D_d4psy")
 
+[node name="Body" parent="." unique_id=1351006833 instance=ExtResource("9_jxlpj")]
+rotation = 1.5707964
+scale = Vector2(0.5, 0.5)
+
+[node name="Main" parent="Body" index="0" unique_id=1935420016]
+texture = ExtResource("10_h2vmu")
+
+[node name="Q1" parent="Body" index="1" unique_id=712174551]
+position = Vector2(-40.113125, 46.698853)
+texture = ExtResource("11_gxdil")
+offset = Vector2(40.113125, -46.698853)
+
+[node name="Q2" parent="Body" index="2" unique_id=498922028]
+position = Vector2(37.585835, 48.137726)
+texture = ExtResource("12_hhe8p")
+offset = Vector2(-37.585835, -48.137726)
+
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+
+[editable path="Body"]

@@ -237,6 +237,7 @@ func pickup(type):
 	player_handler.pickup(self, type)
 
 func attack():
+	$Body.apply_shoot_push()
 	if is_player:
 		attacking = true
 		attack_sprite.visible = true
@@ -265,6 +266,7 @@ func damage(amount):
 
 func apply_damage(amount):
 	if invincible <= 0.0:
+		$Body.apply_damage_push()
 		health -= amount
 		if is_player:
 			player_handler.player_hit(amount, self)

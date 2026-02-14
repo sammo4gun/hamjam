@@ -7,7 +7,7 @@ var TYPE = 'circle'
 @export var ACCELERATION : float = 1200
 @export var DECELERATION : float = 2000
 
-@export var MAX_HEALTH = 4
+@export var MAX_HEALTH = 10000
 var health = MAX_HEALTH
 
 @export var ATTACK_TIME = 0.2
@@ -44,6 +44,8 @@ var cooldown = 0
 @onready var switch_finder = $"SwitchFinder"
 @onready var glitch = $"Sprite2D".material as ShaderMaterial
 
+@onready var body = $Body
+
 var target_handler
 var switch_handler
 var behaviour_handler
@@ -70,6 +72,7 @@ func _ready():
 	nav_agent.max_speed = SPEED
 
 func _physics_process(delta: float) -> void:
+	body.set_velocity(velocity)
 	$Sprite2D/PlayerIndicator.visible = is_player
 	if target_handler: # make sure this doesn't happen before we assign a target handler
 		if is_player:
@@ -285,6 +288,7 @@ func attack():
 	attacking = false
 
 func fire():
+	body.apply_shoot_push()
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = fire_point.global_position
 	bullet.direction = Vector2.from_angle(rotation)
@@ -298,6 +302,7 @@ func fire():
 func apply_damage(amount):
 	if invincible <= 0.0:
 		health -= amount
+		body.apply_damage_push()
 		if is_player:
 			# damage effects?
 			player_handler.player_hit(amount, self)

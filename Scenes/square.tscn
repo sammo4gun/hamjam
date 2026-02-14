@@ -7,6 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://bqtey2pk6yvps" path="res://Sprites/SquareAttack/attack3.png" id="5_g0n2n"]
 [ext_resource type="Shader" uid="uid://25opi4m6leqw" path="res://Shader/glitch.gdshader" id="6_g0n2n"]
 [ext_resource type="Texture2D" uid="uid://blif2c0mtjker" path="res://Sprites/player_indicator.png" id="8_ff18a"]
+[ext_resource type="PackedScene" uid="uid://iqr7jqnkcnt2" path="res://Scenes/body.tscn" id="8_y5xfp"]
+[ext_resource type="Texture2D" uid="uid://bu4y2766ocx6g" path="res://Sprites/Square/square_main.png" id="9_sudue"]
+[ext_resource type="Texture2D" uid="uid://dsdp7pwsxiq1q" path="res://Sprites/Square/square_bl.png" id="10_853fa"]
+[ext_resource type="Texture2D" uid="uid://t4u5q6cc4gk5" path="res://Sprites/Square/square_br.png" id="11_2svkt"]
+[ext_resource type="Texture2D" uid="uid://dg6af5axxkge5" path="res://Sprites/Square/square_tl.png" id="12_uu04h"]
+[ext_resource type="Texture2D" uid="uid://bw73g3buyvjxb" path="res://Sprites/Square/square_tr.png" id="13_bsak4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mu0s7"]
 radius = 20.0
@@ -75,6 +81,7 @@ texture = SubResource("GradientTexture2D_2jr70")
 texture_scale = 2.3
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=738823433]
+visible = false
 material = SubResource("ShaderMaterial_ff18a")
 position = Vector2(0, 1)
 rotation = -1.5642526
@@ -116,6 +123,33 @@ sprite_frames = SubResource("SpriteFrames_ff18a")
 [node name="SwitchFinder" type="RayCast2D" parent="." unique_id=1087052971]
 target_position = Vector2(500, 0)
 
+[node name="Body" parent="." unique_id=1351006833 instance=ExtResource("8_y5xfp")]
+rotation = 1.5707964
+scale = Vector2(0.4, 0.4)
+
+[node name="Main" parent="Body" index="0" unique_id=1935420016]
+texture = ExtResource("9_sudue")
+
+[node name="Q1" parent="Body" index="1" unique_id=712174551]
+position = Vector2(-43.8111, 40.565826)
+texture = ExtResource("10_853fa")
+offset = Vector2(43.8111, -40.565826)
+
+[node name="Q2" parent="Body" index="2" unique_id=498922028]
+position = Vector2(43.8111, 43.811096)
+texture = ExtResource("11_2svkt")
+offset = Vector2(-43.8111, -43.811096)
+
+[node name="Q3" parent="Body" index="3" unique_id=1851037625]
+position = Vector2(-43.811096, -43.811096)
+texture = ExtResource("12_uu04h")
+offset = Vector2(43.811096, 43.811096)
+
+[node name="Q4" parent="Body" index="4" unique_id=234754461]
+position = Vector2(42.18847, -45.43373)
+texture = ExtResource("13_bsak4")
+offset = Vector2(-42.18847, 45.43373)
+
 [node name="EntityView" type="Area2D" parent="." unique_id=39565044]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EntityView" unique_id=850463964]
@@ -128,3 +162,5 @@ scale = Vector2(0.3128148, 0.3128148)
 texture = ExtResource("8_ff18a")
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+
+[editable path="Body"]

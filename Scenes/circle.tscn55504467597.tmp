@@ -8,10 +8,6 @@
 [ext_resource type="Shader" uid="uid://25opi4m6leqw" path="res://Shader/glitch.gdshader" id="6_1axvn"]
 [ext_resource type="PackedScene" uid="uid://iqr7jqnkcnt2" path="res://Scenes/body.tscn" id="8_aij75"]
 [ext_resource type="Texture2D" uid="uid://blif2c0mtjker" path="res://Sprites/player_indicator.png" id="8_q30vm"]
-[ext_resource type="Texture2D" uid="uid://wg3ouexd5tr7" path="res://Sprites/Circle/circle_main.png" id="9_u3h71"]
-[ext_resource type="Texture2D" uid="uid://hc82j2wrf0n7" path="res://Sprites/Circle/circle_left_q.png" id="10_4st7f"]
-[ext_resource type="Texture2D" uid="uid://mdeyquen0l3u" path="res://Sprites/Circle/circle_right_q.png" id="11_a6x2f"]
-[ext_resource type="Texture2D" uid="uid://dbq0i0ugi8ft7" path="res://Sprites/Circle/circle_bottom_q.png" id="12_gftia"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l2lw7"]
 radius = 20.0
@@ -108,19 +104,7 @@ target_position = Vector2(500, 0)
 
 [node name="Body" parent="." unique_id=1351006833 instance=ExtResource("8_aij75")]
 rotation = 1.5707964
-scale = Vector2(0.4, 0.4)
-
-[node name="Main" parent="Body" index="0" unique_id=1935420016]
-texture = ExtResource("9_u3h71")
-
-[node name="Q1" parent="Body" index="1" unique_id=712174551]
-texture = ExtResource("10_4st7f")
-
-[node name="Q2" parent="Body" index="2" unique_id=498922028]
-texture = ExtResource("11_a6x2f")
-
-[node name="Q3" parent="Body" index="3" unique_id=1851037625]
-texture = ExtResource("12_gftia")
+scale = Vector2(0.5, 0.5)
 
 [node name="EntityView" type="Area2D" parent="." unique_id=458178092]
 
@@ -128,5 +112,3 @@ texture = ExtResource("12_gftia")
 shape = SubResource("CircleShape2D_4pbwo")
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
-
-[editable path="Body"]

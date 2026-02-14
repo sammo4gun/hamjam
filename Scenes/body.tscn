@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://iqr7jqnkcnt2"]
+
+[ext_resource type="Script" uid="uid://xvwoxc5ufqa7" path="res://body.gd" id="1_ou3cv"]
+
+[node name="Body" type="Node2D" unique_id=1351006833]
+script = ExtResource("1_ou3cv")
+
+[node name="Main" type="Sprite2D" parent="." unique_id=1935420016]
+
+[node name="Q1" type="Sprite2D" parent="." unique_id=712174551]
+position = Vector2(-47, -44)
+offset = Vector2(47, 44)
+
+[node name="Q2" type="Sprite2D" parent="." unique_id=498922028]
+position = Vector2(52, -49)
+offset = Vector2(-52, 49)
+
+[node name="Q3" type="Sprite2D" parent="." unique_id=1851037625]
+position = Vector2(-1, 46)
+offset = Vector2(1, -46)
+
+[node name="Q4" type="Sprite2D" parent="." unique_id=234754461]
+position = Vector2(44, 33)
+offset = Vector2(-44, -33)
