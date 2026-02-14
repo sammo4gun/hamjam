@@ -286,5 +286,5 @@ func set_light_strength(strength):
 func die():
 	dead = true
 	
-	await get_tree().create_timer(0.4).timeout
+	await get_tree().create_timer(0.2).timeout
 	target_handler.die(self)

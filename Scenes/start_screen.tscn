@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://nylyol4yndjf"]
+
+[ext_resource type="Script" uid="uid://bgdagidf8vd5q" path="res://Scripts/start_screen.gd" id="1_i8r30"]
+[ext_resource type="FontFile" uid="uid://dxutit2kp8gk5" path="res://Sprites/BlueScreenPersonalUseRegular-0W1M9.ttf" id="2_ainjc"]
+
+[node name="StartScreen" type="Control" unique_id=1831954095]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i8r30")
+
+[node name="Button" type="Button" parent="." unique_id=1173186594]
+layout_mode = 0
+offset_left = 441.0
+offset_top = 438.0
+offset_right = 498.0
+offset_bottom = 469.0
+theme_override_fonts/font = ExtResource("2_ainjc")
+text = "CLICK TO BEGIN"
+flat = true

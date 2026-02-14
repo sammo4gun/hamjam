@@ -66,20 +66,21 @@ func end_spawn():
 	current_wave_wait = WAVE_WAIT * (0.5 * current_wave)
 
 func _physics_process(delta: float) -> void:
-	if current_wave_wait <= 0 and !spawning and SPAWN:
-		start_spawn()
-	elif current_wave_wait <= 0 and spawning:
-		if current_spawn_interval <= 0:
-			if get_dict_sum(spawned) < get_dict_sum(spawn_counts):
-				var type = try_spawn_entity()
-				if type:
-					spawned[type] += 1
-				current_spawn_interval = spawn_interval
-			else:
-				end_spawn()
-		else: current_spawn_interval -= delta
-	else: 
-		current_wave_wait -= delta
+	if world.game_started:
+		if current_wave_wait <= 0 and !spawning and SPAWN:
+			start_spawn()
+		elif current_wave_wait <= 0 and spawning:
+			if current_spawn_interval <= 0:
+				if get_dict_sum(spawned) < get_dict_sum(spawn_counts):
+					var type = try_spawn_entity()
+					if type:
+						spawned[type] += 1
+					current_spawn_interval = spawn_interval
+				else:
+					end_spawn()
+			else: current_spawn_interval -= delta
+		else: 
+			current_wave_wait -= delta
 
 func try_spawn_entity():
 	var spawn_area = spawn_areas.pick_random()

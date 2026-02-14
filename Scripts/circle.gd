@@ -17,7 +17,7 @@ var health = MAX_HEALTH
 @export var BACKUP_RANGE = 200
 
 @export var FIRE_SHOT_SPEED = 600.0
-@export var FIRE_RANGE = 300
+@export var FIRE_RANGE = 400
 
 @export var SHYNESS = 100
 @export var WANDER_TIMER = 2.0
@@ -316,5 +316,5 @@ func apply_heal(amount: int):
 func die():
 	dead = true
 	# death animation
-	await get_tree().create_timer(0.4).timeout
+	await get_tree().create_timer(0.2).timeout
 	target_handler.die(self)
