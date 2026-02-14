@@ -45,9 +45,11 @@ func _input(event: InputEvent) -> void:
 			switch()
 
 func switch():
-	var new_type = switchee.TYPE
+	var new_type = switchee.TYPE 
 	var current_switcher = switcher
 	var current_switchee = switchee
+	current_switcher.switch_light.visible = false
+	current_switchee.switch_light.visible = false
 	
 	current_switcher.player_handler.switch()
 	

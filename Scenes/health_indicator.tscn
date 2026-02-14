@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cvgha6npgmrt6"]
 
 [ext_resource type="Texture2D" uid="uid://bfun6qqx5wj6u" path="res://Sprites/gui_basic.png" id="1_61pa1"]
-[ext_resource type="Script" path="res://Scripts/health_indicator.gd" id="1_j11yh"]
+[ext_resource type="Script" uid="uid://b5vyl27fxh6vd" path="res://Scripts/health_indicator.gd" id="1_j11yh"]
 [ext_resource type="Texture2D" uid="uid://xhls52wxtarh" path="res://Sprites/indicator_gem.png" id="2_d212v"]
 [ext_resource type="Texture2D" uid="uid://c8jdq8erv1a03" path="res://Sprites/mana.png" id="4_q1vsb"]
 [ext_resource type="FontFile" uid="uid://c0g4o5k4d5pab" path="res://Sprites/Broken Console Bold.ttf" id="5_n0n2s"]
@@ -124,6 +124,7 @@ scale = Vector2(0.040602952, 0.040602952)
 texture = ExtResource("4_q1vsb")
 
 [node name="Mana6" type="TextureRect" parent="." unique_id=1959496805]
+visible = false
 layout_mode = 0
 offset_left = 122.0
 offset_top = 55.0
@@ -133,6 +134,7 @@ scale = Vector2(0.040602952, 0.040602952)
 texture = ExtResource("4_q1vsb")
 
 [node name="Mana7" type="TextureRect" parent="." unique_id=710173965]
+visible = false
 layout_mode = 0
 offset_left = 145.0
 offset_top = 45.0

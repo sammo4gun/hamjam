@@ -3,7 +3,7 @@ extends Node
 @export var PLAYER_SPEED_FACTOR = 2.0
 @export var SCORE_AMOUNT = 10
 
-@export var SWITCH_COST = 7
+@export var SWITCH_COST = 5
 
 @export var NUM_SCORE_SPAWN = 5
 @export var NUM_SCORE_SPAWN_STDEV = 2

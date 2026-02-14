@@ -31,7 +31,7 @@ var spawned := {
 	'square': 0
 }
 var spawn_interval = 0
-var current_wave_wait = WAVE_WAIT
+var current_wave_wait = 0
 var current_spawn_interval = spawn_interval
 
 var current_wave = 0
@@ -40,10 +40,11 @@ var spawning = false
 
 func start_spawn():
 	spawning = true
-	current_wave += 1
+	
 	print("NEW WAVEEE!!!")
 	print("wave:", current_wave)
 	var total_to_spawn = 3 + int(current_wave * 1.5)
+	current_wave += 1
 	# define what to spawn
 	var all_types = ['circle', 'triangle', 'square']
 	all_types.erase(world.wanted)

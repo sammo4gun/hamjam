@@ -77,8 +77,14 @@ func move_towards_player(delta, player: CharacterBody2D):
 
 func pickup(player: CharacterBody2D):
 	# animation
-	player.pickup(type)
-	queue_free()
+	if type == 'mana':
+		if !$PickupSound.playing:
+			$PickupSound.play()
+			player.pickup(type)
+	else: 
+		player.pickup(type)
+		queue_free()
+
 
 func make_shard_polygon(
 	avg_radius: float,
@@ -131,3 +137,7 @@ func roughen_polygon(poly: PackedVector2Array, splits := 1, roughness := 3.0) ->
 			out.append(p)
 
 	return out
+
+
+func _on_pickup_sound_finished() -> void:
+	queue_free()
