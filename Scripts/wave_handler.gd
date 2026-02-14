@@ -14,7 +14,7 @@ var type_dict = {
 
 @export var SPAWN = true
 
-@export var WAVE_WAIT = 1
+@export var WAVE_WAIT = 10
 @export var WAVE_DURATION: float = 5.0
 @export var max_attempts_per_spawn: int = 10
 

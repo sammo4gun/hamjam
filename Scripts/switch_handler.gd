@@ -6,6 +6,10 @@ extends Node
 
 var switcher
 var switchee
+var player_handler
+
+func _ready() -> void:
+	player_handler = world.player_handler
 
 func _process(delta: float) -> void:
 	if Engine.time_scale < 0.99:
@@ -16,22 +20,24 @@ func switch_available(entity):
 	var new_switcher = null
 	var new_switchee = null
 	
-	var switch_finder : RayCast2D = entity.switch_finder
-	if switch_finder.is_colliding():
-		var collider = switch_finder.get_collider()
-		if collider is CharacterBody2D:
-			if collider.TYPE != entity.TYPE and !collider.dead:
-				new_switcher = entity
-				new_switchee = collider
-	
-	if new_switchee and switchee != new_switchee:
-		set_switchee(new_switchee, true)
-		if switchee: set_switchee(switchee, false)
-	if !new_switchee and switchee != new_switchee:
-		set_switchee(switchee, false)
-	
-	switcher = new_switcher
-	switchee = new_switchee
+	if player_handler:
+		if player_handler.can_switch:
+			var switch_finder : RayCast2D = entity.switch_finder
+			if switch_finder.is_colliding():
+				var collider = switch_finder.get_collider()
+				if collider is CharacterBody2D:
+					if collider.TYPE != entity.TYPE and !collider.dead:
+						new_switcher = entity
+						new_switchee = collider
+		
+			if new_switchee and switchee != new_switchee:
+				set_switchee(new_switchee, true)
+				if switchee: set_switchee(switchee, false)
+			if !new_switchee and switchee != new_switchee:
+				set_switchee(switchee, false)
+			
+			switcher = new_switcher
+			switchee = new_switchee
 
 func set_switchee(entity, toggle):
 	pass # sets a target as switchable, we can do some visual effects
@@ -48,6 +54,8 @@ func switch():
 	
 	current_switcher.is_player = false
 	current_switcher.die()
+	
+	player_handler.switch()
 	
 	current_switchee.activate_glitch(4.0)
 	current_switchee.invincible = 3.0
