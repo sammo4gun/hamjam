@@ -6,10 +6,6 @@ extends Node
 
 var switcher
 var switchee
-var player_handler
-
-func _ready() -> void:
-	player_handler = world.player_handler
 
 func _process(delta: float) -> void:
 	if Engine.time_scale < 0.99:
@@ -20,8 +16,8 @@ func switch_available(entity):
 	var new_switcher = null
 	var new_switchee = null
 	
-	if player_handler:
-		if player_handler.can_switch:
+	if entity.player_handler:
+		if entity.player_handler.can_switch:
 			var switch_finder : RayCast2D = entity.switch_finder
 			if switch_finder.is_colliding():
 				var collider = switch_finder.get_collider()
@@ -52,10 +48,10 @@ func switch():
 	var current_switcher = switcher
 	var current_switchee = switchee
 	
+	current_switcher.player_handler.switch()
+	
 	current_switcher.is_player = false
 	current_switcher.die()
-	
-	player_handler.switch()
 	
 	current_switchee.activate_glitch(4.0)
 	current_switchee.invincible = 3.0
@@ -66,7 +62,4 @@ func switch():
 	
 	await get_tree().create_timer(TIME_TILL_WANTED).timeout
 	
-	swap_wanted(new_type)
-
-func swap_wanted(type):
-	world.wanted = type
+	world.swap_wanted(new_type)

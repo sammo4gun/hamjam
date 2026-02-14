@@ -300,6 +300,7 @@ func apply_damage(amount):
 		health -= amount
 		if is_player:
 			# damage effects?
+			player_handler.player_hit(amount, health <= 0)
 			if health <= 0:
 				# die as a player, do some cool stuff here
 				die()

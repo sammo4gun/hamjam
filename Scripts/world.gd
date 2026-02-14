@@ -5,6 +5,8 @@ extends Node2D
 @onready var behaviour_handler = $"BehaviourHandler"
 @onready var player_handler = $"PlayerHandler"
 
+@onready var wanted_indicator = $"Camera/CanvasLayer/WantedIndicator"
+
 @onready var tilemap = $"LightsLayer"
 
 @onready var camera = $"Camera"
@@ -15,6 +17,8 @@ extends Node2D
 	'square': $Navigation
 }
 
+@onready var hit_layer = $"Camera/CanvasLayer/HitLayer"
+
 var pickup = preload("res://Scenes/pickup.tscn")
 
 var wanted = 'triangle'
@@ -24,6 +28,7 @@ func _ready() -> void:
 		target_handler.register(c)
 		set_camera_target(c)
 		wanted = c.TYPE
+		wanted_indicator.set_wanted(wanted)
 
 func set_camera_target(target):
 	camera.target = target
@@ -66,3 +71,17 @@ func death_spawn(location, _type):
 func add_entity(entity):
 	types_navigation[entity.TYPE].add_child(entity)
 	target_handler.register(entity)
+
+func swap_wanted(type):
+	wanted = ''
+	wanted_indicator.set_wanted(null)
+	await get_tree().create_timer(0.5).timeout
+	wanted = type
+	wanted_indicator.set_wanted(type)
+
+func player_hit(damage: int, dead: bool):
+	var tween = create_tween()
+	tween.tween_property(hit_layer.material, "shader_parameter/intensity", 1.0, 0.1)
+	tween.tween_property(hit_layer.material, "shader_parameter/intensity", 0.0, 0.5)
+	
+	camera.shake_power = 6

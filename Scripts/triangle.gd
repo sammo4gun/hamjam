@@ -292,6 +292,7 @@ func apply_damage(amount):
 	if invincible <= 0.0:
 		health -= amount
 		if is_player:
+			player_handler.player_hit(amount, health <= 0)
 			# damage effects?
 			if health <= 0:
 				# die as a player, do some cool stuff here
