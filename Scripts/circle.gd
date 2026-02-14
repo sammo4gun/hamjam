@@ -7,7 +7,7 @@ var TYPE = 'circle'
 @export var ACCELERATION : float = 1200
 @export var DECELERATION : float = 2000
 
-@export var MAX_HEALTH = 10000
+@export var MAX_HEALTH = 4
 var health = MAX_HEALTH
 
 @export var ATTACK_TIME = 0.2
