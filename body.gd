@@ -42,9 +42,9 @@ var time = 0.0
 
 # -----------------------------
 # Initialization
-# -----------------------------
+# -----------------------------ss
 func _ready():
-	var base_color = Color("#f3a787")
+	var base_color = Color("#fdfe89")
 	$AttackAnim.modulate = Color.WHITE
 	# Set initial shader color for main
 	glitch_main.set_shader_parameter("u_color", base_color)

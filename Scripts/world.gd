@@ -33,7 +33,7 @@ var type_dict = {
 
 @onready var hit_layer = $"Camera/CanvasLayer/HitLayer"
 
-var start_spawn_type = 'square'
+var start_spawn_type = 'circle'
 
 var pickup = preload("res://Scenes/pickup.tscn")
 
