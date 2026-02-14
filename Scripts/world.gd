@@ -7,6 +7,7 @@ extends Node2D
 
 @onready var wanted_indicator = $"Camera/CanvasLayer/WantedIndicator"
 @onready var health_indicator = $"Camera/CanvasLayer/HealthIndicator"
+@onready var paused_indicator = $"Camera/CanvasLayer/PausedLabel"
 
 @onready var tilemap = $"LightsLayer"
 
@@ -94,3 +95,6 @@ func player_hit(damage: int, player: CharacterBody2D):
 
 func set_mana(mana):
 	health_indicator.set_mana(mana)
+
+func set_score(score):
+	health_indicator.set_score(score)

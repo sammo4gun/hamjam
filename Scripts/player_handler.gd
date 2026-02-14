@@ -21,6 +21,7 @@ func _process(_delta: float) -> void:
 
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel"):
+		world.paused_indicator.visible = !get_tree().paused
 		get_tree().paused = !get_tree().paused
 
 func switch():
@@ -37,7 +38,7 @@ func pickup(player: CharacterBody2D, type):
 		player.heal(1)
 	if type == "score":
 		score += SCORE_AMOUNT
-		print(score)
+		world.set_score(score)
 
 func player_hit(damage, player):
 	world.player_hit(damage, player)

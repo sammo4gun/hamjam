@@ -22,6 +22,8 @@ var mana_on_color = Color(0.513, 0.603, 1.591)
 	7: $Mana7,
 }
 
+@onready var score_label = $Score
+
 func set_health(value, max_value):
 	for i in range(1, value+1):
 		health[i].modulate = health_on_color
@@ -35,3 +37,6 @@ func set_mana(value):
 		mana[i].modulate = mana_on_color
 	for i in range(value+1, 8):
 		mana[i].modulate = Color(1,1,1)
+
+func set_score(value):
+	score_label.text = "SCORE   " + str(value).pad_zeros(7)

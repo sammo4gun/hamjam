@@ -15,6 +15,10 @@ run/main_scene="uid://gh1b5exoadvv"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
+
 [input]
 
 move_left={
