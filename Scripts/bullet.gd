@@ -5,7 +5,8 @@ extends Area2D
 
 @onready var ray = $"RayCast2D"
 
-var finished_particles;
+var finished_particles
+var done = false
 
 var enemies = []
 var direction: Vector2 = Vector2.RIGHT
@@ -17,16 +18,23 @@ func _ready():
 	end_of_life()
 
 func end_of_life(collision_normal = null):
-	if finished_particles:
-		var impact = finished_particles.instantiate()
-		get_parent().add_child(impact)
-		if collision_normal:
-			impact.process_material.spread = 90
-			impact.rotation = ray.get_collision_normal().angle()
-		impact.global_position = global_position
-		impact.emitting = true
-	
-	queue_free()
+	if not done:
+		done = true
+		if finished_particles:
+			var impact = finished_particles.instantiate()
+			get_parent().add_child(impact)
+			if collision_normal:
+				impact.process_material.spread = 90
+				impact.rotation = ray.get_collision_normal().angle()
+			impact.global_position = global_position
+			impact.emitting = true
+		
+		$HitSound.play()
+		speed = 0
+		visible = false
+		await $HitSound.finished
+		
+		queue_free()
 
 func _physics_process(delta):
 	global_position += direction * speed * delta

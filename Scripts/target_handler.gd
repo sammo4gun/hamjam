@@ -33,6 +33,21 @@ func get_nearest_wanted(entity) -> CharacterBody2D:
 	
 	return nearest
 
+func get_mood():
+	var total_allies = 0
+	for entity_type in entity_dict.keys():
+		if not is_wanted(entity_type):
+			for entity in entity_dict[entity_type]:
+				if entity.is_player:
+					return 'chill'
+		else:
+			for entity in entity_dict[entity_type]:
+				total_allies += 1
+	
+	if total_allies < 3:
+		return 'normal'
+	else: return 'chill'
+
 func is_wanted(type) -> bool:
 	return type == world.wanted
 

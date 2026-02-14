@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bs1ioal73lrn1" path="res://Sprites/SquareAttack/attack2.png" id="4_1axvn"]
 [ext_resource type="Texture2D" uid="uid://bqtey2pk6yvps" path="res://Sprites/SquareAttack/attack3.png" id="5_evqyu"]
 [ext_resource type="Shader" uid="uid://25opi4m6leqw" path="res://Shader/glitch.gdshader" id="6_1axvn"]
+[ext_resource type="AudioStream" uid="uid://b14nha45vd13c" path="res://SFX/circle_shot.mp3" id="8_4st7f"]
 [ext_resource type="PackedScene" uid="uid://iqr7jqnkcnt2" path="res://Scenes/body.tscn" id="8_aij75"]
 [ext_resource type="Texture2D" uid="uid://blif2c0mtjker" path="res://Sprites/player_indicator.png" id="8_q30vm"]
 [ext_resource type="Texture2D" uid="uid://wg3ouexd5tr7" path="res://Sprites/Circle/circle_main.png" id="9_u3h71"]
@@ -337,6 +338,11 @@ position = Vector2(37.500004, 12.5)
 rotation = 1.5955135
 scale = Vector2(0.5003114, 0.5034464)
 sprite_frames = SubResource("SpriteFrames_q30vm")
+
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="." unique_id=1693643358]
+stream = ExtResource("8_4st7f")
+volume_db = -20.0
+pitch_scale = 0.65
 
 [node name="SwitchFinder" type="RayCast2D" parent="." unique_id=1807708675]
 target_position = Vector2(500, 0)
