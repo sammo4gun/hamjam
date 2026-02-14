@@ -60,6 +60,8 @@ var dead = false
 @export var bullet_scene: PackedScene = preload("res://Scenes/triangle_bullet.tscn")
 @onready var fire_point: Node2D = $"FirePoint"
 
+@onready var switch_light = $SwitchableLight
+
 func _ready():
 	# Optional tuning
 	nav_agent.path_desired_distance = 4.0
@@ -139,9 +141,6 @@ func nav_handle_movement(delta) -> void:
 	if direction != Vector2.ZERO:
 		direction = direction.normalized()
 	
-	if behaviour == 'idle':
-		direction = direction.normalized()
-	
 	if nav_agent.is_navigation_finished() or ready_for_attack or attacking:
 		direction = Vector2.ZERO
 		if backing_up and not attacking:
@@ -166,7 +165,7 @@ func handle_movement(direction: Vector2, delta):
 	if direction != Vector2.ZERO:
 		new_velocity = velocity.move_toward(direction * factored_speed
 		*
-		(0.6 + (0.4 * (Vector2.from_angle(rotation)).normalized().dot(direction.normalized()))), ACCELERATION * delta)
+		(0.6 + (0.4 * (Vector2.from_angle(rotation)).normalized().dot(direction.normalized()))), factored_acceleration * delta)
 	# Apply deceleration when there's no input
 	else:
 		new_velocity = velocity.move_toward(Vector2.ZERO, factored_acceleration * delta)

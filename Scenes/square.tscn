@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dg6af5axxkge5" path="res://Sprites/Square/square_tl.png" id="12_uu04h"]
 [ext_resource type="Texture2D" uid="uid://dnith5ermw40j" path="res://Sprites/SquareAttack/square_attack.png" id="12_y5xfp"]
 [ext_resource type="Texture2D" uid="uid://bw73g3buyvjxb" path="res://Sprites/Square/square_tr.png" id="13_bsak4"]
+[ext_resource type="Texture2D" uid="uid://0c6yjk6iijp3" path="res://Sprites/light.png" id="14_sudue"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mu0s7"]
 radius = 20.0
@@ -44,7 +45,7 @@ height = 48.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2jr70"]
 size = Vector2(55.575577, 49.328053)
 
-[sub_resource type="Shader" id="Shader_sudue"]
+[sub_resource type="Shader" id="Shader_y5xfp"]
 resource_local_to_scene = true
 code = "/*
 	Glitch Effect Shader by Yui Kinomoto @arlez80
@@ -105,9 +106,19 @@ void fragment()
 }
 "
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sudue"]
+resource_local_to_scene = true
+shader = SubResource("Shader_y5xfp")
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 0.2
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
+shader_parameter/u_color = Vector4(1, 1, 1, 1)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_853fa"]
 resource_local_to_scene = true
-shader = SubResource("Shader_sudue")
+shader = SubResource("Shader_y5xfp")
 shader_parameter/shake_power = 0.03
 shader_parameter/shake_rate = 0.2
 shader_parameter/shake_speed = 5.0
@@ -117,7 +128,7 @@ shader_parameter/u_color = Vector4(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2svkt"]
 resource_local_to_scene = true
-shader = SubResource("Shader_sudue")
+shader = SubResource("Shader_y5xfp")
 shader_parameter/shake_power = 0.03
 shader_parameter/shake_rate = 0.2
 shader_parameter/shake_speed = 5.0
@@ -127,7 +138,7 @@ shader_parameter/u_color = Vector4(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uu04h"]
 resource_local_to_scene = true
-shader = SubResource("Shader_sudue")
+shader = SubResource("Shader_y5xfp")
 shader_parameter/shake_power = 0.03
 shader_parameter/shake_rate = 0.2
 shader_parameter/shake_speed = 5.0
@@ -137,17 +148,7 @@ shader_parameter/u_color = Vector4(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bsak4"]
 resource_local_to_scene = true
-shader = SubResource("Shader_sudue")
-shader_parameter/shake_power = 0.03
-shader_parameter/shake_rate = 0.2
-shader_parameter/shake_speed = 5.0
-shader_parameter/shake_block_size = 30.5
-shader_parameter/shake_color_rate = 0.01
-shader_parameter/u_color = Vector4(1, 1, 1, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_e7u4j"]
-resource_local_to_scene = true
-shader = SubResource("Shader_sudue")
+shader = SubResource("Shader_y5xfp")
 shader_parameter/shake_power = 0.03
 shader_parameter/shake_rate = 0.2
 shader_parameter/shake_speed = 5.0
@@ -239,7 +240,7 @@ region = Rect2(1152, 0, 128, 128)
 atlas = ExtResource("12_y5xfp")
 region = Rect2(1280, 0, 128, 128)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_6ucqr"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_e7u4j"]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
@@ -393,36 +394,36 @@ scale = Vector2(0.4, 0.4)
 i_am_a_square = true
 
 [node name="Main" parent="Body" index="0" unique_id=1935420016]
-material = SubResource("ShaderMaterial_853fa")
+material = SubResource("ShaderMaterial_sudue")
 texture = ExtResource("9_sudue")
 
 [node name="Q1" parent="Body" index="1" unique_id=712174551]
-material = SubResource("ShaderMaterial_2svkt")
+material = SubResource("ShaderMaterial_853fa")
 position = Vector2(-43.8111, 40.565826)
 texture = ExtResource("10_853fa")
 offset = Vector2(43.8111, -40.565826)
 
 [node name="Q2" parent="Body" index="2" unique_id=498922028]
-material = SubResource("ShaderMaterial_uu04h")
+material = SubResource("ShaderMaterial_2svkt")
 position = Vector2(43.8111, 43.811096)
 texture = ExtResource("11_2svkt")
 offset = Vector2(-43.8111, -43.811096)
 
 [node name="Q3" parent="Body" index="3" unique_id=1851037625]
-material = SubResource("ShaderMaterial_bsak4")
+material = SubResource("ShaderMaterial_uu04h")
 position = Vector2(-43.811096, -43.811096)
 texture = ExtResource("12_uu04h")
 offset = Vector2(43.811096, 43.811096)
 
 [node name="Q4" parent="Body" index="4" unique_id=234754461]
-material = SubResource("ShaderMaterial_e7u4j")
+material = SubResource("ShaderMaterial_bsak4")
 position = Vector2(42.18847, -45.43373)
 texture = ExtResource("13_bsak4")
 offset = Vector2(-42.18847, 45.43373)
 
 [node name="AttackAnim" parent="Body" index="5" unique_id=1281946594]
 position = Vector2(1.1266216e-06, -102.22591)
-sprite_frames = SubResource("SpriteFrames_6ucqr")
+sprite_frames = SubResource("SpriteFrames_e7u4j")
 
 [node name="EntityView" type="Area2D" parent="." unique_id=39565044]
 
@@ -434,6 +435,14 @@ visible = false
 position = Vector2(-9.086747, 0)
 scale = Vector2(0.3128148, 0.3128148)
 texture = ExtResource("8_ff18a")
+
+[node name="SwitchableLight" type="PointLight2D" parent="." unique_id=463153198]
+visible = false
+scale = Vector2(1.4481856, 1.4481856)
+color = Color(0.4, 1, 1, 1)
+energy = 1.63
+texture = ExtResource("14_sudue")
+texture_scale = 1.78
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 

@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dbq0i0ugi8ft7" path="res://Sprites/Circle/circle_bottom_q.png" id="12_gftia"]
 [ext_resource type="Texture2D" uid="uid://dc4xjjal17jhf" path="res://Sprites/shoot.png" id="13_a6x2f"]
 [ext_resource type="Texture2D" uid="uid://dnith5ermw40j" path="res://Sprites/SquareAttack/square_attack.png" id="14_gftia"]
+[ext_resource type="Texture2D" uid="uid://0c6yjk6iijp3" path="res://Sprites/light.png" id="16_hrrvp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l2lw7"]
 radius = 20.0
@@ -68,16 +69,6 @@ shader_parameter/shake_block_size = 30.5
 shader_parameter/shake_color_rate = 0.01
 shader_parameter/u_color = Vector4(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hrrvp"]
-resource_local_to_scene = true
-shader = ExtResource("6_1axvn")
-shader_parameter/shake_power = 0.03
-shader_parameter/shake_rate = 0.2
-shader_parameter/shake_speed = 5.0
-shader_parameter/shake_block_size = 30.5
-shader_parameter/shake_color_rate = 0.01
-shader_parameter/u_color = Vector4(1, 1, 1, 1)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wqged"]
 resource_local_to_scene = true
 shader = ExtResource("6_1axvn")
@@ -109,6 +100,16 @@ shader_parameter/shake_color_rate = 0.01
 shader_parameter/u_color = Vector4(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a2d5l"]
+resource_local_to_scene = true
+shader = ExtResource("6_1axvn")
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 0.2
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
+shader_parameter/u_color = Vector4(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hm0cd"]
 resource_local_to_scene = true
 shader = ExtResource("6_1axvn")
 shader_parameter/shake_power = 0.03
@@ -202,7 +203,7 @@ region = Rect2(1152, 0, 128, 128)
 atlas = ExtResource("14_gftia")
 region = Rect2(1280, 0, 128, 128)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_hm0cd"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_b8ps3"]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
@@ -353,31 +354,39 @@ rotation = 1.5707964
 scale = Vector2(0.4, 0.4)
 
 [node name="Main" parent="Body" index="0" unique_id=1935420016]
-material = SubResource("ShaderMaterial_hrrvp")
+material = SubResource("ShaderMaterial_wqged")
 texture = ExtResource("9_u3h71")
 
 [node name="Q1" parent="Body" index="1" unique_id=712174551]
-material = SubResource("ShaderMaterial_wqged")
+material = SubResource("ShaderMaterial_xg0f0")
 texture = ExtResource("10_4st7f")
 
 [node name="Q2" parent="Body" index="2" unique_id=498922028]
-material = SubResource("ShaderMaterial_xg0f0")
+material = SubResource("ShaderMaterial_xanrt")
 texture = ExtResource("11_a6x2f")
 
 [node name="Q3" parent="Body" index="3" unique_id=1851037625]
-material = SubResource("ShaderMaterial_xanrt")
+material = SubResource("ShaderMaterial_a2d5l")
 texture = ExtResource("12_gftia")
 
 [node name="Q4" parent="Body" index="4" unique_id=234754461]
-material = SubResource("ShaderMaterial_a2d5l")
+material = SubResource("ShaderMaterial_hm0cd")
 
 [node name="AttackAnim" parent="Body" index="5" unique_id=1281946594]
-sprite_frames = SubResource("SpriteFrames_hm0cd")
+sprite_frames = SubResource("SpriteFrames_b8ps3")
 
 [node name="EntityView" type="Area2D" parent="." unique_id=458178092]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EntityView" unique_id=513281629]
 shape = SubResource("CircleShape2D_4pbwo")
+
+[node name="SwitchableLight" type="PointLight2D" parent="." unique_id=807218621]
+visible = false
+scale = Vector2(1.4481856, 1.4481856)
+color = Color(0.4, 1, 1, 1)
+energy = 1.63
+texture = ExtResource("16_hrrvp")
+texture_scale = 1.78
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 

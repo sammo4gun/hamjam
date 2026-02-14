@@ -13,6 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://ctyqreeyqlcc6" path="res://Sprites/Triangle/triangle_main.png" id="10_h2vmu"]
 [ext_resource type="Texture2D" uid="uid://cpnwfs86b1q4c" path="res://Sprites/Triangle/triangle_left_q.png" id="11_gxdil"]
 [ext_resource type="Texture2D" uid="uid://bxsvtni2heqdq" path="res://Sprites/Triangle/triangle_right_q.png" id="12_hhe8p"]
+[ext_resource type="Texture2D" uid="uid://dc4xjjal17jhf" path="res://Sprites/shoot.png" id="14_nwgn2"]
+[ext_resource type="Texture2D" uid="uid://dnith5ermw40j" path="res://Sprites/SquareAttack/square_attack.png" id="15_yh87l"]
+[ext_resource type="Texture2D" uid="uid://0c6yjk6iijp3" path="res://Sprites/light.png" id="16_vq2ek"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_83av3"]
 resource_local_to_scene = true
@@ -50,7 +53,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_d4psy"]
 radius = 450.0
 
-[sub_resource type="Shader" id="Shader_hhe8p"]
+[sub_resource type="Shader" id="Shader_qsinp"]
 resource_local_to_scene = true
 code = "/*
 	Glitch Effect Shader by Yui Kinomoto @arlez80
@@ -111,9 +114,9 @@ void fragment()
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3kn0i"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yosad"]
 resource_local_to_scene = true
-shader = SubResource("Shader_hhe8p")
+shader = SubResource("Shader_qsinp")
 shader_parameter/shake_power = 0.03
 shader_parameter/shake_rate = 0.2
 shader_parameter/shake_speed = 5.0
@@ -121,9 +124,9 @@ shader_parameter/shake_block_size = 30.5
 shader_parameter/shake_color_rate = 0.01
 shader_parameter/u_color = Vector4(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nwgn2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n1bjc"]
 resource_local_to_scene = true
-shader = SubResource("Shader_hhe8p")
+shader = SubResource("Shader_qsinp")
 shader_parameter/shake_power = 0.03
 shader_parameter/shake_rate = 0.2
 shader_parameter/shake_speed = 5.0
@@ -131,9 +134,9 @@ shader_parameter/shake_block_size = 30.5
 shader_parameter/shake_color_rate = 0.01
 shader_parameter/u_color = Vector4(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yh87l"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8o2gc"]
 resource_local_to_scene = true
-shader = SubResource("Shader_hhe8p")
+shader = SubResource("Shader_qsinp")
 shader_parameter/shake_power = 0.03
 shader_parameter/shake_rate = 0.2
 shader_parameter/shake_speed = 5.0
@@ -141,9 +144,9 @@ shader_parameter/shake_block_size = 30.5
 shader_parameter/shake_color_rate = 0.01
 shader_parameter/u_color = Vector4(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vq2ek"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t3krk"]
 resource_local_to_scene = true
-shader = SubResource("Shader_hhe8p")
+shader = SubResource("Shader_qsinp")
 shader_parameter/shake_power = 0.03
 shader_parameter/shake_rate = 0.2
 shader_parameter/shake_speed = 5.0
@@ -151,15 +154,188 @@ shader_parameter/shake_block_size = 30.5
 shader_parameter/shake_color_rate = 0.01
 shader_parameter/u_color = Vector4(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qsinp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yo6jq"]
 resource_local_to_scene = true
-shader = SubResource("Shader_hhe8p")
+shader = SubResource("Shader_qsinp")
 shader_parameter/shake_power = 0.03
 shader_parameter/shake_rate = 0.2
 shader_parameter/shake_speed = 5.0
 shader_parameter/shake_block_size = 30.5
 shader_parameter/shake_color_rate = 0.01
 shader_parameter/u_color = Vector4(1, 1, 1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ou3cv"]
+atlas = ExtResource("14_nwgn2")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2pd1"]
+atlas = ExtResource("14_nwgn2")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wq5q"]
+atlas = ExtResource("14_nwgn2")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lwtj6"]
+atlas = ExtResource("14_nwgn2")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_80q7h"]
+atlas = ExtResource("14_nwgn2")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w6uka"]
+atlas = ExtResource("14_nwgn2")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whkl4"]
+atlas = ExtResource("14_nwgn2")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hg21s"]
+atlas = ExtResource("14_nwgn2")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1fh7"]
+atlas = ExtResource("14_nwgn2")
+region = Rect2(1024, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwu1r"]
+atlas = ExtResource("14_nwgn2")
+region = Rect2(1152, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yxsct"]
+atlas = ExtResource("15_yh87l")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5fcs"]
+atlas = ExtResource("15_yh87l")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pilda"]
+atlas = ExtResource("15_yh87l")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3cyl"]
+atlas = ExtResource("15_yh87l")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wf36i"]
+atlas = ExtResource("15_yh87l")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47rig"]
+atlas = ExtResource("15_yh87l")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yj7if"]
+atlas = ExtResource("15_yh87l")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwk4u"]
+atlas = ExtResource("15_yh87l")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebkxf"]
+atlas = ExtResource("15_yh87l")
+region = Rect2(1024, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0ejv"]
+atlas = ExtResource("15_yh87l")
+region = Rect2(1152, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_acthd"]
+atlas = ExtResource("15_yh87l")
+region = Rect2(1280, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mbpk3"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ou3cv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q2pd1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8wq5q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lwtj6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_80q7h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w6uka")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whkl4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hg21s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1fh7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uwu1r")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yxsct")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5fcs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pilda")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3cyl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wf36i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47rig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yj7if")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwk4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ebkxf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f0ejv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_acthd")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"square_attack",
+"speed": 5.0
+}]
 
 [node name="Triangle" type="CharacterBody2D" unique_id=814518204]
 motion_mode = 1
@@ -169,6 +345,7 @@ script = ExtResource("1_d4psy")
 position = Vector2(24, 0)
 
 [node name="Light" type="PointLight2D" parent="." unique_id=763952222]
+visible = false
 position = Vector2(-6, 1.1920929e-07)
 rotation = -2.3386483
 energy = 0.5
@@ -228,26 +405,37 @@ rotation = 1.5707964
 scale = Vector2(0.5, 0.5)
 
 [node name="Main" parent="Body" index="0" unique_id=1935420016]
-material = SubResource("ShaderMaterial_3kn0i")
+material = SubResource("ShaderMaterial_yosad")
 texture = ExtResource("10_h2vmu")
 
 [node name="Q1" parent="Body" index="1" unique_id=712174551]
-material = SubResource("ShaderMaterial_nwgn2")
+material = SubResource("ShaderMaterial_n1bjc")
 position = Vector2(-40.113125, 46.698853)
 texture = ExtResource("11_gxdil")
 offset = Vector2(40.113125, -46.698853)
 
 [node name="Q2" parent="Body" index="2" unique_id=498922028]
-material = SubResource("ShaderMaterial_yh87l")
+material = SubResource("ShaderMaterial_8o2gc")
 position = Vector2(37.585835, 48.137726)
 texture = ExtResource("12_hhe8p")
 offset = Vector2(-37.585835, -48.137726)
 
 [node name="Q3" parent="Body" index="3" unique_id=1851037625]
-material = SubResource("ShaderMaterial_vq2ek")
+material = SubResource("ShaderMaterial_t3krk")
 
 [node name="Q4" parent="Body" index="4" unique_id=234754461]
-material = SubResource("ShaderMaterial_qsinp")
+material = SubResource("ShaderMaterial_yo6jq")
+
+[node name="AttackAnim" parent="Body" index="5" unique_id=1281946594]
+sprite_frames = SubResource("SpriteFrames_mbpk3")
+
+[node name="SwitchableLight" type="PointLight2D" parent="." unique_id=2040857844]
+visible = false
+scale = Vector2(1.4481856, 1.4481856)
+color = Color(0.4, 1, 1, 1)
+energy = 1.63
+texture = ExtResource("16_vq2ek")
+texture_scale = 1.78
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 

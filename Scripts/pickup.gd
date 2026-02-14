@@ -4,7 +4,7 @@ extends Node2D
 @export var pickup_range = 500
 var pickup_ranges = {
 	'mana': 500,
-	'score': 150,
+	'score': 250,
 	'health': 300,
 }
 @export var lifetime = 0.0
