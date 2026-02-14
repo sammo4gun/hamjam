@@ -12,17 +12,20 @@ extends Node2D
 @export var damage_push_strength = 300.0
 @export var shoot_push_strength = 300.0
 
+# ShaderMaterials
 @onready var glitch_main = $"Main".material as ShaderMaterial
 @onready var glitch_q1 = $"Q1".material as ShaderMaterial
 @onready var glitch_q2 = $"Q2".material as ShaderMaterial
 @onready var glitch_q3 = $"Q3".material as ShaderMaterial
 @onready var glitch_q4 = $"Q4".material as ShaderMaterial
 
+# Colors
 @export var damage_color: Color = Color("#E84855")
 @export var shoot_color: Color = Color("#93a8ac")
 @export var flash_duration: float = 0.35
 @export var shoot_flash_duration: float = 0.65
 
+# State
 var rest_offsets = []
 var velocities = []
 var base_colors = []
@@ -35,35 +38,47 @@ var glitch_max_timer = 0.0
 var object_velocity = Vector2.ZERO
 var time = 0.0
 
+# -----------------------------
+# Initialization
+# -----------------------------
 func _ready():
-	# set initial color
 	var base_color = Color("#212738")
-	main.modulate = base_color
+	# Set initial shader color for main
+	glitch_main.set_shader_parameter("u_color", base_color)
 	for c in corners:
 		c.top_level = false
-		c.modulate = base_color
+		# Set initial shader color for corners
+		c.get_material().set_shader_parameter("u_color", base_color)
 		rest_offsets.append(c.position)
 		velocities.append(Vector2.ZERO)
 		base_colors.append(base_color)
 		color_flash_progress.append(0.0)
 
+# -----------------------------
+# Physics update
+# -----------------------------
 func _physics_process(delta):
 	time += delta
-	
+
+	# Main flash
 	if color_flash_progress_main > 0.0:
 		color_flash_progress_main -= delta / shoot_flash_duration
 		color_flash_progress_main = max(color_flash_progress_main, 0.0)
-		main.modulate = shoot_color.lerp(base_colors[0], 1.0 - color_flash_progress_main)
-		
+		var main_color = shoot_color.lerp(base_colors[0], 1.0 - color_flash_progress_main)
+		glitch_main.set_shader_parameter("u_color", main_color)
+
+	# Glitch effect decay
 	if glitch_timer > 0.0:
 		glitch_timer -= delta
-		glitch_main.set_shader_parameter("shake_power", 0.3 * glitch_timer/glitch_max_timer)
-		glitch_q1.set_shader_parameter("shake_power", 0.3 * glitch_timer/glitch_max_timer)
-		glitch_q2.set_shader_parameter("shake_power", 0.3 * glitch_timer/glitch_max_timer)
-		glitch_q3.set_shader_parameter("shake_power", 0.3 * glitch_timer/glitch_max_timer)
-		glitch_q4.set_shader_parameter("shake_power", 0.3 * glitch_timer/glitch_max_timer)
-	else: stop_glitch()
-	
+		var shake_value = 0.3 * glitch_timer / glitch_max_timer
+		glitch_main.set_shader_parameter("shake_power", shake_value)
+		glitch_q1.set_shader_parameter("shake_power", shake_value)
+		glitch_q2.set_shader_parameter("shake_power", shake_value)
+		glitch_q3.set_shader_parameter("shake_power", shake_value)
+		glitch_q4.set_shader_parameter("shake_power", shake_value)
+	else:
+		stop_glitch()
+
 	for i in range(corners.size()):
 		var c = corners[i]
 
@@ -86,17 +101,26 @@ func _physics_process(delta):
 			displacement = displacement.normalized() * max_offset
 
 		var acceleration = displacement * spring_strength
-
 		velocities[i] += acceleration * delta
 		velocities[i] -= velocities[i] * damping * delta
 		c.position += velocities[i] * delta
 
-		# color flash back to base
+		# corner color flash
 		if color_flash_progress[i] > 0.0:
 			color_flash_progress[i] -= delta / flash_duration
 			color_flash_progress[i] = max(color_flash_progress[i], 0.0)
-			c.modulate = damage_color.lerp(base_colors[i], 1.0 - color_flash_progress[i])
-			
+			var corner_color = damage_color.lerp(base_colors[i], 1.0 - color_flash_progress[i])
+			c.get_material().set_shader_parameter("u_color", corner_color)
+
+# -----------------------------
+# External velocity for trailing
+# -----------------------------
+func set_velocity(vel: Vector2) -> void:
+	object_velocity = vel
+
+# -----------------------------
+# Glitch control
+# -----------------------------
 func activate_glitch(period):
 	glitch_max_timer = period
 	glitch_timer = period
@@ -109,9 +133,9 @@ func activate_glitch(period):
 func stop_glitch():
 	glitch_max_timer = 0.0
 
-func set_velocity(vel: Vector2) -> void:
-	object_velocity = vel
-
+# -----------------------------
+# Damage push for corners
+# -----------------------------
 func apply_damage_push():
 	for i in range(corners.size()):
 		var dir = rest_offsets[i]
@@ -119,11 +143,15 @@ func apply_damage_push():
 			dir = dir.normalized()
 			velocities[i] += dir * damage_push_strength
 
-		# color flash
-		corners[i].modulate = damage_color
+		# flash corners
 		color_flash_progress[i] = 1.0
+		corners[i].get_material().set_shader_parameter("u_color", damage_color)
 
+# -----------------------------
+# Shoot / knockback opposite facing
+# -----------------------------
 func apply_shoot_push():
+	# main facing in local space
 	var facing_global = main.global_transform.x.normalized().rotated(deg_to_rad(90))
 	var facing_local = facing_global.rotated(-global_rotation)
 	var knockback_dir = facing_local 
@@ -136,8 +164,6 @@ func apply_shoot_push():
 			dir = (dir * 0.3 + knockback_dir * 0.7).normalized()
 			velocities[i] += dir * shoot_push_strength
 
-	# main sprite flash
-	main.modulate = shoot_color
+	# main flash
 	color_flash_progress_main = 1.0
-
-	
+	glitch_main.set_shader_parameter("u_color", shoot_color)
