@@ -4,6 +4,7 @@ extends Node2D
 @onready var switch_handler = $"SwitchHandler"
 @onready var behaviour_handler = $"BehaviourHandler"
 @onready var player_handler = $"PlayerHandler"
+@onready var music_handler = $"MusicHandler"
 
 @onready var wanted_indicator = $"Camera/CanvasLayer/WantedIndicator"
 @onready var health_indicator = $"Camera/CanvasLayer/HealthIndicator"
@@ -32,7 +33,7 @@ var type_dict = {
 
 @onready var hit_layer = $"Camera/CanvasLayer/HitLayer"
 
-var start_spawn_type = 'circle'
+var start_spawn_type = 'square'
 
 var pickup = preload("res://Scenes/pickup.tscn")
 
@@ -62,6 +63,8 @@ func _process(delta: float) -> void:
 		if camera.zoom.x < 1.:
 			camera.zoom.x = lerpf(camera.zoom.x, 1., delta * 2.)
 			camera.zoom.y = lerpf(camera.zoom.y, 1., delta * 2.)
+		if music_handler.mood != 'intense' and music_handler.mood != 'nothing':
+			music_handler.mood = target_handler.get_mood()
 
 
 func _input(event: InputEvent) -> void:
@@ -73,6 +76,7 @@ func start_game() -> void:
 	game_started = true
 	wanted = start_spawn_type
 	wanted_indicator.set_wanted(wanted)
+	music_handler.mood = 'chill'
 	
 	var entity = type_dict[start_spawn_type].instantiate()
 	entity.global_position = Vector2(0, 0)
@@ -141,16 +145,22 @@ func swap_wanted(type):
 
 func new_player(entity):
 	entity.is_player = true
+	if entity.health > 1:
+		music_handler.mood = target_handler.get_mood()
 	health_indicator.set_health(entity.health, entity.MAX_HEALTH)
 
 func player_hit(damage: int, player: CharacterBody2D):
 	health_indicator.set_health(max(0, player.health), player.MAX_HEALTH)
 	if player.health > 0:
+		if player.health == 1:
+			music_handler.mood = 'intense'
+		
 		var tween = create_tween()
 		tween.tween_property(hit_layer.material, "shader_parameter/intensity", 1.0, 0.1)
 		tween.tween_property(hit_layer.material, "shader_parameter/intensity", 0.0, 0.5)
 		
 		camera.shake_power = 6 * damage
+		music_handler.current_playing = music_handler.playing - 15
 	else:
 		# player died
 		camera.shake_power = 12
@@ -171,8 +181,9 @@ func end_game():
 	HIGH_SCORE            %s
 	
 	READY TO START?
-	""" % [int(time) / 60, int(time) % 60, str(player_handler.score).pad_zeros(7), 
+	""" % [time / 60, int(time) % 60, str(player_handler.score).pad_zeros(7), 
 	Globals.longest_time_s / 60, Globals.longest_time_s % 60, str(Globals.high_score).pad_zeros(7)]
+	music_handler.mood = 'nothing'
 
 func set_mana(mana):
 	health_indicator.set_mana(mana)

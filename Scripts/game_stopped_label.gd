@@ -3,7 +3,7 @@ extends Label
 @onready var world = get_parent().get_parent().get_parent()
 
 func _ready() -> void:
-	var minutes = Globals.longest_time_s / 60
+	var minutes = Globals.longest_time_s / 60.
 	var seconds = Globals.longest_time_s % 60
 	text = """
 	LONGEST TIME            %02d:%02d
@@ -12,7 +12,7 @@ func _ready() -> void:
 	READY TO START?
 	""" % [minutes, seconds, str(Globals.high_score).pad_zeros(7)]
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Globals.first_run_done and !world.game_fadeout and !world.game_started and visible:
 		get_tree().paused = false
 		world.start_game()
@@ -24,8 +24,3 @@ func _unhandled_input(event):
 			get_tree().paused = false
 			world.start_game()
 			visible = false
-
-func seconds_to_time(total_seconds: int) -> String:
-	var minutes = total_seconds / 60
-	var seconds = total_seconds % 60
-	return "%02d:%02d" % [minutes, seconds]

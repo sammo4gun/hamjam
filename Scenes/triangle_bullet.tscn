@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://chybb5ebcgl4n"]
 
-[ext_resource type="Script" path="res://Scripts/bullet.gd" id="1_unfqi"]
+[ext_resource type="Script" uid="uid://dtjig2dqg7kxa" path="res://Scripts/bullet.gd" id="1_unfqi"]
 [ext_resource type="Texture2D" uid="uid://devcphhh4vsmi" path="res://Sprites/circle.png" id="2_di87k"]
 [ext_resource type="Shader" uid="uid://djsqxws8gq1go" path="res://Shader/circle_laser.gdshader" id="3_di87k"]
+[ext_resource type="AudioStream" uid="uid://6hx4um81jwvm" path="res://SFX/bullet_land.mp3" id="4_vw7at"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ml3eb"]
 radius = 5.0
@@ -51,5 +52,9 @@ pivot_offset = Vector2(20, 20)
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=434511867]
 target_position = Vector2(20, 0)
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="." unique_id=260422180]
+stream = ExtResource("4_vw7at")
+volume_db = -25.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

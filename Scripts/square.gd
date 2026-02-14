@@ -29,11 +29,11 @@ var target_lookat = null
 
 var ready_for_attack = false
 var attacking = false
-@onready var attack_sprite = $"AttackSprite"
 @onready var attack_detection_area = $"AttackDetectorArea"
 @onready var attack_area = $"AttackArea"
 @onready var switch_finder = $"SwitchFinder"
-@onready var glitch = $"Sprite2D".material as ShaderMaterial
+
+@onready var attack_sound = $"AttackSound"
 
 var target_handler
 var switch_handler
@@ -42,9 +42,6 @@ var player_handler
 
 var entities_seen = []
 var behaviour = 'idle'
-
-var glitch_timer = 0.0
-var glitch_max_timer = 0.0
 
 var invincible = 0.0
 
@@ -72,18 +69,11 @@ func _physics_process(delta: float) -> void:
 			handle_behaviours(delta)
 			nav_handle_movement(delta)
 			nav_handle_rotation(delta)
-	if glitch_timer > 0.0:
-		glitch_timer -= delta
-		glitch.set_shader_parameter("shake_power", 0.3 * glitch_timer/glitch_max_timer)
-	else: stop_glitch()
 	if invincible > 0.0:
 		invincible -= delta
 
 func activate_glitch(period):
 	$Body.activate_glitch(period)
-
-func stop_glitch():
-	glitch_max_timer = 0.0
 
 func handle_behaviours(delta):
 	if !NavigationServer2D.map_get_iteration_id(nav_map) == 0:
@@ -236,22 +226,16 @@ func pickup(type):
 
 func attack():
 	$Body.apply_shoot_push()
+	attack_sound.pitch_scale = randf_range(0.9, 1.0)
+	attack_sound.play()
 	if is_player:
 		attacking = true
-		attack_sprite.visible = true
-		attack_sprite.play()
-		await attack_sprite.animation_finished
 		damage(5)
-		attack_sprite.visible = false
 		await get_tree().create_timer(0.3).timeout
 		attacking = false
 	else:
 		attacking = true
-		attack_sprite.visible = true
-		attack_sprite.play()
-		await attack_sprite.animation_finished
 		damage(3)
-		attack_sprite.visible = false
 		await get_tree().create_timer(0.3).timeout
 		attacking = false
 

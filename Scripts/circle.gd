@@ -44,6 +44,7 @@ var cooldown = 0
 @onready var switch_finder = $"SwitchFinder"
 @onready var glitch = $"Sprite2D".material as ShaderMaterial
 
+@onready var attack_sound = $"AttackSound"
 
 @onready var body = $Body
 
@@ -91,6 +92,7 @@ func _physics_process(delta: float) -> void:
 			nav_handle_rotation(delta)
 	if invincible > 0.0:
 		invincible -= delta
+	if cooldown > 0: cooldown -= delta
 
 func handle_behaviours(delta):
 	if !NavigationServer2D.map_get_iteration_id(nav_map) == 0:
@@ -108,7 +110,6 @@ func handle_behaviours(delta):
 		elif behaviour == 'attack':
 			nav_find_target()
 			check_target_finder()
-			if cooldown > 0: cooldown -= delta
 			if ready_for_attack and !attacking and cooldown <= 0 and not dead:
 				attack()
 
@@ -253,7 +254,7 @@ func player_handle_rotation(delta) -> void:
 func _input(event: InputEvent) -> void:
 	if (is_player and !attacking and not dead and
 		event is InputEventMouseButton and event.is_pressed() and 
-		event.button_index == MOUSE_BUTTON_LEFT):
+		event.button_index == MOUSE_BUTTON_LEFT and cooldown <= 0):
 		attack()
 
 func pickup(type):
@@ -264,23 +265,17 @@ func attack():
 	if is_player:
 		await get_tree().create_timer(ATTACK_TIME).timeout
 		fire()
-		#attack_sprite.visible = true
-		#attack_sprite.play()
-		#await attack_sprite.animation_finished
-		#attack_sprite.visible = false
 		cooldown = ATTACK_COOLDOWN
 	else:
 		await get_tree().create_timer(ATTACK_TIME, false).timeout
 		fire()
-		#attack_sprite.visible = true
-		#attack_sprite.play()
-		#await attack_sprite.animation_finished
-		#attack_sprite.visible = false
 		cooldown = ATTACK_COOLDOWN * 2
 	attacking = false
 
 func fire():
 	body.apply_shoot_push()
+	attack_sound.pitch_scale = randf_range(0.6, 0.7)
+	attack_sound.play()
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = fire_point.global_position
 	bullet.direction = Vector2.from_angle(rotation)

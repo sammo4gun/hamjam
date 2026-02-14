@@ -11,7 +11,7 @@ var TYPE = 'triangle'
 var health = MAX_HEALTH
 
 @export var ATTACK_TIME = 0.1
-@export var ATTACK_COOLDOWN = 0.5
+@export var ATTACK_COOLDOWN = .5
 
 @export var BACKUP_SLOWDOWN = 0.2
 @export var BACKUP_RANGE = 300
@@ -42,7 +42,8 @@ var cooldown = 0
 @onready var attack_sprite = $"AttackSprite"
 @onready var target_finder = $"TargetFinder"
 @onready var switch_finder = $"SwitchFinder"
-@onready var glitch = $"Sprite2D".material as ShaderMaterial
+
+@onready var attack_sound = $"AttackSound"
 
 var target_handler
 var switch_handler
@@ -51,9 +52,6 @@ var player_handler
 
 var entities_seen = []
 var behaviour = 'idle'
-
-var glitch_timer = 0.0
-var glitch_max_timer = 0.0
 
 var invincible = 0.0
 
@@ -85,19 +83,12 @@ func _physics_process(delta: float) -> void:
 			handle_behaviours(delta)
 			nav_handle_movement(delta)
 			nav_handle_rotation(delta)
-	if glitch_timer > 0.0:
-		glitch_timer -= delta
-		glitch.set_shader_parameter("shake_power", 0.3 * glitch_timer/glitch_max_timer)
-	else: stop_glitch()
 	if invincible > 0.0:
 		invincible -= delta
+	if cooldown > 0: cooldown -= delta
 
 func activate_glitch(period):
 	$Body.activate_glitch(period)
-
-
-func stop_glitch():
-	glitch_max_timer = 0.0
 
 func handle_behaviours(delta):
 	if !NavigationServer2D.map_get_iteration_id(nav_map) == 0:
@@ -114,7 +105,6 @@ func handle_behaviours(delta):
 		elif behaviour == 'attack':
 			nav_find_target()
 			check_target_finder()
-			if cooldown > 0: cooldown -= delta
 			if ready_for_attack and !attacking and cooldown <= 0 and not dead:
 				attack()
 
@@ -257,7 +247,7 @@ func player_handle_rotation(delta) -> void:
 	rotation = rotate_toward(rotation, angle_to_mouse, 10 * delta)
 
 func _input(event: InputEvent) -> void:
-	if (is_player and !attacking and not dead and
+	if (is_player and !attacking and not dead and cooldown <= 0 and
 		event is InputEventMouseButton and event.is_pressed() and 
 		event.button_index == MOUSE_BUTTON_LEFT):
 		attack()
@@ -279,6 +269,8 @@ func attack():
 func fire():
 	$Body.apply_shoot_push()
 	var bullet = bullet_scene.instantiate()
+	attack_sound.pitch_scale = randf_range(0.9, 1.0)
+	attack_sound.play()
 	bullet.global_position = fire_point.global_position
 	bullet.direction = Vector2.from_angle(rotation)
 	bullet.rotation = rotation
