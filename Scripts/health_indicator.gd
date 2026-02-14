@@ -1,7 +1,7 @@
 extends Control
 
-var health_on_color = Color(1.338, 0.194, 0.251)
-var mana_on_color = Color(0.513, 0.603, 1.591)
+var health_on_color = Color("dc1414")
+var mana_on_color = Color("5efdf7")
 
 @onready var health = {
 	1: $Health1,

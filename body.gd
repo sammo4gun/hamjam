@@ -22,8 +22,8 @@ extends Node2D
 @onready var glitch_q4 = $"Q4".material as ShaderMaterial
 
 # Colors
-@export var damage_color: Color = Color("#E84855")
-@export var shoot_color: Color = Color("#93a8ac")
+@export var damage_color: Color = Color("#dc1414")
+@export var shoot_color: Color = Color("#ffffff")
 @export var flash_duration: float = 0.35
 @export var shoot_flash_duration: float = 0.65
 
@@ -44,7 +44,7 @@ var time = 0.0
 # Initialization
 # -----------------------------
 func _ready():
-	var base_color = Color("#212738")
+	var base_color = Color("#f3a787")
 	$AttackAnim.modulate = Color.WHITE
 	# Set initial shader color for main
 	glitch_main.set_shader_parameter("u_color", base_color)

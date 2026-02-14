@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://hc82j2wrf0n7" path="res://Sprites/Circle/circle_left_q.png" id="10_4st7f"]
 [ext_resource type="Texture2D" uid="uid://mdeyquen0l3u" path="res://Sprites/Circle/circle_right_q.png" id="11_a6x2f"]
 [ext_resource type="Texture2D" uid="uid://dbq0i0ugi8ft7" path="res://Sprites/Circle/circle_bottom_q.png" id="12_gftia"]
+[ext_resource type="Texture2D" uid="uid://dc4xjjal17jhf" path="res://Sprites/shoot.png" id="13_a6x2f"]
+[ext_resource type="Texture2D" uid="uid://dnith5ermw40j" path="res://Sprites/SquareAttack/square_attack.png" id="14_gftia"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l2lw7"]
 radius = 20.0
@@ -24,6 +26,7 @@ shader_parameter/shake_rate = 0.0
 shader_parameter/shake_speed = 3.0
 shader_parameter/shake_block_size = 5.0
 shader_parameter/shake_color_rate = 0.01
+shader_parameter/u_color = Vector4(1, 1, 1, 1)
 
 [sub_resource type="Gradient" id="Gradient_4pbwo"]
 offsets = PackedFloat32Array(0.0025252525, 0.27525252, 1)
@@ -62,6 +65,230 @@ shader_parameter/shake_rate = 0.2
 shader_parameter/shake_speed = 5.0
 shader_parameter/shake_block_size = 30.5
 shader_parameter/shake_color_rate = 0.01
+shader_parameter/u_color = Vector4(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hrrvp"]
+resource_local_to_scene = true
+shader = ExtResource("6_1axvn")
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 0.2
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
+shader_parameter/u_color = Vector4(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wqged"]
+resource_local_to_scene = true
+shader = ExtResource("6_1axvn")
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 0.2
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
+shader_parameter/u_color = Vector4(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xg0f0"]
+resource_local_to_scene = true
+shader = ExtResource("6_1axvn")
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 0.2
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
+shader_parameter/u_color = Vector4(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xanrt"]
+resource_local_to_scene = true
+shader = ExtResource("6_1axvn")
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 0.2
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
+shader_parameter/u_color = Vector4(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a2d5l"]
+resource_local_to_scene = true
+shader = ExtResource("6_1axvn")
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 0.2
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
+shader_parameter/u_color = Vector4(1, 1, 1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ou3cv"]
+atlas = ExtResource("13_a6x2f")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2pd1"]
+atlas = ExtResource("13_a6x2f")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wq5q"]
+atlas = ExtResource("13_a6x2f")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lwtj6"]
+atlas = ExtResource("13_a6x2f")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_80q7h"]
+atlas = ExtResource("13_a6x2f")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w6uka"]
+atlas = ExtResource("13_a6x2f")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whkl4"]
+atlas = ExtResource("13_a6x2f")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hg21s"]
+atlas = ExtResource("13_a6x2f")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1fh7"]
+atlas = ExtResource("13_a6x2f")
+region = Rect2(1024, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwu1r"]
+atlas = ExtResource("13_a6x2f")
+region = Rect2(1152, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yxsct"]
+atlas = ExtResource("14_gftia")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5fcs"]
+atlas = ExtResource("14_gftia")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pilda"]
+atlas = ExtResource("14_gftia")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3cyl"]
+atlas = ExtResource("14_gftia")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wf36i"]
+atlas = ExtResource("14_gftia")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47rig"]
+atlas = ExtResource("14_gftia")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yj7if"]
+atlas = ExtResource("14_gftia")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwk4u"]
+atlas = ExtResource("14_gftia")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebkxf"]
+atlas = ExtResource("14_gftia")
+region = Rect2(1024, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0ejv"]
+atlas = ExtResource("14_gftia")
+region = Rect2(1152, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_acthd"]
+atlas = ExtResource("14_gftia")
+region = Rect2(1280, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hm0cd"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ou3cv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q2pd1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8wq5q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lwtj6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_80q7h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w6uka")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whkl4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hg21s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1fh7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uwu1r")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yxsct")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5fcs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pilda")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3cyl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wf36i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47rig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yj7if")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwk4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ebkxf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f0ejv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_acthd")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"square_attack",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4pbwo"]
 radius = 600.0
@@ -120,16 +347,26 @@ rotation = 1.5707964
 scale = Vector2(0.4, 0.4)
 
 [node name="Main" parent="Body" index="0" unique_id=1935420016]
+material = SubResource("ShaderMaterial_hrrvp")
 texture = ExtResource("9_u3h71")
 
 [node name="Q1" parent="Body" index="1" unique_id=712174551]
+material = SubResource("ShaderMaterial_wqged")
 texture = ExtResource("10_4st7f")
 
 [node name="Q2" parent="Body" index="2" unique_id=498922028]
+material = SubResource("ShaderMaterial_xg0f0")
 texture = ExtResource("11_a6x2f")
 
 [node name="Q3" parent="Body" index="3" unique_id=1851037625]
+material = SubResource("ShaderMaterial_xanrt")
 texture = ExtResource("12_gftia")
+
+[node name="Q4" parent="Body" index="4" unique_id=234754461]
+material = SubResource("ShaderMaterial_a2d5l")
+
+[node name="AttackAnim" parent="Body" index="5" unique_id=1281946594]
+sprite_frames = SubResource("SpriteFrames_hm0cd")
 
 [node name="EntityView" type="Area2D" parent="." unique_id=458178092]
 

@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://bgtc71vbh858x"]
 
-[ext_resource type="Texture2D" uid="uid://be8dpd8hioe0w" path="res://Sprites/square.png" id="1_2b6xv"]
-[ext_resource type="Script" uid="uid://cwyf50h2v8t5c" path="res://Scripts/wanted_indicator.gd" id="1_gs4iv"]
+[ext_resource type="Script" path="res://Scripts/wanted_indicator.gd" id="1_gs4iv"]
 [ext_resource type="Shader" uid="uid://25opi4m6leqw" path="res://Shader/glitch.gdshader" id="1_vt26m"]
-[ext_resource type="Texture2D" uid="uid://4nft4js2ma0y" path="res://Sprites/triangle.png" id="2_rkdcv"]
 [ext_resource type="Texture2D" uid="uid://dsv5b46fi1q41" path="res://Sprites/wanted_ui.png" id="2_y8rb8"]
-[ext_resource type="Texture2D" uid="uid://devcphhh4vsmi" path="res://Sprites/circle.png" id="3_vt26m"]
+[ext_resource type="Texture2D" uid="uid://dm8owna2sqpcu" path="res://Sprites/square_full.png" id="3_y8rb8"]
+[ext_resource type="Texture2D" uid="uid://cqlf0hv2w43mj" path="res://Sprites/triangle_full.png" id="4_pexh4"]
 [ext_resource type="FontFile" uid="uid://dxutit2kp8gk5" path="res://Sprites/BlueScreenPersonalUseRegular-0W1M9.ttf" id="4_rkdcv"]
+[ext_resource type="Texture2D" uid="uid://0p011ehtfet4" path="res://Sprites/circle_full.png" id="5_vuyid"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gs4iv"]
 resource_local_to_scene = true
@@ -16,6 +16,7 @@ shader_parameter/shake_rate = 1.0
 shader_parameter/shake_speed = 5.0
 shader_parameter/shake_block_size = 30.5
 shader_parameter/shake_color_rate = 0.038000001805
+shader_parameter/u_color = Vector4(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y8rb8"]
 shader = ExtResource("1_vt26m")
@@ -24,6 +25,7 @@ shader_parameter/shake_rate = 1.0
 shader_parameter/shake_speed = 5.0
 shader_parameter/shake_block_size = 30.5
 shader_parameter/shake_color_rate = 0.0190000009025
+shader_parameter/u_color = Vector4(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pexh4"]
 shader = ExtResource("1_vt26m")
@@ -32,6 +34,7 @@ shader_parameter/shake_rate = 1.0
 shader_parameter/shake_speed = 5.0
 shader_parameter/shake_block_size = 30.5
 shader_parameter/shake_color_rate = 0.038000001805
+shader_parameter/u_color = Vector4(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vt26m"]
 shader = ExtResource("1_vt26m")
@@ -40,6 +43,7 @@ shader_parameter/shake_rate = 0.050000002375
 shader_parameter/shake_speed = 3.0
 shader_parameter/shake_block_size = 30.5
 shader_parameter/shake_color_rate = 0.01
+shader_parameter/u_color = Vector4(1, 1, 1, 1)
 
 [node name="WantedIndicator" type="Control" unique_id=913205555]
 layout_mode = 3
@@ -64,28 +68,28 @@ offset_left = 4.0
 offset_top = 4.0
 offset_right = 84.0
 offset_bottom = 104.0
-color = Color(0, 0, 0.64705884, 1)
+color = Color(0.37254903, 0.43137255, 0.90588236, 1)
 
 [node name="SquareSprite" type="Sprite2D" parent="." unique_id=1321156450]
 visible = false
 material = SubResource("ShaderMaterial_gs4iv")
 position = Vector2(44, 68)
 scale = Vector2(0.44828442, 0.44828442)
-texture = ExtResource("1_2b6xv")
+texture = ExtResource("3_y8rb8")
 
 [node name="TriangleSprite" type="Sprite2D" parent="." unique_id=884370653]
 visible = false
 material = SubResource("ShaderMaterial_y8rb8")
 position = Vector2(46.139923, 69.61462)
 scale = Vector2(0.44828442, 0.44828442)
-texture = ExtResource("2_rkdcv")
+texture = ExtResource("4_pexh4")
 
 [node name="CircleSprite" type="Sprite2D" parent="." unique_id=1925836687]
 visible = false
 material = SubResource("ShaderMaterial_pexh4")
 position = Vector2(45.330452, 68.805145)
 scale = Vector2(0.44828442, 0.44828442)
-texture = ExtResource("3_vt26m")
+texture = ExtResource("5_vuyid")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1130408945]
 layout_mode = 0
