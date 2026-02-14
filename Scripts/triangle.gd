@@ -269,10 +269,10 @@ func attack():
 	attacking = true
 	await get_tree().create_timer(ATTACK_TIME).timeout
 	fire()
-	attack_sprite.visible = true
-	attack_sprite.play()
-	await attack_sprite.animation_finished
-	attack_sprite.visible = false
+	#attack_sprite.visible = true
+	#attack_sprite.play()
+	#await attack_sprite.animation_finished
+	#attack_sprite.visible = false
 	attacking = false
 	cooldown = ATTACK_COOLDOWN
 

@@ -262,20 +262,20 @@ func pickup(type):
 func attack():
 	attacking = true
 	if is_player:
-		#await get_tree().create_timer(ATTACK_TIME).timeout
+		await get_tree().create_timer(ATTACK_TIME).timeout
 		fire()
-		attack_sprite.visible = true
-		attack_sprite.play()
-		await attack_sprite.animation_finished
-		attack_sprite.visible = false
+		#attack_sprite.visible = true
+		#attack_sprite.play()
+		#await attack_sprite.animation_finished
+		#attack_sprite.visible = false
 		cooldown = ATTACK_COOLDOWN
 	else:
 		await get_tree().create_timer(ATTACK_TIME, false).timeout
 		fire()
-		attack_sprite.visible = true
-		attack_sprite.play()
-		await attack_sprite.animation_finished
-		attack_sprite.visible = false
+		#attack_sprite.visible = true
+		#attack_sprite.play()
+		#await attack_sprite.animation_finished
+		#attack_sprite.visible = false
 		cooldown = ATTACK_COOLDOWN * 2
 	attacking = false
 

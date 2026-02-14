@@ -12,6 +12,8 @@ extends Node2D
 @export var damage_push_strength = 300.0
 @export var shoot_push_strength = 300.0
 
+@export var i_am_a_square = false
+
 # ShaderMaterials
 @onready var glitch_main = $"Main".material as ShaderMaterial
 @onready var glitch_q1 = $"Q1".material as ShaderMaterial
@@ -43,6 +45,7 @@ var time = 0.0
 # -----------------------------
 func _ready():
 	var base_color = Color("#212738")
+	$AttackAnim.modulate = Color.WHITE
 	# Set initial shader color for main
 	glitch_main.set_shader_parameter("u_color", base_color)
 	for c in corners:
@@ -167,3 +170,9 @@ func apply_shoot_push():
 	# main flash
 	color_flash_progress_main = 1.0
 	glitch_main.set_shader_parameter("u_color", shoot_color)
+	
+	$AttackAnim.frame = 0
+	if i_am_a_square:
+		$AttackAnim.play("square_attack")
+	else:
+		$AttackAnim.play("default")

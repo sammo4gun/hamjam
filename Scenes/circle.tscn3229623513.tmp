@@ -1,56 +1,72 @@
-[gd_scene format=3 uid="uid://cu8bxqh8t3jt0"]
+[gd_scene format=3 uid="uid://yq7k650rdo1l"]
 
-[ext_resource type="Script" uid="uid://bh3q47edog7ty" path="res://Scripts/triangle.gd" id="1_d4psy"]
-[ext_resource type="Texture2D" uid="uid://4nft4js2ma0y" path="res://Sprites/triangle.png" id="2_d4psy"]
-[ext_resource type="Texture2D" uid="uid://boke3lxkf5lno" path="res://Sprites/directional_light.png" id="2_m0yjs"]
-[ext_resource type="Texture2D" uid="uid://c26xulcg06wfu" path="res://Sprites/SquareAttack/attack1.png" id="3_18ods"]
-[ext_resource type="Texture2D" uid="uid://bs1ioal73lrn1" path="res://Sprites/SquareAttack/attack2.png" id="4_3mfel"]
-[ext_resource type="Texture2D" uid="uid://bqtey2pk6yvps" path="res://Sprites/SquareAttack/attack3.png" id="5_83av3"]
-[ext_resource type="Shader" uid="uid://25opi4m6leqw" path="res://Shader/glitch.gdshader" id="7_3mfel"]
-[ext_resource type="Texture2D" uid="uid://blif2c0mtjker" path="res://Sprites/player_indicator.png" id="9_83av3"]
-[ext_resource type="PackedScene" uid="uid://iqr7jqnkcnt2" path="res://Scenes/body.tscn" id="9_jxlpj"]
-[ext_resource type="Texture2D" uid="uid://ctyqreeyqlcc6" path="res://Sprites/Triangle/triangle_main.png" id="10_h2vmu"]
-[ext_resource type="Texture2D" uid="uid://cpnwfs86b1q4c" path="res://Sprites/Triangle/triangle_left_q.png" id="11_gxdil"]
-[ext_resource type="Texture2D" uid="uid://bxsvtni2heqdq" path="res://Sprites/Triangle/triangle_right_q.png" id="12_hhe8p"]
-[ext_resource type="Texture2D" uid="uid://dc4xjjal17jhf" path="res://Sprites/shoot.png" id="13_gxdil"]
+[ext_resource type="Script" uid="uid://dqn5hrnqr7qao" path="res://Scripts/circle.gd" id="1_ny5yc"]
+[ext_resource type="Texture2D" uid="uid://devcphhh4vsmi" path="res://Sprites/circle.png" id="2_ny5yc"]
+[ext_resource type="Texture2D" uid="uid://c26xulcg06wfu" path="res://Sprites/SquareAttack/attack1.png" id="3_4pbwo"]
+[ext_resource type="Texture2D" uid="uid://bs1ioal73lrn1" path="res://Sprites/SquareAttack/attack2.png" id="4_1axvn"]
+[ext_resource type="Texture2D" uid="uid://bqtey2pk6yvps" path="res://Sprites/SquareAttack/attack3.png" id="5_evqyu"]
+[ext_resource type="Shader" uid="uid://25opi4m6leqw" path="res://Shader/glitch.gdshader" id="6_1axvn"]
+[ext_resource type="PackedScene" uid="uid://iqr7jqnkcnt2" path="res://Scenes/body.tscn" id="8_aij75"]
+[ext_resource type="Texture2D" uid="uid://blif2c0mtjker" path="res://Sprites/player_indicator.png" id="8_q30vm"]
+[ext_resource type="Texture2D" uid="uid://wg3ouexd5tr7" path="res://Sprites/Circle/circle_main.png" id="9_u3h71"]
+[ext_resource type="Texture2D" uid="uid://hc82j2wrf0n7" path="res://Sprites/Circle/circle_left_q.png" id="10_4st7f"]
+[ext_resource type="Texture2D" uid="uid://mdeyquen0l3u" path="res://Sprites/Circle/circle_right_q.png" id="11_a6x2f"]
+[ext_resource type="Texture2D" uid="uid://dbq0i0ugi8ft7" path="res://Sprites/Circle/circle_bottom_q.png" id="12_gftia"]
+[ext_resource type="Texture2D" uid="uid://dc4xjjal17jhf" path="res://Sprites/shoot.png" id="13_4st7f"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_83av3"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_l2lw7"]
+radius = 20.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q30vm"]
 resource_local_to_scene = true
-shader = ExtResource("7_3mfel")
-shader_parameter/shake_power = 0.3
+shader = ExtResource("6_1axvn")
+shader_parameter/shake_power = 0.4
 shader_parameter/shake_rate = 0.0
-shader_parameter/shake_speed = 5.0
-shader_parameter/shake_block_size = 15.0
+shader_parameter/shake_speed = 3.0
+shader_parameter/shake_block_size = 5.0
 shader_parameter/shake_color_rate = 0.01
 shader_parameter/u_color = Vector4(1, 1, 1, 1)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d4psy"]
-height = 42.0
+[sub_resource type="Gradient" id="Gradient_4pbwo"]
+offsets = PackedFloat32Array(0.0025252525, 0.27525252, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1axvn"]
+gradient = SubResource("Gradient_4pbwo")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_q30vm"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_18ods")
+"texture": ExtResource("3_4pbwo")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_3mfel")
+"texture": ExtResource("4_1axvn")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_83av3")
+"texture": ExtResource("5_evqyu")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_83av3")
+"texture": ExtResource("5_evqyu")
 }],
 "loop": false,
 "name": &"default",
 "speed": 20.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_d4psy"]
-radius = 450.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u3h71"]
+shader = ExtResource("6_1axvn")
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 0.2
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
+shader_parameter/u_color = Vector4(1, 1, 1, 1)
 
-[sub_resource type="Shader" id="Shader_hhe8p"]
+[sub_resource type="Shader" id="Shader_a6x2f"]
 resource_local_to_scene = true
 code = "/*
 	Glitch Effect Shader by Yui Kinomoto @arlez80
@@ -111,9 +127,9 @@ void fragment()
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3kn0i"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gftia"]
 resource_local_to_scene = true
-shader = SubResource("Shader_hhe8p")
+shader = SubResource("Shader_a6x2f")
 shader_parameter/shake_power = 0.03
 shader_parameter/shake_rate = 0.2
 shader_parameter/shake_speed = 5.0
@@ -121,9 +137,9 @@ shader_parameter/shake_block_size = 30.5
 shader_parameter/shake_color_rate = 0.01
 shader_parameter/u_color = Vector4(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nwgn2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hrrvp"]
 resource_local_to_scene = true
-shader = SubResource("Shader_hhe8p")
+shader = SubResource("Shader_a6x2f")
 shader_parameter/shake_power = 0.03
 shader_parameter/shake_rate = 0.2
 shader_parameter/shake_speed = 5.0
@@ -131,9 +147,9 @@ shader_parameter/shake_block_size = 30.5
 shader_parameter/shake_color_rate = 0.01
 shader_parameter/u_color = Vector4(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yh87l"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wqged"]
 resource_local_to_scene = true
-shader = SubResource("Shader_hhe8p")
+shader = SubResource("Shader_a6x2f")
 shader_parameter/shake_power = 0.03
 shader_parameter/shake_rate = 0.2
 shader_parameter/shake_speed = 5.0
@@ -141,9 +157,9 @@ shader_parameter/shake_block_size = 30.5
 shader_parameter/shake_color_rate = 0.01
 shader_parameter/u_color = Vector4(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vq2ek"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xg0f0"]
 resource_local_to_scene = true
-shader = SubResource("Shader_hhe8p")
+shader = SubResource("Shader_a6x2f")
 shader_parameter/shake_power = 0.03
 shader_parameter/shake_rate = 0.2
 shader_parameter/shake_speed = 5.0
@@ -151,9 +167,9 @@ shader_parameter/shake_block_size = 30.5
 shader_parameter/shake_color_rate = 0.01
 shader_parameter/u_color = Vector4(1, 1, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qsinp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xanrt"]
 resource_local_to_scene = true
-shader = SubResource("Shader_hhe8p")
+shader = SubResource("Shader_a6x2f")
 shader_parameter/shake_power = 0.03
 shader_parameter/shake_rate = 0.2
 shader_parameter/shake_speed = 5.0
@@ -162,46 +178,46 @@ shader_parameter/shake_color_rate = 0.01
 shader_parameter/u_color = Vector4(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ou3cv"]
-atlas = ExtResource("13_gxdil")
+atlas = ExtResource("13_4st7f")
 region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q2pd1"]
-atlas = ExtResource("13_gxdil")
+atlas = ExtResource("13_4st7f")
 region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8wq5q"]
-atlas = ExtResource("13_gxdil")
+atlas = ExtResource("13_4st7f")
 region = Rect2(256, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lwtj6"]
-atlas = ExtResource("13_gxdil")
+atlas = ExtResource("13_4st7f")
 region = Rect2(384, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_80q7h"]
-atlas = ExtResource("13_gxdil")
+atlas = ExtResource("13_4st7f")
 region = Rect2(512, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w6uka"]
-atlas = ExtResource("13_gxdil")
+atlas = ExtResource("13_4st7f")
 region = Rect2(640, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_whkl4"]
-atlas = ExtResource("13_gxdil")
+atlas = ExtResource("13_4st7f")
 region = Rect2(768, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hg21s"]
-atlas = ExtResource("13_gxdil")
+atlas = ExtResource("13_4st7f")
 region = Rect2(896, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d1fh7"]
-atlas = ExtResource("13_gxdil")
+atlas = ExtResource("13_4st7f")
 region = Rect2(1024, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uwu1r"]
-atlas = ExtResource("13_gxdil")
+atlas = ExtResource("13_4st7f")
 region = Rect2(1152, 0, 128, 128)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_yosad"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_a2d5l"]
 resource_local_to_scene = true
 animations = [{
 "frames": [{
@@ -246,44 +262,43 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Triangle" type="CharacterBody2D" unique_id=814518204]
+[sub_resource type="CircleShape2D" id="CircleShape2D_4pbwo"]
+radius = 600.0
+
+[node name="Circle" type="CharacterBody2D" unique_id=814518204]
 motion_mode = 1
-script = ExtResource("1_d4psy")
+script = ExtResource("1_ny5yc")
 
 [node name="FirePoint" type="Node2D" parent="." unique_id=1906386619]
-position = Vector2(24, 0)
+position = Vector2(20, 0)
 
-[node name="Light" type="PointLight2D" parent="." unique_id=763952222]
-position = Vector2(-6, 1.1920929e-07)
-rotation = -2.3386483
-energy = 0.5
-shadow_enabled = true
-texture = ExtResource("2_m0yjs")
-texture_scale = 3.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1199280012]
+shape = SubResource("CircleShape2D_l2lw7")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=884459657]
 visible = false
-material = SubResource("ShaderMaterial_83av3")
-position = Vector2(3, 1.9999999)
-rotation = 1.5707964
-scale = Vector2(0.47352228, 0.5656355)
-texture = ExtResource("2_d4psy")
+material = SubResource("ShaderMaterial_q30vm")
+position = Vector2(0.46116912, -0.461169)
+rotation = -1.5791483
+scale = Vector2(0.39812627, 0.39812627)
+texture = ExtResource("2_ny5yc")
 
-[node name="PlayerIndicator" type="Sprite2D" parent="Sprite2D" unique_id=179032166]
-visible = false
-position = Vector2(-4.2236657, -3.5358458)
-rotation = -1.5707964
-scale = Vector2(0.55303246, 0.66061264)
-texture = ExtResource("9_83av3")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1199280012]
-position = Vector2(-1, 0)
-rotation = -1.5707964
-shape = SubResource("CapsuleShape2D_d4psy")
+[node name="PlayerIndicator" type="Sprite2D" parent="Sprite2D" unique_id=2074330455]
+position = Vector2(1.5938017, -28.775465)
+rotation = 1.5791483
+scale = Vector2(0.7857175, 0.7857175)
+texture = ExtResource("8_q30vm")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=215279989]
 avoidance_enabled = true
+radius = 20.0
 neighbor_distance = 100.0
+
+[node name="Light" type="PointLight2D" parent="." unique_id=2012919769]
+energy = 0.5
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_1axvn")
+texture_scale = 2.3
 
 [node name="TargetFinder" type="RayCast2D" parent="." unique_id=1221931344]
 target_position = Vector2(300, 0)
@@ -295,42 +310,40 @@ rotation = 1.5955135
 scale = Vector2(0.5003114, 0.5034464)
 sprite_frames = SubResource("SpriteFrames_q30vm")
 
-[node name="SwitchFinder" type="RayCast2D" parent="." unique_id=980646788]
+[node name="SwitchFinder" type="RayCast2D" parent="." unique_id=1807708675]
 target_position = Vector2(500, 0)
 
-[node name="EntityView" type="Area2D" parent="." unique_id=1515433456]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EntityView" unique_id=2129735163]
-shape = SubResource("CircleShape2D_d4psy")
-
-[node name="Body" parent="." unique_id=1351006833 instance=ExtResource("9_jxlpj")]
+[node name="Body" parent="." unique_id=1351006833 instance=ExtResource("8_aij75")]
+material = SubResource("ShaderMaterial_u3h71")
 rotation = 1.5707964
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.4, 0.4)
 
 [node name="Main" parent="Body" index="0" unique_id=1935420016]
-material = SubResource("ShaderMaterial_3kn0i")
-texture = ExtResource("10_h2vmu")
+material = SubResource("ShaderMaterial_gftia")
+texture = ExtResource("9_u3h71")
 
 [node name="Q1" parent="Body" index="1" unique_id=712174551]
-material = SubResource("ShaderMaterial_nwgn2")
-position = Vector2(-40.113125, 46.698853)
-texture = ExtResource("11_gxdil")
-offset = Vector2(40.113125, -46.698853)
+material = SubResource("ShaderMaterial_hrrvp")
+texture = ExtResource("10_4st7f")
 
 [node name="Q2" parent="Body" index="2" unique_id=498922028]
-material = SubResource("ShaderMaterial_yh87l")
-position = Vector2(37.585835, 48.137726)
-texture = ExtResource("12_hhe8p")
-offset = Vector2(-37.585835, -48.137726)
+material = SubResource("ShaderMaterial_wqged")
+texture = ExtResource("11_a6x2f")
 
 [node name="Q3" parent="Body" index="3" unique_id=1851037625]
-material = SubResource("ShaderMaterial_vq2ek")
+material = SubResource("ShaderMaterial_xg0f0")
+texture = ExtResource("12_gftia")
 
 [node name="Q4" parent="Body" index="4" unique_id=234754461]
-material = SubResource("ShaderMaterial_qsinp")
+material = SubResource("ShaderMaterial_xanrt")
 
 [node name="AttackAnim" parent="Body" index="5" unique_id=1281946594]
-sprite_frames = SubResource("SpriteFrames_yosad")
+sprite_frames = SubResource("SpriteFrames_a2d5l")
+
+[node name="EntityView" type="Area2D" parent="." unique_id=458178092]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntityView" unique_id=513281629]
+shape = SubResource("CircleShape2D_4pbwo")
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 
