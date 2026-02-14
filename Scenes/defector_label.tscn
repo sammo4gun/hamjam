@@ -7,7 +7,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ilcer"]
 shader = ExtResource("1_v275c")
 shader_parameter/shake_power = 0.1
-shader_parameter/shake_rate = 0.0590000028025
+shader_parameter/shake_rate = 0.230000010925
 shader_parameter/shake_speed = 5.0
 shader_parameter/shake_block_size = 30.5
 shader_parameter/shake_color_rate = 0.01

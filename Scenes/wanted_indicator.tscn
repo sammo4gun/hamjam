@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bgtc71vbh858x"]
 
-[ext_resource type="Script" path="res://Scripts/wanted_indicator.gd" id="1_gs4iv"]
+[ext_resource type="Script" uid="uid://cwyf50h2v8t5c" path="res://Scripts/wanted_indicator.gd" id="1_gs4iv"]
 [ext_resource type="Shader" uid="uid://25opi4m6leqw" path="res://Shader/glitch.gdshader" id="1_vt26m"]
 [ext_resource type="Texture2D" uid="uid://dsv5b46fi1q41" path="res://Sprites/wanted_ui.png" id="2_y8rb8"]
 [ext_resource type="Texture2D" uid="uid://dm8owna2sqpcu" path="res://Sprites/square_full.png" id="3_y8rb8"]
