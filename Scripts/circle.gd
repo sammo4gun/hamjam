@@ -275,7 +275,7 @@ func attack():
 		attack_sprite.visible = false
 		cooldown = ATTACK_COOLDOWN
 	else:
-		await get_tree().create_timer(ATTACK_TIME).timeout
+		await get_tree().create_timer(ATTACK_TIME, false).timeout
 		fire()
 		attack_sprite.visible = true
 		attack_sprite.play()
@@ -300,7 +300,7 @@ func apply_damage(amount):
 		health -= amount
 		if is_player:
 			# damage effects?
-			player_handler.player_hit(amount, health <= 0)
+			player_handler.player_hit(amount, self)
 			if health <= 0:
 				# die as a player, do some cool stuff here
 				die()

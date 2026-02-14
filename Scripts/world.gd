@@ -6,6 +6,7 @@ extends Node2D
 @onready var player_handler = $"PlayerHandler"
 
 @onready var wanted_indicator = $"Camera/CanvasLayer/WantedIndicator"
+@onready var health_indicator = $"Camera/CanvasLayer/HealthIndicator"
 
 @onready var tilemap = $"LightsLayer"
 
@@ -29,6 +30,7 @@ func _ready() -> void:
 		set_camera_target(c)
 		wanted = c.TYPE
 		wanted_indicator.set_wanted(wanted)
+		new_player(c)
 
 func set_camera_target(target):
 	camera.target = target
@@ -79,9 +81,16 @@ func swap_wanted(type):
 	wanted = type
 	wanted_indicator.set_wanted(type)
 
-func player_hit(damage: int, dead: bool):
+func new_player(entity):
+	health_indicator.set_health(entity.health, entity.MAX_HEALTH)
+
+func player_hit(damage: int, player: CharacterBody2D):
+	health_indicator.set_health(max(0, player.health), player.MAX_HEALTH)
 	var tween = create_tween()
 	tween.tween_property(hit_layer.material, "shader_parameter/intensity", 1.0, 0.1)
 	tween.tween_property(hit_layer.material, "shader_parameter/intensity", 0.0, 0.5)
 	
 	camera.shake_power = 6
+
+func set_mana(mana):
+	health_indicator.set_mana(mana)

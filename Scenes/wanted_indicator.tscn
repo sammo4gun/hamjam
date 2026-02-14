@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cwyf50h2v8t5c" path="res://Scripts/wanted_indicator.gd" id="1_gs4iv"]
 [ext_resource type="Shader" uid="uid://25opi4m6leqw" path="res://Shader/glitch.gdshader" id="1_vt26m"]
 [ext_resource type="Texture2D" uid="uid://4nft4js2ma0y" path="res://Sprites/triangle.png" id="2_rkdcv"]
+[ext_resource type="Texture2D" uid="uid://dsv5b46fi1q41" path="res://Sprites/wanted_ui.png" id="2_y8rb8"]
 [ext_resource type="Texture2D" uid="uid://devcphhh4vsmi" path="res://Sprites/circle.png" id="3_vt26m"]
 [ext_resource type="FontFile" uid="uid://dxutit2kp8gk5" path="res://Sprites/BlueScreenPersonalUseRegular-0W1M9.ttf" id="4_rkdcv"]
 
@@ -51,6 +52,7 @@ scale = Vector2(1.2353728, 1.2353728)
 script = ExtResource("1_gs4iv")
 
 [node name="ColorRect2" type="ColorRect" parent="." unique_id=1658618923]
+visible = false
 layout_mode = 0
 offset_right = 88.0
 offset_bottom = 108.0
@@ -84,6 +86,16 @@ material = SubResource("ShaderMaterial_pexh4")
 position = Vector2(45.330452, 68.805145)
 scale = Vector2(0.44828442, 0.44828442)
 texture = ExtResource("3_vt26m")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1130408945]
+layout_mode = 0
+offset_left = -94.70825
+offset_top = 170.79863
+offset_right = 1505.2917
+offset_bottom = 1740.7986
+rotation = 4.712389
+scale = Vector2(0.23220776, 0.23220776)
+texture = ExtResource("2_y8rb8")
 
 [node name="Label" type="Label" parent="." unique_id=556716293]
 material = SubResource("ShaderMaterial_vt26m")

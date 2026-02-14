@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cithos3j5x82f" path="res://Scripts/pickup.gd" id="1_cya6u"]
 [ext_resource type="Texture2D" uid="uid://4nft4js2ma0y" path="res://Sprites/triangle.png" id="2_nya46"]
+[ext_resource type="Texture2D" uid="uid://c8jdq8erv1a03" path="res://Sprites/mana.png" id="2_yxn47"]
+[ext_resource type="Texture2D" uid="uid://0c6yjk6iijp3" path="res://Sprites/light.png" id="3_yxn47"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8fsbe"]
 radius = 5.0
@@ -21,9 +23,16 @@ shape = SubResource("CircleShape2D_8fsbe")
 
 [node name="ManaSprite" type="Sprite2D" parent="." unique_id=607595376]
 visible = false
-modulate = Color(1, 0, 1, 1)
-scale = Vector2(0.24848747, 0.21915798)
-texture = ExtResource("2_nya46")
+modulate = Color(0.513, 0.603, 1.591, 1)
+scale = Vector2(0.03653776, 0.032225132)
+texture = ExtResource("2_yxn47")
+
+[node name="PointLight2D" type="PointLight2D" parent="ManaSprite" unique_id=337659395]
+scale = Vector2(19.597769, 19.597769)
+color = Color(0.513, 0.603, 1.591, 1)
+energy = 1.65
+shadow_enabled = true
+texture = ExtResource("3_yxn47")
 
 [node name="HealthSprite" type="Sprite2D" parent="." unique_id=147941292]
 visible = false

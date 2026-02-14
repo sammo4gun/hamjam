@@ -1,5 +1,10 @@
 [gd_scene format=3 uid="uid://cvgha6npgmrt6"]
 
+[ext_resource type="Texture2D" uid="uid://bfun6qqx5wj6u" path="res://Sprites/gui_basic.png" id="1_61pa1"]
+[ext_resource type="Script" uid="uid://b5vyl27fxh6vd" path="res://Scripts/health_indicator.gd" id="1_j11yh"]
+[ext_resource type="Texture2D" uid="uid://xhls52wxtarh" path="res://Sprites/indicator_gem.png" id="2_d212v"]
+[ext_resource type="Texture2D" uid="uid://c8jdq8erv1a03" path="res://Sprites/mana.png" id="4_q1vsb"]
+
 [node name="HealthIndicator" type="Control" unique_id=232711862]
 layout_mode = 3
 anchors_preset = 15
@@ -7,3 +12,130 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_j11yh")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=387722630]
+layout_mode = 0
+offset_left = -54.0
+offset_top = -85.0
+offset_right = 1546.0
+offset_bottom = 1485.0
+scale = Vector2(0.23220776, 0.23220776)
+texture = ExtResource("1_61pa1")
+
+[node name="Health1" type="TextureRect" parent="." unique_id=1958420279]
+layout_mode = 0
+offset_left = 8.000003
+offset_top = 12.000002
+offset_right = 1608.0
+offset_bottom = 1558.0
+scale = Vector2(0.033907954, 0.033907954)
+texture = ExtResource("2_d212v")
+
+[node name="Health2" type="TextureRect" parent="." unique_id=1270662931]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 12.0
+offset_right = 1638.0
+offset_bottom = 1558.0
+scale = Vector2(0.033907954, 0.033907954)
+texture = ExtResource("2_d212v")
+
+[node name="Health3" type="TextureRect" parent="." unique_id=503727375]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 12.0
+offset_right = 1668.0
+offset_bottom = 1558.0
+scale = Vector2(0.033907954, 0.033907954)
+texture = ExtResource("2_d212v")
+
+[node name="Health4" type="TextureRect" parent="." unique_id=659318417]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 12.0
+offset_right = 1698.0
+offset_bottom = 1558.0
+scale = Vector2(0.033907954, 0.033907954)
+texture = ExtResource("2_d212v")
+
+[node name="Health5" type="TextureRect" parent="." unique_id=1932621230]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 12.0
+offset_right = 1728.0
+offset_bottom = 1558.0
+scale = Vector2(0.033907954, 0.033907954)
+texture = ExtResource("2_d212v")
+
+[node name="Health6" type="TextureRect" parent="." unique_id=754865275]
+layout_mode = 0
+offset_left = 158.0
+offset_top = 12.0
+offset_right = 1758.0
+offset_bottom = 1558.0
+scale = Vector2(0.033907954, 0.033907954)
+texture = ExtResource("2_d212v")
+
+[node name="Mana1" type="TextureRect" parent="." unique_id=151704389]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 45.0
+offset_right = 1344.0
+offset_bottom = 1351.0
+scale = Vector2(0.040602952, 0.040602952)
+texture = ExtResource("4_q1vsb")
+
+[node name="Mana2" type="TextureRect" parent="." unique_id=42512903]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 55.0
+offset_right = 1366.0
+offset_bottom = 1361.0
+scale = Vector2(0.040602952, 0.040602952)
+texture = ExtResource("4_q1vsb")
+
+[node name="Mana3" type="TextureRect" parent="." unique_id=231419008]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 45.0
+offset_right = 1389.0
+offset_bottom = 1351.0
+scale = Vector2(0.040602952, 0.040602952)
+texture = ExtResource("4_q1vsb")
+
+[node name="Mana4" type="TextureRect" parent="." unique_id=739499772]
+layout_mode = 0
+offset_left = 77.0
+offset_top = 55.0
+offset_right = 1411.0
+offset_bottom = 1361.0
+scale = Vector2(0.040602952, 0.040602952)
+texture = ExtResource("4_q1vsb")
+
+[node name="Mana5" type="TextureRect" parent="." unique_id=1030248736]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 45.0
+offset_right = 1434.0
+offset_bottom = 1351.0
+scale = Vector2(0.040602952, 0.040602952)
+texture = ExtResource("4_q1vsb")
+
+[node name="Mana6" type="TextureRect" parent="." unique_id=1959496805]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 55.0
+offset_right = 1456.0
+offset_bottom = 1361.0
+scale = Vector2(0.040602952, 0.040602952)
+texture = ExtResource("4_q1vsb")
+
+[node name="Mana7" type="TextureRect" parent="." unique_id=710173965]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 45.0
+offset_right = 1479.0
+offset_bottom = 1351.0
+scale = Vector2(0.040602952, 0.040602952)
+texture = ExtResource("4_q1vsb")

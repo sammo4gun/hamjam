@@ -12,7 +12,7 @@ var direction: Vector2 = Vector2.RIGHT
 
 func _ready():
 	# Delete bullet after lifetime expires
-	await get_tree().create_timer(lifetime).timeout
+	await get_tree().create_timer(lifetime, false).timeout
 	
 	end_of_life()
 

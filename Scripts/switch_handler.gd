@@ -53,6 +53,7 @@ func switch():
 	current_switcher.is_player = false
 	current_switcher.die()
 	
+	world.new_player(current_switchee)
 	current_switchee.activate_glitch(4.0)
 	current_switchee.invincible = 3.0
 	Engine.time_scale = 0.2
