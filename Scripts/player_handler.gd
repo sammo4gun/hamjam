@@ -18,6 +18,7 @@ var score = 0
 
 func _process(_delta: float) -> void:
 	can_switch = mana >= SWITCH_COST
+	world.defector_indicator.visible = can_switch
 
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel"):
@@ -26,6 +27,7 @@ func _unhandled_input(event):
 
 func switch():
 	mana = max(mana - SWITCH_COST, 0)
+	world.set_mana(mana)
 	$SwitchEffect.play()
 
 func pickup(player: CharacterBody2D, type):

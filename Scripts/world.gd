@@ -10,6 +10,7 @@ extends Node2D
 @onready var health_indicator = $"Camera/CanvasLayer/HealthIndicator"
 @onready var paused_indicator = $"Camera/CanvasLayer/PausedLabel"
 @onready var end_game_screen = $"Camera/CanvasLayer/EndGameScreen"
+@onready var defector_indicator = $"Camera/CanvasLayer/DefectorLabel"
 
 @onready var tilemap = $"LightsLayer"
 

@@ -37,7 +37,7 @@ func switch_available(entity):
 			switchee = new_switchee
 
 func set_switchee(entity, toggle):
-	pass # sets a target as switchable, we can do some visual effects
+	entity.switch_light.visible = toggle
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("switch"):

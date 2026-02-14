@@ -47,6 +47,8 @@ var invincible = 0.0
 
 var dead = false
 
+@onready var switch_light = $SwitchableLight
+
 func _ready():
 	# Optional tuning
 	nav_agent.path_desired_distance = 4.0

@@ -66,6 +66,8 @@ var invincible = 0.0
 @export var bullet_scene: PackedScene = preload("res://Scenes/circle_bullet.tscn")
 @onready var fire_point: Node2D = $"FirePoint"
 
+@onready var switch_light = $SwitchableLight
+
 func _ready():
 	# Optional tuning
 	nav_agent.path_desired_distance = 4.0

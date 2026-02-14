@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://baoa37o1eipoe"]
+
+[ext_resource type="Shader" uid="uid://25opi4m6leqw" path="res://Shader/glitch.gdshader" id="1_v275c"]
+[ext_resource type="FontFile" uid="uid://c0g4o5k4d5pab" path="res://Sprites/Broken Console Bold.ttf" id="2_dxmc6"]
+[ext_resource type="Texture2D" uid="uid://djr3hm4gfihrn" path="res://Sprites/line.png" id="3_4kqb2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ilcer"]
+shader = ExtResource("1_v275c")
+shader_parameter/shake_power = 0.1
+shader_parameter/shake_rate = 0.0590000028025
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
+shader_parameter/u_color = Vector4(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_npuhn"]
+font_size = 64
+
+[node name="DefectorLabel" type="Label" unique_id=2087552875]
+visible = false
+modulate = Color(0.4, 1, 1, 1)
+material = SubResource("ShaderMaterial_ilcer")
+offset_left = 380.00003
+offset_top = 14.0
+offset_right = 988.0
+offset_bottom = 97.0
+scale = Vector2(0.6161699, 0.2968778)
+theme_override_fonts/font = ExtResource("2_dxmc6")
+text = "Defect.or Loaded"
+label_settings = SubResource("LabelSettings_npuhn")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=684136400]
+layout_mode = 0
+offset_left = -301.8648
+offset_top = -239.15565
+offset_right = 298.1352
+offset_bottom = 360.84436
+scale = Vector2(0.48066473, 1)
+texture = ExtResource("3_4kqb2")
+
+[node name="TextureRect2" type="ColorRect" parent="." unique_id=952070238]
+layout_mode = 0
+offset_left = -21.098125
+offset_top = -16.841946
+offset_right = -11.360516
+offset_bottom = 67.36778
