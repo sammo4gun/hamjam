@@ -80,6 +80,7 @@ func pickup(player: CharacterBody2D):
 	if type == 'mana':
 		if !$PickupSound.playing:
 			$PickupSound.play()
+			visible = false
 			player.pickup(type)
 	else: 
 		player.pickup(type)

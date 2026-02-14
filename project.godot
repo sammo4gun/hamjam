@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 Globals="*uid://c5y2jbii84kj8"
 
+[display]
+
+window/stretch/mode="viewport"
+
 [gui]
 
 theme/default_font_multichannel_signed_distance_field=true
