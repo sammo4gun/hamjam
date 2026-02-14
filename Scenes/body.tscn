@@ -1,24 +1,75 @@
 [gd_scene format=3 uid="uid://iqr7jqnkcnt2"]
 
 [ext_resource type="Script" uid="uid://xvwoxc5ufqa7" path="res://body.gd" id="1_ou3cv"]
+[ext_resource type="Shader" uid="uid://25opi4m6leqw" path="res://Shader/glitch.gdshader" id="2_7h43o"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vhqrm"]
+resource_local_to_scene = true
+shader = ExtResource("2_7h43o")
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 0.2
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ou3cv"]
+resource_local_to_scene = true
+shader = ExtResource("2_7h43o")
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 0.2
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q2pd1"]
+resource_local_to_scene = true
+shader = ExtResource("2_7h43o")
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 0.2
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8wq5q"]
+resource_local_to_scene = true
+shader = ExtResource("2_7h43o")
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 0.2
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lwtj6"]
+resource_local_to_scene = true
+shader = ExtResource("2_7h43o")
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 0.2
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
 
 [node name="Body" type="Node2D" unique_id=1351006833]
 script = ExtResource("1_ou3cv")
 
 [node name="Main" type="Sprite2D" parent="." unique_id=1935420016]
+material = SubResource("ShaderMaterial_vhqrm")
 
 [node name="Q1" type="Sprite2D" parent="." unique_id=712174551]
+material = SubResource("ShaderMaterial_ou3cv")
 position = Vector2(-47, -44)
 offset = Vector2(47, 44)
 
 [node name="Q2" type="Sprite2D" parent="." unique_id=498922028]
+material = SubResource("ShaderMaterial_q2pd1")
 position = Vector2(52, -49)
 offset = Vector2(-52, 49)
 
 [node name="Q3" type="Sprite2D" parent="." unique_id=1851037625]
+material = SubResource("ShaderMaterial_8wq5q")
 position = Vector2(-1, 46)
 offset = Vector2(1, -46)
 
 [node name="Q4" type="Sprite2D" parent="." unique_id=234754461]
+material = SubResource("ShaderMaterial_lwtj6")
 position = Vector2(44, 33)
 offset = Vector2(-44, -33)

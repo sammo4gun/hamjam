@@ -93,9 +93,8 @@ func _physics_process(delta: float) -> void:
 		invincible -= delta
 
 func activate_glitch(period):
-	glitch_max_timer = period
-	glitch_timer = period
-	glitch.set_shader_parameter("shake_rate", 1)
+	$Body.activate_glitch(period)
+
 
 func stop_glitch():
 	glitch_max_timer = 0.0

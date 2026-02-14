@@ -44,6 +44,7 @@ var cooldown = 0
 @onready var switch_finder = $"SwitchFinder"
 @onready var glitch = $"Sprite2D".material as ShaderMaterial
 
+
 @onready var body = $Body
 
 var target_handler
@@ -88,20 +89,8 @@ func _physics_process(delta: float) -> void:
 			handle_behaviours(delta)
 			nav_handle_movement(delta)
 			nav_handle_rotation(delta)
-	if glitch_timer > 0.0:
-		glitch_timer -= delta
-		glitch.set_shader_parameter("shake_power", 0.3 * glitch_timer/glitch_max_timer)
-	else: stop_glitch()
 	if invincible > 0.0:
 		invincible -= delta
-
-func activate_glitch(period):
-	glitch_max_timer = period
-	glitch_timer = period
-	glitch.set_shader_parameter("shake_rate", 1)
-
-func stop_glitch():
-	glitch_max_timer = 0.0
 
 func handle_behaviours(delta):
 	if !NavigationServer2D.map_get_iteration_id(nav_map) == 0:
@@ -128,6 +117,9 @@ func wander_check(delta):
 		wander_target = behaviour_handler.pick_wander_target()
 		wander_time = WANDER_TIMER + (randf()-0.5) * 0.5 * WANDER_TIMER
 	else: wander_time -= delta
+
+func activate_glitch(period):
+	$Body.activate_glitch(period)
 
 # ============================================================
 # ENEMY SCRIPTS

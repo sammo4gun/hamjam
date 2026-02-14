@@ -12,6 +12,12 @@ extends Node2D
 @export var damage_push_strength = 300.0
 @export var shoot_push_strength = 300.0
 
+@onready var glitch_main = $"Main".material as ShaderMaterial
+@onready var glitch_q1 = $"Q1".material as ShaderMaterial
+@onready var glitch_q2 = $"Q2".material as ShaderMaterial
+@onready var glitch_q3 = $"Q3".material as ShaderMaterial
+@onready var glitch_q4 = $"Q4".material as ShaderMaterial
+
 @export var damage_color: Color = Color("#E84855")
 @export var shoot_color: Color = Color("#93a8ac")
 @export var flash_duration: float = 0.35
@@ -22,6 +28,9 @@ var velocities = []
 var base_colors = []
 var color_flash_progress = []
 var color_flash_progress_main = 0.0
+
+var glitch_timer = 0.0
+var glitch_max_timer = 0.0
 
 var object_velocity = Vector2.ZERO
 var time = 0.0
@@ -45,6 +54,15 @@ func _physics_process(delta):
 		color_flash_progress_main -= delta / shoot_flash_duration
 		color_flash_progress_main = max(color_flash_progress_main, 0.0)
 		main.modulate = shoot_color.lerp(base_colors[0], 1.0 - color_flash_progress_main)
+		
+	if glitch_timer > 0.0:
+		glitch_timer -= delta
+		glitch_main.set_shader_parameter("shake_power", 0.3 * glitch_timer/glitch_max_timer)
+		glitch_q1.set_shader_parameter("shake_power", 0.3 * glitch_timer/glitch_max_timer)
+		glitch_q2.set_shader_parameter("shake_power", 0.3 * glitch_timer/glitch_max_timer)
+		glitch_q3.set_shader_parameter("shake_power", 0.3 * glitch_timer/glitch_max_timer)
+		glitch_q4.set_shader_parameter("shake_power", 0.3 * glitch_timer/glitch_max_timer)
+	else: stop_glitch()
 	
 	for i in range(corners.size()):
 		var c = corners[i]
@@ -78,6 +96,18 @@ func _physics_process(delta):
 			color_flash_progress[i] -= delta / flash_duration
 			color_flash_progress[i] = max(color_flash_progress[i], 0.0)
 			c.modulate = damage_color.lerp(base_colors[i], 1.0 - color_flash_progress[i])
+			
+func activate_glitch(period):
+	glitch_max_timer = period
+	glitch_timer = period
+	glitch_main.set_shader_parameter("shake_rate", 1)
+	glitch_q1.set_shader_parameter("shake_rate", 1)
+	glitch_q2.set_shader_parameter("shake_rate", 1)
+	glitch_q3.set_shader_parameter("shake_rate", 1)
+	glitch_q4.set_shader_parameter("shake_rate", 1)
+
+func stop_glitch():
+	glitch_max_timer = 0.0
 
 func set_velocity(vel: Vector2) -> void:
 	object_velocity = vel
