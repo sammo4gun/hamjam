@@ -51,7 +51,7 @@ func set_type(type_str: String):
 		poly = roughen_polygon(poly, 1, 2.0)
 		var vis := Polygon2D.new()
 		vis.polygon = poly
-		vis.color = Color.BLACK
+		vis.color = Color("fdfe89")
 		add_child(vis)
 
 func _physics_process(delta: float) -> void:
