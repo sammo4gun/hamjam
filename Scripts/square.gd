@@ -167,7 +167,7 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 		move_and_slide()
 
 func nav_handle_rotation(delta) -> void:
-	#if attacking: return
+	if attacking: return
 	# Get the mouse position and calculate the angle to face it
 	var target_position = next_position
 	if target_lookat: target_position = target_lookat

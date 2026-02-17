@@ -37,6 +37,7 @@ func pickup(player: CharacterBody2D, type):
 			world.set_mana(mana)
 		else:
 			score += MANA_BONUS_SCORE
+			world.set_score(score)
 	if type == "health":
 		player.heal(1)
 	if type == "score":

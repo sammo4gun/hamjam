@@ -68,24 +68,24 @@ func _physics_process(delta: float) -> void:
 		else: queue_free()
 
 func move_towards_player(delta, player: CharacterBody2D):
-	var dist = player.global_position.distance_to(global_position)
-	
-	global_position += delta * speed * pow((1. - (dist / pickup_range)),4) * (player.global_position - global_position).normalized()
-	
-	if dist < 20:
-		pickup(player)
+	if visible:
+		var dist = player.global_position.distance_to(global_position)
+		
+		global_position += delta * speed * pow((1. - (dist / pickup_range)),4) * (player.global_position - global_position).normalized()
+		
+		if dist < 20:
+			pickup(player)
 
 func pickup(player: CharacterBody2D):
 	# animation
 	if type == 'mana':
-		if !$PickupSound.playing:
+		if !$PickupSound.playing and visible:
 			$PickupSound.play()
 			visible = false
 			player.pickup(type)
 	else: 
 		player.pickup(type)
 		queue_free()
-
 
 func make_shard_polygon(
 	avg_radius: float,

@@ -41,8 +41,6 @@ var spawning = false
 func start_spawn():
 	spawning = true
 	
-	print("NEW WAVEEE!!!")
-	print("wave:", current_wave)
 	var total_to_spawn = 3 + int(current_wave * 1.5)
 	current_wave += 1
 	# define what to spawn
@@ -100,8 +98,6 @@ func try_spawn_entity():
 
 		if result.is_empty():
 			return spawn_entity_at(params.position)
-
-	print("Failed to find free spawn position")
 
 func get_random_point_in_shape(shape):
 	if shape is RectangleShape2D:

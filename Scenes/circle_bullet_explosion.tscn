@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dfnvwrselsncj"]
 
 [ext_resource type="Texture2D" uid="uid://ujh2jn45ngoa" path="res://Sprites/circle_particle.png" id="1_ue6nd"]
-[ext_resource type="Script" path="res://Scripts/circle_bullet_explosion.gd" id="2_tj4ow"]
+[ext_resource type="Script" uid="uid://5l4f7k7ms5qf" path="res://Scripts/circle_bullet_explosion.gd" id="2_tj4ow"]
 
 [sub_resource type="Curve" id="Curve_eiyb3"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -22,7 +22,6 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.01
 scale_max = 0.19999999
 scale_curve = SubResource("CurveTexture_w3nvr")
-turbulence_enabled = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" unique_id=548318484]
 scale = Vector2(0.9981223, 1)
